@@ -1754,7 +1754,7 @@ GameObject:
   - component: {fileID: 7503394580103374733}
   - component: {fileID: 2379045615134683189}
   m_Layer: 0
-  m_Name: RunnerPlayerController
+  m_Name: RunnerPlayer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

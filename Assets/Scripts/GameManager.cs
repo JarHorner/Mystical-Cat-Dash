@@ -6,7 +6,7 @@ using TMPro;
 
 public class GameManager : MonoBehaviour
 {
-    public static GameManager GameManagerInstance { get; private set; }
+    public static GameManager Instance { get; private set; }
     [SerializeField]
     private Camera runnerCamera;
     [SerializeField]
@@ -17,12 +17,13 @@ public class GameManager : MonoBehaviour
     private TMP_Text score;
     private int calculatedScore = 0;
     private float countdownToPointGain = 0f;
+    public bool gameOver = false;
 
     private void Awake()
     {
-        if (GameManagerInstance == null)
+        if (Instance == null)
         {
-            GameManagerInstance = this;
+            Instance = this;
             DontDestroyOnLoad(this.gameObject);
         }
         else
@@ -31,10 +32,6 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    void Start()
-    {
-
-    }
 
     void Update()
     {
