@@ -8,16 +8,14 @@ public class GameUI : MonoBehaviour
     public static GameUI GameUIInstance { get; private set; }
     private void Awake()
     {
-        // If there is an instance, and it's not me, delete myself.
-
-        if (GameUIInstance != null && GameUIInstance != this)
-        {
-            Destroy(this);
-        }
-        else
+        if (GameUIInstance == null)
         {
             GameUIInstance = this;
             DontDestroyOnLoad(this.gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
         }
     }
 

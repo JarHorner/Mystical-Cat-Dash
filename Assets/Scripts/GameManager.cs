@@ -20,16 +20,14 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-        // If there is an instance, and it's not me, delete myself.
-
-        if (GameManagerInstance != null && GameManagerInstance != this)
-        {
-            Destroy(this);
-        }
-        else
+        if (GameManagerInstance == null)
         {
             GameManagerInstance = this;
             DontDestroyOnLoad(this.gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
         }
     }
 
@@ -63,10 +61,6 @@ public class GameManager : MonoBehaviour
         if (scene.name == "Runner")
         {
             SceneManager.LoadScene("Flappy");
-        }
-        else
-        {
-            SceneManager.LoadScene("Runner");
         }
     }
 }
