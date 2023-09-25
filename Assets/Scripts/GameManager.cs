@@ -8,16 +8,12 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
     [SerializeField]
-    private Camera runnerCamera;
-    [SerializeField]
-    private Camera flappyCamera;
-    [SerializeField]
-    private Canvas canvas;
-    [SerializeField]
-    private TMP_Text score;
+    public GameObject score;
+    public GameObject gameOverScore;
     private int calculatedScore = 0;
     private float countdownToPointGain = 0f;
     public bool gameOver = false;
+    public GameObject gameOverPanel;
 
     private void Awake()
     {
@@ -32,12 +28,27 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    void Start() 
+    {
+        gameOverPanel.SetActive(false);
+    }
 
     void Update()
     {
-        countdownToPointGain += Time.deltaTime;
-
-        convertTimeToPoints();
+        if (!gameOver)
+        {
+            countdownToPointGain += Time.deltaTime;
+            convertTimeToPoints();
+        }
+        else
+        {
+            Time.timeScale = 0;
+            score.SetActive(false);
+            
+            gameOverScore.GetComponent<TMP_Text>().text = calculatedScore.ToString();
+            gameOverPanel.SetActive(true);
+        }
+        
     }
 
     private void convertTimeToPoints() 
@@ -45,7 +56,7 @@ public class GameManager : MonoBehaviour
         if (countdownToPointGain >= 1)
         {
             calculatedScore += 100;
-            score.text = calculatedScore.ToString();
+            score.GetComponent<TMP_Text>().text = calculatedScore.ToString();
             countdownToPointGain = 0;
         }
     }

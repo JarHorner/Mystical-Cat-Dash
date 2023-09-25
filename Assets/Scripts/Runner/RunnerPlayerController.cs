@@ -30,6 +30,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         controller = GetComponent<CharacterController>();
+        Time.timeScale = 1;
     }
 
     private void OnEnable()
@@ -73,13 +74,33 @@ public class PlayerController : MonoBehaviour
         {
             targetPosition += Vector3.right * laneDistance;
         }
-        transform.position = Vector3.Lerp(transform.position, targetPosition, 80 * Time.fixedDeltaTime);
 
+        //Normalizes and lerps the player to the different lanes. Allows collisions to occur properly!
+        if (transform.position == targetPosition)
+            return;
+        Vector3 diff = targetPosition - transform.position;
+        Vector3 moveDir = diff.normalized * 25 * Time.deltaTime;
+        if (moveDir.sqrMagnitude < diff.sqrMagnitude)
+        {
+            controller.Move(moveDir);
+        }
+        else
+        {
+            controller.Move(diff);
+        }
     }
 
     void FixedUpdate()
     {
         controller.Move(direction * Time.fixedDeltaTime);
+    }
+
+    private void OnControllerColliderHit(ControllerColliderHit hit) 
+    {
+        if (hit.transform.tag == "Object")
+        {
+            GameManager.Instance.gameOver = true;
+        }
     }
 
     private void ShiftLeft(InputAction.CallbackContext context)

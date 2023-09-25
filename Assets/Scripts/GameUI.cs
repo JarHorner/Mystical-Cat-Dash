@@ -21,7 +21,7 @@ public class GameUI : MonoBehaviour
 
     void Start()
     {
-
+        
     }
 
     void Update()

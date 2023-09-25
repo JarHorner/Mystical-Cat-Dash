@@ -60,12 +60,9 @@ public class FlappyPlayerController : MonoBehaviour
 
     public void Jump(InputAction.CallbackContext context)
     {
-        Debug.Log("Clicking Jump!");
-        if (!GameManager.Instance.gameOver && context.performed)
-        {
-            Debug.Log("JUMP!");
-            velocity.y = Mathf.Sqrt(jumpSpeed);
-        }
+        Debug.Log("JUMP!");
+        velocity.y = Mathf.Sqrt(jumpSpeed);
+        
     }
 
     IEnumerator Death()
