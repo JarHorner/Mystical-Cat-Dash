@@ -35,6 +35,24 @@ public partial class @Player: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ShiftLeft"",
+                    ""type"": ""Button"",
+                    ""id"": ""5087f4f1-55a1-4e66-b778-2d22550e62e5"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ShiftRight"",
+                    ""type"": ""Button"",
+                    ""id"": ""75caf820-adcd-42fa-ac39-e4f6db7fab0f"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -57,6 +75,50 @@ public partial class @Player: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": ""Mobile"",
                     ""action"": ""Jump"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""de535091-0a72-4d3f-8418-d7b310247727"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""ShiftLeft"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2e8874fe-7385-4d94-bbc0-d663f1a9c68c"",
+                    ""path"": ""<Keyboard>/leftArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""ShiftLeft"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""46f225b6-90a1-46b2-ac8c-bd69e1f33137"",
+                    ""path"": ""<Keyboard>/d"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""ShiftRight"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3c78e2dc-8ff7-416d-a2ce-effa850fec86"",
+                    ""path"": ""<Keyboard>/rightArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""ShiftRight"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -292,6 +354,8 @@ public partial class @Player: IInputActionCollection2, IDisposable
         // RunnerPlayer
         m_RunnerPlayer = asset.FindActionMap("RunnerPlayer", throwIfNotFound: true);
         m_RunnerPlayer_Jump = m_RunnerPlayer.FindAction("Jump", throwIfNotFound: true);
+        m_RunnerPlayer_ShiftLeft = m_RunnerPlayer.FindAction("ShiftLeft", throwIfNotFound: true);
+        m_RunnerPlayer_ShiftRight = m_RunnerPlayer.FindAction("ShiftRight", throwIfNotFound: true);
         // FlappyPlayer
         m_FlappyPlayer = asset.FindActionMap("FlappyPlayer", throwIfNotFound: true);
         m_FlappyPlayer_Jump = m_FlappyPlayer.FindAction("Jump", throwIfNotFound: true);
@@ -364,11 +428,15 @@ public partial class @Player: IInputActionCollection2, IDisposable
     private readonly InputActionMap m_RunnerPlayer;
     private List<IRunnerPlayerActions> m_RunnerPlayerActionsCallbackInterfaces = new List<IRunnerPlayerActions>();
     private readonly InputAction m_RunnerPlayer_Jump;
+    private readonly InputAction m_RunnerPlayer_ShiftLeft;
+    private readonly InputAction m_RunnerPlayer_ShiftRight;
     public struct RunnerPlayerActions
     {
         private @Player m_Wrapper;
         public RunnerPlayerActions(@Player wrapper) { m_Wrapper = wrapper; }
         public InputAction @Jump => m_Wrapper.m_RunnerPlayer_Jump;
+        public InputAction @ShiftLeft => m_Wrapper.m_RunnerPlayer_ShiftLeft;
+        public InputAction @ShiftRight => m_Wrapper.m_RunnerPlayer_ShiftRight;
         public InputActionMap Get() { return m_Wrapper.m_RunnerPlayer; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -381,6 +449,12 @@ public partial class @Player: IInputActionCollection2, IDisposable
             @Jump.started += instance.OnJump;
             @Jump.performed += instance.OnJump;
             @Jump.canceled += instance.OnJump;
+            @ShiftLeft.started += instance.OnShiftLeft;
+            @ShiftLeft.performed += instance.OnShiftLeft;
+            @ShiftLeft.canceled += instance.OnShiftLeft;
+            @ShiftRight.started += instance.OnShiftRight;
+            @ShiftRight.performed += instance.OnShiftRight;
+            @ShiftRight.canceled += instance.OnShiftRight;
         }
 
         private void UnregisterCallbacks(IRunnerPlayerActions instance)
@@ -388,6 +462,12 @@ public partial class @Player: IInputActionCollection2, IDisposable
             @Jump.started -= instance.OnJump;
             @Jump.performed -= instance.OnJump;
             @Jump.canceled -= instance.OnJump;
+            @ShiftLeft.started -= instance.OnShiftLeft;
+            @ShiftLeft.performed -= instance.OnShiftLeft;
+            @ShiftLeft.canceled -= instance.OnShiftLeft;
+            @ShiftRight.started -= instance.OnShiftRight;
+            @ShiftRight.performed -= instance.OnShiftRight;
+            @ShiftRight.canceled -= instance.OnShiftRight;
         }
 
         public void RemoveCallbacks(IRunnerPlayerActions instance)
@@ -550,6 +630,8 @@ public partial class @Player: IInputActionCollection2, IDisposable
     public interface IRunnerPlayerActions
     {
         void OnJump(InputAction.CallbackContext context);
+        void OnShiftLeft(InputAction.CallbackContext context);
+        void OnShiftRight(InputAction.CallbackContext context);
     }
     public interface IFlappyPlayerActions
     {

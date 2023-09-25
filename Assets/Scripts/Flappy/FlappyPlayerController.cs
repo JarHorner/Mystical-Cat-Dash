@@ -8,6 +8,7 @@ public class FlappyPlayerController : MonoBehaviour
 {
 
     private Rigidbody rb;
+    private Vector3 velocity;
     public Animator anim;
     private FlappyGameController flappyGameController;
     [SerializeField] private InputActionAsset inputMaster;
@@ -42,6 +43,12 @@ public class FlappyPlayerController : MonoBehaviour
         flappyGameController = GameObject.Find("FlappyGameController").GetComponent<FlappyGameController>();
     }
 
+    void Update()
+    {
+        velocity.y -= 15 * Time.deltaTime;
+        rb.velocity = velocity;
+    }
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "Ground")
@@ -57,10 +64,7 @@ public class FlappyPlayerController : MonoBehaviour
         if (!GameManager.Instance.gameOver && context.performed)
         {
             Debug.Log("JUMP!");
-            rb.AddForce(new Vector3(0, jumpSpeed, 0));
-            flappyGameController.jumped = true;
-
-            rb.velocity = Vector2.zero;
+            velocity.y = Mathf.Sqrt(jumpSpeed);
         }
     }
 

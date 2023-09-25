@@ -59,5 +59,9 @@ public class GameManager : MonoBehaviour
         {
             SceneManager.LoadScene("Flappy");
         }
+        else if (scene.name == "Flappy")
+        {
+            SceneManager.LoadScene("Runner");
+        }
     }
 }
