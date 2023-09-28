@@ -6,6 +6,24 @@
             "id": "39f95a9a-18ff-4b4f-b30a-99a14944853a",
             "actions": [
                 {
+                    "name": "PrimaryContact",
+                    "type": "PassThrough",
+                    "id": "221308c2-75ec-481b-9048-52ec1577d895",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Press",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "PrimaryPosition",
+                    "type": "PassThrough",
+                    "id": "0d5f0221-f4ed-430d-a682-54d26bae61f3",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "Jump",
                     "type": "Button",
                     "id": "4406accc-3fd4-49a9-8a7f-676cf95456ff",
@@ -97,6 +115,28 @@
                     "processors": "",
                     "groups": "Keyboard&Mouse",
                     "action": "ShiftRight",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "04faf80d-2b37-4af0-9eee-c428ab5c8dc2",
+                    "path": "<Touchscreen>/primaryTouch/press",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Mobile",
+                    "action": "PrimaryContact",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "15f3f8b5-55b2-4e9e-9df5-b3daab51b01b",
+                    "path": "<Touchscreen>/primaryTouch/position",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Mobile",
+                    "action": "PrimaryPosition",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

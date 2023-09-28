@@ -28,6 +28,24 @@ public partial class @Player: IInputActionCollection2, IDisposable
             ""id"": ""39f95a9a-18ff-4b4f-b30a-99a14944853a"",
             ""actions"": [
                 {
+                    ""name"": ""PrimaryContact"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""221308c2-75ec-481b-9048-52ec1577d895"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Press"",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""PrimaryPosition"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""0d5f0221-f4ed-430d-a682-54d26bae61f3"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
                     ""name"": ""Jump"",
                     ""type"": ""Button"",
                     ""id"": ""4406accc-3fd4-49a9-8a7f-676cf95456ff"",
@@ -119,6 +137,28 @@ public partial class @Player: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse"",
                     ""action"": ""ShiftRight"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""04faf80d-2b37-4af0-9eee-c428ab5c8dc2"",
+                    ""path"": ""<Touchscreen>/primaryTouch/press"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Mobile"",
+                    ""action"": ""PrimaryContact"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""15f3f8b5-55b2-4e9e-9df5-b3daab51b01b"",
+                    ""path"": ""<Touchscreen>/primaryTouch/position"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Mobile"",
+                    ""action"": ""PrimaryPosition"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -353,6 +393,8 @@ public partial class @Player: IInputActionCollection2, IDisposable
 }");
         // RunnerPlayer
         m_RunnerPlayer = asset.FindActionMap("RunnerPlayer", throwIfNotFound: true);
+        m_RunnerPlayer_PrimaryContact = m_RunnerPlayer.FindAction("PrimaryContact", throwIfNotFound: true);
+        m_RunnerPlayer_PrimaryPosition = m_RunnerPlayer.FindAction("PrimaryPosition", throwIfNotFound: true);
         m_RunnerPlayer_Jump = m_RunnerPlayer.FindAction("Jump", throwIfNotFound: true);
         m_RunnerPlayer_ShiftLeft = m_RunnerPlayer.FindAction("ShiftLeft", throwIfNotFound: true);
         m_RunnerPlayer_ShiftRight = m_RunnerPlayer.FindAction("ShiftRight", throwIfNotFound: true);
@@ -427,6 +469,8 @@ public partial class @Player: IInputActionCollection2, IDisposable
     // RunnerPlayer
     private readonly InputActionMap m_RunnerPlayer;
     private List<IRunnerPlayerActions> m_RunnerPlayerActionsCallbackInterfaces = new List<IRunnerPlayerActions>();
+    private readonly InputAction m_RunnerPlayer_PrimaryContact;
+    private readonly InputAction m_RunnerPlayer_PrimaryPosition;
     private readonly InputAction m_RunnerPlayer_Jump;
     private readonly InputAction m_RunnerPlayer_ShiftLeft;
     private readonly InputAction m_RunnerPlayer_ShiftRight;
@@ -434,6 +478,8 @@ public partial class @Player: IInputActionCollection2, IDisposable
     {
         private @Player m_Wrapper;
         public RunnerPlayerActions(@Player wrapper) { m_Wrapper = wrapper; }
+        public InputAction @PrimaryContact => m_Wrapper.m_RunnerPlayer_PrimaryContact;
+        public InputAction @PrimaryPosition => m_Wrapper.m_RunnerPlayer_PrimaryPosition;
         public InputAction @Jump => m_Wrapper.m_RunnerPlayer_Jump;
         public InputAction @ShiftLeft => m_Wrapper.m_RunnerPlayer_ShiftLeft;
         public InputAction @ShiftRight => m_Wrapper.m_RunnerPlayer_ShiftRight;
@@ -446,6 +492,12 @@ public partial class @Player: IInputActionCollection2, IDisposable
         {
             if (instance == null || m_Wrapper.m_RunnerPlayerActionsCallbackInterfaces.Contains(instance)) return;
             m_Wrapper.m_RunnerPlayerActionsCallbackInterfaces.Add(instance);
+            @PrimaryContact.started += instance.OnPrimaryContact;
+            @PrimaryContact.performed += instance.OnPrimaryContact;
+            @PrimaryContact.canceled += instance.OnPrimaryContact;
+            @PrimaryPosition.started += instance.OnPrimaryPosition;
+            @PrimaryPosition.performed += instance.OnPrimaryPosition;
+            @PrimaryPosition.canceled += instance.OnPrimaryPosition;
             @Jump.started += instance.OnJump;
             @Jump.performed += instance.OnJump;
             @Jump.canceled += instance.OnJump;
@@ -459,6 +511,12 @@ public partial class @Player: IInputActionCollection2, IDisposable
 
         private void UnregisterCallbacks(IRunnerPlayerActions instance)
         {
+            @PrimaryContact.started -= instance.OnPrimaryContact;
+            @PrimaryContact.performed -= instance.OnPrimaryContact;
+            @PrimaryContact.canceled -= instance.OnPrimaryContact;
+            @PrimaryPosition.started -= instance.OnPrimaryPosition;
+            @PrimaryPosition.performed -= instance.OnPrimaryPosition;
+            @PrimaryPosition.canceled -= instance.OnPrimaryPosition;
             @Jump.started -= instance.OnJump;
             @Jump.performed -= instance.OnJump;
             @Jump.canceled -= instance.OnJump;
@@ -629,6 +687,8 @@ public partial class @Player: IInputActionCollection2, IDisposable
     }
     public interface IRunnerPlayerActions
     {
+        void OnPrimaryContact(InputAction.CallbackContext context);
+        void OnPrimaryPosition(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
         void OnShiftLeft(InputAction.CallbackContext context);
         void OnShiftRight(InputAction.CallbackContext context);

@@ -22,7 +22,8 @@ public class Events : MonoBehaviour
     public void ReplayGame()
     {
         GameManager.Instance.gameOver = false;
-        GameManager.Instance.gameOverPanel.SetActive(false);
+        GameUI.Instance.gameOverPanel.SetActive(false);
+        GameManager.Instance.calculatedScore = 0;
         SceneManager.LoadScene("Runner");
     }
 

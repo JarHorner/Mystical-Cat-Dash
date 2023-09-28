@@ -3,16 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerController : MonoBehaviour
+public class RunnerPlayerController : MonoBehaviour
 {
     [SerializeField] private InputActionAsset inputMaster;
-    private InputAction shiftLeft, shiftRight, jump;
+    private InputAction primaryContact, primaryPosition, shiftLeft, shiftRight, jump;
+
+    private Vector2 initialPos;
+    private Vector2 currentPos => primaryPosition.ReadValue<Vector2>();
 
     private CharacterController controller;
     private Vector3 direction;
     public float forwardSpeed;
 
-    private int desiredLane = 1;
+    public int desiredLane = 1;
     public float laneDistance = 4;
 
     public float jumpForce;
@@ -22,6 +25,8 @@ public class PlayerController : MonoBehaviour
     {
         var playerActionMap = inputMaster.FindActionMap("RunnerPlayer");
 
+        primaryContact = playerActionMap.FindAction("PrimaryContact");
+        primaryPosition = playerActionMap.FindAction("PrimaryPosition");
         shiftLeft = playerActionMap.FindAction("ShiftLeft");
         shiftRight = playerActionMap.FindAction("ShiftRight");
         jump = playerActionMap.FindAction("Jump");
@@ -95,7 +100,7 @@ public class PlayerController : MonoBehaviour
         controller.Move(direction * Time.fixedDeltaTime);
     }
 
-    private void OnControllerColliderHit(ControllerColliderHit hit) 
+    private void OnControllerColliderHit(ControllerColliderHit hit)
     {
         if (hit.transform.tag == "Object")
         {
@@ -111,7 +116,23 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public void SwipeShiftLeft()
+    {
+        if (desiredLane > 0)
+        {
+            desiredLane--;
+        }
+    }
+
     private void ShiftRight(InputAction.CallbackContext context)
+    {
+        if (desiredLane < 2)
+        {
+            desiredLane++;
+        }
+    }
+
+    public void SwipeShiftRight()
     {
         if (desiredLane < 2)
         {
@@ -125,7 +146,14 @@ public class PlayerController : MonoBehaviour
         {
             direction.y = jumpForce;
         }
+    }
 
+    public void SwipeJump()
+    {
+        if (controller.isGrounded)
+        {
+            direction.y = jumpForce;
+        }
     }
 
 

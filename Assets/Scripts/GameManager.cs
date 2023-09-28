@@ -8,12 +8,10 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
     [SerializeField]
-    public GameObject score;
-    public GameObject gameOverScore;
-    private int calculatedScore = 0;
+    public int calculatedScore = 0;
     private float countdownToPointGain = 0f;
     public bool gameOver = false;
-    public GameObject gameOverPanel;
+    private GameUI gameUI;
 
     private void Awake()
     {
@@ -30,7 +28,7 @@ public class GameManager : MonoBehaviour
 
     void Start() 
     {
-        gameOverPanel.SetActive(false);
+        gameUI = GameUI.Instance;
     }
 
     void Update()
@@ -43,10 +41,10 @@ public class GameManager : MonoBehaviour
         else
         {
             Time.timeScale = 0;
-            score.SetActive(false);
             
-            gameOverScore.GetComponent<TMP_Text>().text = calculatedScore.ToString();
-            gameOverPanel.SetActive(true);
+            gameUI.gameOverScore.GetComponent<TMP_Text>().text = calculatedScore.ToString();
+            gameUI.gameOverPanel.SetActive(true);
+            countdownToPointGain = 0f;
         }
         
     }
@@ -56,7 +54,7 @@ public class GameManager : MonoBehaviour
         if (countdownToPointGain >= 1)
         {
             calculatedScore += 100;
-            score.GetComponent<TMP_Text>().text = calculatedScore.ToString();
+            gameUI.score.GetComponent<TMP_Text>().text = calculatedScore.ToString();
             countdownToPointGain = 0;
         }
     }

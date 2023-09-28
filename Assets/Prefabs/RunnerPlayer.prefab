@@ -1070,6 +1070,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inputMaster: {fileID: -944628639613478452, guid: 97a8dd31ec7c04a41a350e52d0086a16, type: 3}
   forwardSpeed: 5
+  desiredLane: 1
   laneDistance: 3
   jumpForce: 10
   gravity: -20
