@@ -14,6 +14,7 @@ public class TileManager : MonoBehaviour
 
     void Start()
     {
+        playerTransform = GameObject.FindWithTag("Player").transform;
         for (int i = 0; i < numOfTiles; i++)
         {
             if (i == 0)

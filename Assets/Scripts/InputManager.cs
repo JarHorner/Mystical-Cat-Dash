@@ -18,6 +18,7 @@ public class InputManager : MonoBehaviour
     private InputAction primaryContact, primaryPosition;
     private Player player;
     [SerializeField] private Camera mainCamera;
+    private bool removing = false;
 
     private void Awake()
     {
@@ -28,13 +29,20 @@ public class InputManager : MonoBehaviour
         }
         else
         {
+            removing = true;
             Destroy(gameObject);
         }
 
+        mainCamera = GameObject.FindWithTag("MainCamera").GetComponent<Camera>();
         var playerActionMap = inputMaster.FindActionMap("RunnerPlayer");
 
         primaryContact = playerActionMap.FindAction("PrimaryContact");
         primaryPosition = playerActionMap.FindAction("PrimaryPosition");
+    }
+
+    void Start()
+    {
+        //mainCamera = GameObject.FindWithTag("MainCamera").GetComponent<Camera>();
     }
 
     void OnEnable()
@@ -47,16 +55,18 @@ public class InputManager : MonoBehaviour
 
     void OnDisable()
     {
-        primaryContact.started -= ctx => StartTouchPrimary(ctx);
-        primaryContact.canceled -= ctx => EndTouchPrimary(ctx);
-        primaryContact.Disable();
+        if (!removing)
+        {
+            primaryContact.started -= ctx => StartTouchPrimary(ctx);
+            primaryContact.canceled -= ctx => EndTouchPrimary(ctx);
+            primaryContact.Disable();
+        }
     }
 
-    // void Start()
-    // {
-    //     primaryContact.started += ctx => StartTouchPrimary(ctx);
-    //     primaryContact.canceled += ctx => EndTouchPrimary(ctx);
-    // }
+    void Update()
+    {
+        mainCamera = GameObject.Find("Main Camera").GetComponent<Camera>();
+    }
 
     private void StartTouchPrimary(InputAction.CallbackContext context)
     {

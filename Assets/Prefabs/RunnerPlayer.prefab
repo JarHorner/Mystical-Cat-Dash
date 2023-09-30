@@ -1013,7 +1013,7 @@ GameObject:
   - component: {fileID: 2457871527586346379}
   m_Layer: 0
   m_Name: RunnerPlayer
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1069,9 +1069,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inputMaster: {fileID: -944628639613478452, guid: 97a8dd31ec7c04a41a350e52d0086a16, type: 3}
-  forwardSpeed: 5
+  controller: {fileID: 0}
+  forwardSpeed: 10
   desiredLane: 1
-  laneDistance: 3
+  laneDistance: 2.5
   jumpForce: 10
   gravity: -20
 --- !u!143 &2457871527586346379

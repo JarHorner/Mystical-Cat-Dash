@@ -11,7 +11,7 @@ public class RunnerPlayerController : MonoBehaviour
     private Vector2 initialPos;
     private Vector2 currentPos => primaryPosition.ReadValue<Vector2>();
 
-    private CharacterController controller;
+    [SerializeField]private CharacterController controller;
     private Vector3 direction;
     public float forwardSpeed;
 
@@ -60,6 +60,8 @@ public class RunnerPlayerController : MonoBehaviour
 
         jump.performed -= Jump;
         jump.Disable();
+
+        Debug.Log("Player deleted");
     }
 
     // Update is called once per frame

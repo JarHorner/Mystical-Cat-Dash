@@ -15,17 +15,31 @@ public class SwipeDetection : MonoBehaviour
     private float startTime;
     private Vector2 endPosition;
     private float endTime;
+    [SerializeField]
     private RunnerPlayerController runnerPlayer;
 
-    public void Awake()
+    void Start()
     {
-        runnerPlayer = GameObject.Find("RunnerPlayer").GetComponent<RunnerPlayerController>();
+        runnerPlayer = GameObject.FindWithTag("Player").GetComponent<RunnerPlayerController>();
     }
-    
+
+    void Update()
+    {
+        runnerPlayer = GameObject.FindWithTag("Player").GetComponent<RunnerPlayerController>();
+    }
+
+
+    private IEnumerator DelayFindPlayer()
+    {
+        yield return new WaitForSeconds(2f);
+        runnerPlayer = GameObject.FindWithTag("Player").GetComponent<RunnerPlayerController>();
+    }
+
     private void OnEnable()
     {
         InputManager.Instance.OnStartTouch += SwipeStart;
         InputManager.Instance.OnEndTouch += SwipeEnd;
+        Debug.Log("SWIPE AWAY");
     }
 
     void OnDisable()
