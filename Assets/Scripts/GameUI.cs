@@ -11,6 +11,7 @@ public class GameUI : MonoBehaviour
     public GameObject score;
     public GameObject gameOverScore;
     public GameObject gameOverPanel;
+    public GameObject startingText;
     private void Awake()
     {
         if (Instance == null)

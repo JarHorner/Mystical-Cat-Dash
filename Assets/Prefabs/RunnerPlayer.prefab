@@ -1045,7 +1045,7 @@ Animator:
   m_GameObject: {fileID: 4443037441189781418}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 5917c0e93d180a842b61d1ebc62a195c, type: 3}
-  m_Controller: {fileID: 9100000, guid: eb79e3fd0dd669f40a90a984b92a0ccf, type: 2}
+  m_Controller: {fileID: 9100000, guid: a8555c0cff30527479e32562cef9141f, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -1069,8 +1069,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inputMaster: {fileID: -944628639613478452, guid: 97a8dd31ec7c04a41a350e52d0086a16, type: 3}
-  controller: {fileID: 0}
+  animatorControllers: []
+  anim: {fileID: 1978468359818719094}
+  controller: {fileID: 2457871527586346379}
   forwardSpeed: 10
+  maximumForwardSpeed: 20
   desiredLane: 1
   laneDistance: 2
   jumpForce: 10

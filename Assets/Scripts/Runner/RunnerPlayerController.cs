@@ -2,18 +2,30 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEditor.Animations;
 
+public enum PlayerState
+{
+    idle,
+    run,
+    sprint,
+    jump,
+    falling,
+    slide,
+}
 public class RunnerPlayerController : MonoBehaviour
 {
+    public PlayerState currentState;
     [SerializeField] private InputActionAsset inputMaster;
-    private InputAction primaryContact, primaryPosition, shiftLeft, shiftRight, jump;
-
+    private InputAction primaryContact, primaryPosition, shiftLeft, shiftRight, jump, slide;
+    public Animator animator;
     private Vector2 initialPos;
     private Vector2 currentPos => primaryPosition.ReadValue<Vector2>();
 
-    [SerializeField]private CharacterController controller;
+    [SerializeField] private CharacterController controller;
     private Vector3 direction;
     public float forwardSpeed;
+    public float maximumForwardSpeed;
 
     public int desiredLane = 1;
     public float laneDistance = 4;
@@ -30,10 +42,12 @@ public class RunnerPlayerController : MonoBehaviour
         shiftLeft = playerActionMap.FindAction("ShiftLeft");
         shiftRight = playerActionMap.FindAction("ShiftRight");
         jump = playerActionMap.FindAction("Jump");
+        slide = playerActionMap.FindAction("Slide");
     }
 
     void Start()
     {
+        currentState = PlayerState.idle;
         controller = GetComponent<CharacterController>();
         Time.timeScale = 1;
     }
@@ -48,6 +62,9 @@ public class RunnerPlayerController : MonoBehaviour
 
         jump.Enable();
         jump.performed += Jump;
+
+        slide.Enable();
+        slide.performed += Slide;
     }
 
     void OnDisable()
@@ -61,12 +78,36 @@ public class RunnerPlayerController : MonoBehaviour
         jump.performed -= Jump;
         jump.Disable();
 
+        slide.performed -= Slide;
+        slide.Disable();
+
         Debug.Log("Player deleted");
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (controller.isGrounded)
+        {
+            currentState = PlayerState.run;
+        }
+
+
+        if (currentState == PlayerState.run)
+        {
+            animator.runtimeAnimatorController = Resources.Load<AnimatorController>("BasicMotions@Run");
+        }
+        else if (currentState == PlayerState.jump)
+        {
+            animator.runtimeAnimatorController = Resources.Load<AnimatorController>("BasicMotions@Jump");
+        }
+
+        // increases speed of player slowly as game progresses to a maximum amount
+        if (forwardSpeed < maximumForwardSpeed)
+        {
+            forwardSpeed += 0.1f * Time.deltaTime;
+        }
+
         direction.z = forwardSpeed;
         direction.y += gravity * Time.deltaTime;
 
@@ -99,6 +140,9 @@ public class RunnerPlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
+        if (!GameManager.Instance.isGameStarted)
+            return;
+
         controller.Move(direction * Time.fixedDeltaTime);
     }
 
@@ -146,6 +190,7 @@ public class RunnerPlayerController : MonoBehaviour
     {
         if (controller.isGrounded && context.performed)
         {
+            currentState = PlayerState.jump;
             direction.y = jumpForce;
         }
     }
@@ -156,6 +201,22 @@ public class RunnerPlayerController : MonoBehaviour
         {
             direction.y = jumpForce;
         }
+    }
+
+    private void Slide(InputAction.CallbackContext context)
+    {
+        StartCoroutine(RunnerSlide());
+    }
+
+    public void SwipeSlide()
+    {
+        StartCoroutine(RunnerSlide());
+    }
+
+    private IEnumerator RunnerSlide()
+    {
+        Debug.Log("Slide!");
+        yield return new WaitForSeconds(1f);
     }
 
 

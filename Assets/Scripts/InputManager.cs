@@ -11,11 +11,13 @@ public class InputManager : MonoBehaviour
     public event StartTouch OnStartTouch;
     public delegate void EndTouch(Vector2 position, float time);
     public event EndTouch OnEndTouch;
+    public delegate void TapStart();
+    public event TapStart OnTapStart;
     #endregion
 
     public static InputManager Instance { get; private set; }
     [SerializeField] private InputActionAsset inputMaster;
-    private InputAction primaryContact, primaryPosition;
+    private InputAction primaryContact, primaryPosition, tap;
     private Player player;
     [SerializeField] private Camera mainCamera;
     private bool removing = false;
@@ -36,6 +38,7 @@ public class InputManager : MonoBehaviour
 
         primaryContact = playerActionMap.FindAction("PrimaryContact");
         primaryPosition = playerActionMap.FindAction("PrimaryPosition");
+        tap = playerActionMap.FindAction("StartGame");
     }
 
     void Start()
@@ -49,6 +52,10 @@ public class InputManager : MonoBehaviour
         primaryContact.Enable();
         primaryContact.started += ctx => StartTouchPrimary(ctx);
         primaryContact.canceled += ctx => EndTouchPrimary(ctx);
+
+        tap.Enable();
+        tap.started += ctx => StartGameTap(ctx);
+        tap.canceled += ctx => StartGameTap(ctx);
     }
 
     void OnDisable()
@@ -59,6 +66,11 @@ public class InputManager : MonoBehaviour
             primaryContact.started -= ctx => StartTouchPrimary(ctx);
             primaryContact.canceled -= ctx => EndTouchPrimary(ctx);
             primaryContact.Disable();
+            primaryPosition.Disable();
+
+            tap.started -= ctx => StartGameTap(ctx);
+            tap.canceled -= ctx => StartGameTap(ctx);
+            tap.Disable();
         }
     }
 
@@ -83,6 +95,15 @@ public class InputManager : MonoBehaviour
         if (OnStartTouch != null)
         {
             OnEndTouch(Utils.ScreenToWorld(mainCamera, primaryPosition.ReadValue<Vector2>()), (float)context.time);
+        }
+    }
+
+    private void StartGameTap(InputAction.CallbackContext context)
+    {
+        if (!GameManager.Instance.isGameStarted)
+        {
+            Debug.Log("tap");
+            OnTapStart();
         }
     }
 

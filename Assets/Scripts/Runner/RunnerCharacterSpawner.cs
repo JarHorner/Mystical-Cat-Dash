@@ -10,6 +10,7 @@ public class RunnerCharacterSpawner : MonoBehaviour
 
     void Awake()
     {
-        Instantiate(runnerPlayer, new Vector3(0, 0, 0), Quaternion.identity);
+        GameObject newRunnerPlayer = Instantiate(runnerPlayer, new Vector3(0, 0, 0), Quaternion.identity);
+        newRunnerPlayer.name = runnerPlayer.name;
     }
 }

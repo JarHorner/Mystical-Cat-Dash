@@ -71,13 +71,31 @@ public partial class @Player: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""StartGame"",
+                    ""type"": ""Button"",
+                    ""id"": ""587d89cd-8296-467b-a57c-256c3b9c6817"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Slide"",
+                    ""type"": ""Button"",
+                    ""id"": ""571a5cdb-1b07-4d86-80b3-b07f96f5bf99"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
                 {
                     ""name"": """",
                     ""id"": ""ee10f572-3af7-4ac5-9c77-dbf8a57aa691"",
-                    ""path"": ""<Mouse>/leftButton"",
+                    ""path"": ""<Keyboard>/w"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse"",
@@ -88,10 +106,10 @@ public partial class @Player: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""9f7ddb70-95fd-40cb-94fc-f1a1f253c2a2"",
-                    ""path"": ""<Touchscreen>/primaryTouch/tap"",
+                    ""path"": ""<Keyboard>/upArrow"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Mobile"",
+                    ""groups"": ""Keyboard&Mouse"",
                     ""action"": ""Jump"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -159,6 +177,39 @@ public partial class @Player: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": ""Mobile"",
                     ""action"": ""PrimaryPosition"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e041b3b4-46ef-47fc-9426-4a494c0d3bd9"",
+                    ""path"": ""<Touchscreen>/primaryTouch/tap"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Mobile"",
+                    ""action"": ""StartGame"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0be304b6-376e-4078-a9ad-1f32f7cc025a"",
+                    ""path"": ""<Keyboard>/s"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Slide"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c7ec562b-980d-4116-a02a-f6441af275d6"",
+                    ""path"": ""<Keyboard>/downArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Slide"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -398,6 +449,8 @@ public partial class @Player: IInputActionCollection2, IDisposable
         m_RunnerPlayer_Jump = m_RunnerPlayer.FindAction("Jump", throwIfNotFound: true);
         m_RunnerPlayer_ShiftLeft = m_RunnerPlayer.FindAction("ShiftLeft", throwIfNotFound: true);
         m_RunnerPlayer_ShiftRight = m_RunnerPlayer.FindAction("ShiftRight", throwIfNotFound: true);
+        m_RunnerPlayer_StartGame = m_RunnerPlayer.FindAction("StartGame", throwIfNotFound: true);
+        m_RunnerPlayer_Slide = m_RunnerPlayer.FindAction("Slide", throwIfNotFound: true);
         // FlappyPlayer
         m_FlappyPlayer = asset.FindActionMap("FlappyPlayer", throwIfNotFound: true);
         m_FlappyPlayer_Jump = m_FlappyPlayer.FindAction("Jump", throwIfNotFound: true);
@@ -474,6 +527,8 @@ public partial class @Player: IInputActionCollection2, IDisposable
     private readonly InputAction m_RunnerPlayer_Jump;
     private readonly InputAction m_RunnerPlayer_ShiftLeft;
     private readonly InputAction m_RunnerPlayer_ShiftRight;
+    private readonly InputAction m_RunnerPlayer_StartGame;
+    private readonly InputAction m_RunnerPlayer_Slide;
     public struct RunnerPlayerActions
     {
         private @Player m_Wrapper;
@@ -483,6 +538,8 @@ public partial class @Player: IInputActionCollection2, IDisposable
         public InputAction @Jump => m_Wrapper.m_RunnerPlayer_Jump;
         public InputAction @ShiftLeft => m_Wrapper.m_RunnerPlayer_ShiftLeft;
         public InputAction @ShiftRight => m_Wrapper.m_RunnerPlayer_ShiftRight;
+        public InputAction @StartGame => m_Wrapper.m_RunnerPlayer_StartGame;
+        public InputAction @Slide => m_Wrapper.m_RunnerPlayer_Slide;
         public InputActionMap Get() { return m_Wrapper.m_RunnerPlayer; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -507,6 +564,12 @@ public partial class @Player: IInputActionCollection2, IDisposable
             @ShiftRight.started += instance.OnShiftRight;
             @ShiftRight.performed += instance.OnShiftRight;
             @ShiftRight.canceled += instance.OnShiftRight;
+            @StartGame.started += instance.OnStartGame;
+            @StartGame.performed += instance.OnStartGame;
+            @StartGame.canceled += instance.OnStartGame;
+            @Slide.started += instance.OnSlide;
+            @Slide.performed += instance.OnSlide;
+            @Slide.canceled += instance.OnSlide;
         }
 
         private void UnregisterCallbacks(IRunnerPlayerActions instance)
@@ -526,6 +589,12 @@ public partial class @Player: IInputActionCollection2, IDisposable
             @ShiftRight.started -= instance.OnShiftRight;
             @ShiftRight.performed -= instance.OnShiftRight;
             @ShiftRight.canceled -= instance.OnShiftRight;
+            @StartGame.started -= instance.OnStartGame;
+            @StartGame.performed -= instance.OnStartGame;
+            @StartGame.canceled -= instance.OnStartGame;
+            @Slide.started -= instance.OnSlide;
+            @Slide.performed -= instance.OnSlide;
+            @Slide.canceled -= instance.OnSlide;
         }
 
         public void RemoveCallbacks(IRunnerPlayerActions instance)
@@ -692,6 +761,8 @@ public partial class @Player: IInputActionCollection2, IDisposable
         void OnJump(InputAction.CallbackContext context);
         void OnShiftLeft(InputAction.CallbackContext context);
         void OnShiftRight(InputAction.CallbackContext context);
+        void OnStartGame(InputAction.CallbackContext context);
+        void OnSlide(InputAction.CallbackContext context);
     }
     public interface IFlappyPlayerActions
     {

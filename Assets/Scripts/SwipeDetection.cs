@@ -31,7 +31,6 @@ public class SwipeDetection : MonoBehaviour
     {
         InputManager.Instance.OnStartTouch += SwipeStart;
         InputManager.Instance.OnEndTouch += SwipeEnd;
-        Debug.Log("SWIPE AWAY");
     }
 
     void OnDisable()
@@ -76,6 +75,7 @@ public class SwipeDetection : MonoBehaviour
         else if (Vector2.Dot(Vector2.down, direction) > directionThreshhold)
         {
             Debug.Log("DOWN");
+            runnerPlayer.SwipeSlide();
         }
         else if (Vector2.Dot(Vector2.left, direction) > directionThreshhold)
         {
