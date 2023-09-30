@@ -718,7 +718,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inputMaster: {fileID: -944628639613478452, guid: 97a8dd31ec7c04a41a350e52d0086a16, type: 3}
-  mainCamera: {fileID: 6885075696139341378}
+  mainCamera: {fileID: 0}
 --- !u!4 &758203450
 Transform:
   m_ObjectHideFlags: 0
@@ -2315,6 +2315,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
+  runnerCamera: {fileID: 6885075696139341378}
 --- !u!81 &8099622715144869722
 AudioListener:
   m_ObjectHideFlags: 0

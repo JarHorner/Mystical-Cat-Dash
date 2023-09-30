@@ -18,21 +18,13 @@ public class SwipeDetection : MonoBehaviour
     [SerializeField]
     private RunnerPlayerController runnerPlayer;
 
-    void Start()
-    {
-        runnerPlayer = GameObject.FindWithTag("Player").GetComponent<RunnerPlayerController>();
-    }
 
     void Update()
     {
-        runnerPlayer = GameObject.FindWithTag("Player").GetComponent<RunnerPlayerController>();
-    }
-
-
-    private IEnumerator DelayFindPlayer()
-    {
-        yield return new WaitForSeconds(2f);
-        runnerPlayer = GameObject.FindWithTag("Player").GetComponent<RunnerPlayerController>();
+        if (runnerPlayer == null)
+        {
+            runnerPlayer = GameObject.FindWithTag("Player").GetComponent<RunnerPlayerController>();
+        }
     }
 
     private void OnEnable()

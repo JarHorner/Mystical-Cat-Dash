@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class RunnerCameraController : MonoBehaviour
 {
-    [SerializeField] 
+    [SerializeField]
     private Transform target;
     private Vector3 offset;
+
 
     void Start()
     {

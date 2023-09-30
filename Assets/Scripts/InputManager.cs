@@ -32,8 +32,6 @@ public class InputManager : MonoBehaviour
             removing = true;
             Destroy(gameObject);
         }
-
-        mainCamera = GameObject.FindWithTag("MainCamera").GetComponent<Camera>();
         var playerActionMap = inputMaster.FindActionMap("RunnerPlayer");
 
         primaryContact = playerActionMap.FindAction("PrimaryContact");
@@ -42,11 +40,11 @@ public class InputManager : MonoBehaviour
 
     void Start()
     {
-        //mainCamera = GameObject.FindWithTag("MainCamera").GetComponent<Camera>();
     }
 
     void OnEnable()
     {
+        Debug.Log("enable");
         primaryPosition.Enable();
         primaryContact.Enable();
         primaryContact.started += ctx => StartTouchPrimary(ctx);
@@ -55,6 +53,7 @@ public class InputManager : MonoBehaviour
 
     void OnDisable()
     {
+        Debug.Log("disable");
         if (!removing)
         {
             primaryContact.started -= ctx => StartTouchPrimary(ctx);
@@ -65,7 +64,10 @@ public class InputManager : MonoBehaviour
 
     void Update()
     {
-        mainCamera = GameObject.Find("Main Camera").GetComponent<Camera>();
+        if (mainCamera == null)
+        {
+            mainCamera = Camera.main;
+        }
     }
 
     private void StartTouchPrimary(InputAction.CallbackContext context)
