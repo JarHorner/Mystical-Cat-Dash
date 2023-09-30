@@ -26,8 +26,7 @@ public class GameUI : MonoBehaviour
 
     void Start() 
     {
-        gameOverPanel.SetActive(false);
-        score.GetComponent<TMP_Text>().text = "0";
+
     }
 
     void Update()

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class Events : MonoBehaviour
 {
@@ -22,8 +23,9 @@ public class Events : MonoBehaviour
     public void ReplayGame()
     {
         GameManager.Instance.gameOver = false;
-        GameUI.Instance.gameOverPanel.SetActive(false);
         GameManager.Instance.calculatedScore = 0;
+        GameUI.Instance.gameOverPanel.SetActive(false);
+        GameUI.Instance.score.GetComponent<TMP_Text>().text = "0";
         SceneManager.LoadScene("Runner");
     }
 

@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
+
         if (Instance == null)
         {
             Instance = this;
@@ -26,7 +27,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    void Start() 
+    void Start()
     {
         gameUI = GameUI.Instance;
     }
@@ -41,15 +42,15 @@ public class GameManager : MonoBehaviour
         else
         {
             Time.timeScale = 0;
-            
+
             gameUI.gameOverScore.GetComponent<TMP_Text>().text = calculatedScore.ToString();
             gameUI.gameOverPanel.SetActive(true);
             countdownToPointGain = 0f;
         }
-        
+
     }
 
-    private void convertTimeToPoints() 
+    private void convertTimeToPoints()
     {
         if (countdownToPointGain >= 1)
         {
@@ -59,7 +60,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void SwitchDimensions() 
+    public void SwitchDimensions()
     {
         Scene scene = SceneManager.GetActiveScene();
         Debug.Log(scene.name);

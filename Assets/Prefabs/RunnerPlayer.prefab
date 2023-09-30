@@ -1072,7 +1072,7 @@ MonoBehaviour:
   controller: {fileID: 0}
   forwardSpeed: 10
   desiredLane: 1
-  laneDistance: 2.5
+  laneDistance: 2
   jumpForce: 10
   gravity: -20
 --- !u!143 &2457871527586346379
