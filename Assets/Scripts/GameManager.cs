@@ -58,6 +58,8 @@ public class GameManager : MonoBehaviour
             {
                 Time.timeScale = 0;
 
+                
+
                 gameUI.gameOverScore.GetComponent<TMP_Text>().text = calculatedScore.ToString();
                 gameUI.gameOverPanel.SetActive(true);
                 countdownToPointGain = 0f;

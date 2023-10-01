@@ -5,10 +5,14 @@ using UnityEngine;
 public class TileManager : MonoBehaviour
 {
     public GameObject[] tilePrefabs;
+    public GameObject swapGameTile;
+    public int swapGameTileSpawnNum;
     public float zSpawn = 0;
     public float tileLength = 20;
     public int numOfTiles = 5;
+    public int totalTilesSpawned = 0;
     private List<GameObject> activeTiles = new List<GameObject>();
+
 
     public Transform playerTransform;
 
@@ -21,7 +25,14 @@ public class TileManager : MonoBehaviour
             {
                 SpawnTile(0);
             }
-            SpawnTile(Random.Range(0, tilePrefabs.Length));
+            if (i == swapGameTileSpawnNum)
+            {
+                SpawnSwapGameTile();
+            }
+            else
+            {
+                SpawnTile(Random.Range(0, tilePrefabs.Length));
+            }
         }
     }
 
@@ -29,14 +40,30 @@ public class TileManager : MonoBehaviour
     {
         if (playerTransform.position.z - 25 > zSpawn - (numOfTiles * tileLength))
         {
-            SpawnTile(Random.Range(0, tilePrefabs.Length));
+            if (totalTilesSpawned == swapGameTileSpawnNum)
+            {
+                SpawnSwapGameTile();
+            }
+            else
+            {
+                SpawnTile(Random.Range(0, tilePrefabs.Length));
+            }
             DeleteTile();
         }
     }
 
     public void SpawnTile(int index)
     {
+        totalTilesSpawned++;
         GameObject tile = Instantiate(tilePrefabs[index], transform.forward * zSpawn, transform.rotation);
+        activeTiles.Add(tile);
+        zSpawn += tileLength;
+    }
+
+    public void SpawnSwapGameTile()
+    {
+        totalTilesSpawned++;
+        GameObject tile = Instantiate(swapGameTile, transform.forward * zSpawn, transform.rotation);
         activeTiles.Add(tile);
         zSpawn += tileLength;
     }

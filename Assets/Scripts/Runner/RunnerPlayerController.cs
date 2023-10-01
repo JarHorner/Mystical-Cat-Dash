@@ -9,8 +9,6 @@ public enum PlayerState
     idle,
     run,
     sprint,
-    jump,
-    falling,
     slide,
 }
 public class RunnerPlayerController : MonoBehaviour
@@ -87,19 +85,9 @@ public class RunnerPlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (controller.isGrounded)
-        {
-            currentState = PlayerState.run;
-        }
-
-
         if (currentState == PlayerState.run)
         {
             animator.runtimeAnimatorController = Resources.Load<AnimatorController>("BasicMotions@Run");
-        }
-        else if (currentState == PlayerState.jump)
-        {
-            animator.runtimeAnimatorController = Resources.Load<AnimatorController>("BasicMotions@Jump");
         }
 
         // increases speed of player slowly as game progresses to a maximum amount
@@ -140,6 +128,11 @@ public class RunnerPlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
+        if (controller.isGrounded)
+        {
+            currentState = PlayerState.run;
+        }
+
         if (!GameManager.Instance.isGameStarted)
             return;
 
@@ -152,11 +145,15 @@ public class RunnerPlayerController : MonoBehaviour
         {
             GameManager.Instance.gameOver = true;
         }
+        else if (hit.transform.tag == "Portal")
+        {
+            GameManager.Instance.SwitchDimensions();
+        }
     }
 
     private void ShiftLeft(InputAction.CallbackContext context)
     {
-        if (desiredLane > 0)
+        if (desiredLane > 0 && currentState != PlayerState.idle)
         {
             desiredLane--;
         }
@@ -164,7 +161,7 @@ public class RunnerPlayerController : MonoBehaviour
 
     public void SwipeShiftLeft()
     {
-        if (desiredLane > 0)
+        if (desiredLane > 0 && currentState != PlayerState.idle)
         {
             desiredLane--;
         }
@@ -172,7 +169,7 @@ public class RunnerPlayerController : MonoBehaviour
 
     private void ShiftRight(InputAction.CallbackContext context)
     {
-        if (desiredLane < 2)
+        if (desiredLane < 2 && currentState != PlayerState.idle)
         {
             desiredLane++;
         }
@@ -180,7 +177,7 @@ public class RunnerPlayerController : MonoBehaviour
 
     public void SwipeShiftRight()
     {
-        if (desiredLane < 2)
+        if (desiredLane < 2 && currentState != PlayerState.idle)
         {
             desiredLane++;
         }
@@ -190,7 +187,6 @@ public class RunnerPlayerController : MonoBehaviour
     {
         if (controller.isGrounded && context.performed)
         {
-            currentState = PlayerState.jump;
             direction.y = jumpForce;
         }
     }
@@ -205,18 +201,26 @@ public class RunnerPlayerController : MonoBehaviour
 
     private void Slide(InputAction.CallbackContext context)
     {
-        StartCoroutine(RunnerSlide());
+        if (controller.isGrounded)
+        {
+            StartCoroutine(RunnerSlide());
+        }
     }
 
     public void SwipeSlide()
     {
-        StartCoroutine(RunnerSlide());
+        if (controller.isGrounded)
+        {
+            StartCoroutine(RunnerSlide());
+        }
     }
 
     private IEnumerator RunnerSlide()
     {
         Debug.Log("Slide!");
+        gameObject.transform.localScale = new Vector3(1f, 0.5f, 1f);
         yield return new WaitForSeconds(1f);
+        gameObject.transform.localScale = new Vector3(1f, 1f, 1f);
     }
 
 
