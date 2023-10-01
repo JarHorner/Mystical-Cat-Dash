@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.4465829, g: 0.49641728, b: 0.57482105, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -157,7 +157,7 @@ MonoBehaviour:
   - {fileID: 1876835430686383551, guid: 963d92eb10b5ac64a837a5462afa41eb, type: 3}
   - {fileID: 2992694648310732138, guid: a793766d6ee0fe24eaf1fc46db73e148, type: 3}
   swapGameTile: {fileID: 472977540979237916, guid: 11683c1ee36f76448b57b77419e0ee77, type: 3}
-  swapGameTileSpawnNum: 5
+  swapGameTileSpawnNum: 2
   zSpawn: 0
   tileLength: 20
   numOfTiles: 15
@@ -2136,8 +2136,8 @@ Camera:
   m_GameObject: {fileID: 6908559714516582453}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.6981132, g: 0.35504922, b: 0.26782957, a: 0}
+  m_ClearFlags: 2
+  m_BackGroundColor: {r: 0.32514533, g: 0.754717, b: 0.73236406, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0

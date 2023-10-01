@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Object
   - Portal
+  - OutOfBounds
   layers:
   - Default
   - TransparentFX

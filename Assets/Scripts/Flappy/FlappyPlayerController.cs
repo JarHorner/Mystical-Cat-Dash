@@ -7,13 +7,14 @@ using UnityEngine.SceneManagement;
 public class FlappyPlayerController : MonoBehaviour
 {
 
-    private Rigidbody rb;
+    private Rigidbody2D rb;
     private Vector3 velocity;
     public Animator anim;
-    private FlappyGameController flappyGameController;
+    [SerializeField] private FlappyGameController flappyGameController;
     [SerializeField] private InputActionAsset inputMaster;
     private InputAction jump;
     [SerializeField] private float jumpSpeed;
+    private bool isDead = false;
 
     void Awake()
     {
@@ -39,36 +40,45 @@ public class FlappyPlayerController : MonoBehaviour
 
     void Start()
     {
-        rb = GetComponent<Rigidbody>();
-        flappyGameController = GameObject.Find("FlappyGameController").GetComponent<FlappyGameController>();
+        rb = GetComponent<Rigidbody2D>();
     }
 
     void Update()
     {
-        velocity.y -= 15 * Time.deltaTime;
-        rb.velocity = velocity;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Ground")
+        if (collision.gameObject.tag == "OutOfBounds")
         {
-            this.GetComponent<CapsuleCollider2D>().enabled = false;
+            Debug.Log("Dying");
+            this.GetComponent<BoxCollider2D>().enabled = false;
             StartCoroutine(Death());
         }
     }
 
     public void Jump(InputAction.CallbackContext context)
     {
-        Debug.Log("JUMP!");
-        velocity.y = Mathf.Sqrt(jumpSpeed);
-        
+        if (!isDead && context.performed)
+        {
+            Debug.Log("JUMP!");
+            rb.AddForce(new Vector2(0, jumpSpeed));
+            rb.velocity = Vector2.zero;
+        }
+        // if (!GameManager.Instance.gameOver && context.performed)
+        // {
+        //     Debug.Log("JUMP!");
+        //     rb.AddForce(new Vector2(0, jumpSpeed));
+        //     rb.velocity = Vector2.zero;
+        // }
+
     }
 
     IEnumerator Death()
     {
         rb.velocity = Vector2.zero;
-        GameManager.Instance.gameOver = true;
+        isDead = true;
+        //GameManager.Instance.gameOver = true;
         yield return new WaitForSeconds(2f);
         Destroy(this.gameObject);
     }

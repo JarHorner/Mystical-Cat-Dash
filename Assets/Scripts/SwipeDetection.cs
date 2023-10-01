@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class SwipeDetection : MonoBehaviour
 {
@@ -21,7 +22,7 @@ public class SwipeDetection : MonoBehaviour
 
     void Update()
     {
-        if (runnerPlayer == null)
+        if (SceneManager.GetActiveScene().name == "Runner" && runnerPlayer == null)
         {
             runnerPlayer = GameObject.FindWithTag("Player").GetComponent<RunnerPlayerController>();
         }
