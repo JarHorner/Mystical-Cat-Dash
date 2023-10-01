@@ -12,8 +12,10 @@ public class GameManager : MonoBehaviour
     public int calculatedScore = 0;
     private float countdownToPointGain = 0f;
     public bool gameOver = false;
+    public bool gameOverMenuOpen = false;
     public bool isGameStarted;
     private GameUI gameUI;
+    [SerializeField] private AudioSource gameOverMusic;
 
     private void Awake()
     {
@@ -56,13 +58,19 @@ public class GameManager : MonoBehaviour
             }
             else
             {
-                Time.timeScale = 0;
+                if (!gameOverMenuOpen)
+                {
+                    gameOverMusic.Play();
 
-                
+                    Time.timeScale = 0;
 
-                gameUI.gameOverScore.GetComponent<TMP_Text>().text = calculatedScore.ToString();
-                gameUI.gameOverPanel.SetActive(true);
-                countdownToPointGain = 0f;
+
+                    gameUI.gameOverScore.GetComponent<TMP_Text>().text = calculatedScore.ToString();
+                    gameUI.gameOverPanel.SetActive(true);
+                    countdownToPointGain = 0f;
+
+                    gameOverMenuOpen = true;
+                }
             }
         }
     }

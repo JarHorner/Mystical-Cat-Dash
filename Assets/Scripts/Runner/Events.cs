@@ -23,6 +23,7 @@ public class Events : MonoBehaviour
     public void ReplayGame()
     {
         GameManager.Instance.gameOver = false;
+        GameManager.Instance.gameOverMenuOpen = false;
         GameManager.Instance.calculatedScore = 0;
         GameUI.Instance.gameOverPanel.SetActive(false);
         GameUI.Instance.score.GetComponent<TMP_Text>().text = "0";
