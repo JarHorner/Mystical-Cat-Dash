@@ -54,7 +54,7 @@ public class GameManager : MonoBehaviour
             if (!gameOver)
             {
                 countdownToPointGain += Time.deltaTime;
-                convertTimeToPoints();
+                ConvertTimeToPoints();
             }
             else
             {
@@ -90,7 +90,7 @@ public class GameManager : MonoBehaviour
 
     }
 
-    private void convertTimeToPoints()
+    private void ConvertTimeToPoints()
     {
         if (countdownToPointGain >= 1)
         {
@@ -98,6 +98,12 @@ public class GameManager : MonoBehaviour
             gameUI.score.GetComponent<TMP_Text>().text = calculatedScore.ToString();
             countdownToPointGain = 0;
         }
+    }
+
+    public void Scored()
+    {
+        calculatedScore += 200;
+        gameUI.score.GetComponent<TMP_Text>().text = calculatedScore.ToString();
     }
 
     public void SwitchDimensions()

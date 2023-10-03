@@ -41,19 +41,38 @@ public class FlappyPlayerController : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        flappyGameController = GameObject.FindWithTag("GameController").GetComponent<FlappyGameController>();
     }
 
     void Update()
     {
+        if (!flappyGameController.playerPositioned)
+        {
+            transform.Translate(Vector2.right * 10 * Time.deltaTime);
+        }
+
+        if (transform.position.x > -2)
+        {
+            flappyGameController.playerPositioned = true;
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "OutOfBounds")
+        if (collision.gameObject.tag == "OutOfBounds" || collision.gameObject.tag == "Object")
         {
             Debug.Log("Dying");
             this.GetComponent<BoxCollider2D>().enabled = false;
             StartCoroutine(Death());
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D col)
+    {
+        if (col.gameObject.tag == "Portal")
+        {
+            //GameManager.Instance.SwitchDimensions();
+            SceneManager.LoadScene("Runner");
         }
     }
 
@@ -76,6 +95,7 @@ public class FlappyPlayerController : MonoBehaviour
 
     IEnumerator Death()
     {
+        rb.constraints = RigidbodyConstraints2D.None;
         rb.velocity = Vector2.zero;
         isDead = true;
         //GameManager.Instance.gameOver = true;

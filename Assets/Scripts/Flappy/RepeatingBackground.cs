@@ -6,11 +6,6 @@ public class RepeatingBackground : MonoBehaviour
 {
     [SerializeField] private float groundHorizontalLength;
 
-    void Start()
-    {
-    
-    }
-
     void Update()
     {
         if (transform.position.x < -groundHorizontalLength)

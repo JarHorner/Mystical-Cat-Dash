@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ScrollingObject : MonoBehaviour
 {
-    private FlappyPlayerController flappyPlayerController;
+    private FlappyGameController flappyGameController;
     private Rigidbody2D rb;
     [SerializeField] private float scrollSpeed;
     private bool scrolling = false;
@@ -12,12 +12,13 @@ public class ScrollingObject : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        flappyPlayerController = GameObject.FindWithTag("Player").GetComponent<FlappyPlayerController>();
+        flappyGameController = GameObject.FindWithTag("GameController").GetComponent<FlappyGameController>();
     }
 
     void Update()
     {
-        if (!scrolling)
+
+        if (!scrolling && flappyGameController.playerPositioned)
         {
             rb.velocity = new Vector2(-scrollSpeed, 0);
             scrolling = true;
