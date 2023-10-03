@@ -71,25 +71,25 @@ public class FlappyPlayerController : MonoBehaviour
     {
         if (col.gameObject.tag == "Portal")
         {
-            //GameManager.Instance.SwitchDimensions();
-            SceneManager.LoadScene("Runner");
+            GameManager.Instance.SwitchDimensions();
+            //SceneManager.LoadScene("Runner");
         }
     }
 
     public void Jump(InputAction.CallbackContext context)
     {
-        if (!isDead && context.performed)
-        {
-            Debug.Log("JUMP!");
-            rb.AddForce(new Vector2(0, jumpSpeed));
-            rb.velocity = Vector2.zero;
-        }
-        // if (!GameManager.Instance.gameOver && context.performed)
+        // if (!isDead && context.performed)
         // {
         //     Debug.Log("JUMP!");
         //     rb.AddForce(new Vector2(0, jumpSpeed));
         //     rb.velocity = Vector2.zero;
         // }
+        if (!GameManager.Instance.gameOver && context.performed)
+        {
+            Debug.Log("JUMP!");
+            rb.AddForce(new Vector2(0, jumpSpeed));
+            rb.velocity = Vector2.zero;
+        }
 
     }
 
@@ -97,8 +97,8 @@ public class FlappyPlayerController : MonoBehaviour
     {
         rb.constraints = RigidbodyConstraints2D.None;
         rb.velocity = Vector2.zero;
-        isDead = true;
-        //GameManager.Instance.gameOver = true;
+        //isDead = true;
+        GameManager.Instance.gameOver = true;
         yield return new WaitForSeconds(2f);
         Destroy(this.gameObject);
     }
