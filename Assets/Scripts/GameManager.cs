@@ -9,6 +9,8 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance { get; private set; }
     public RectTransform fader;
     public int calculatedScore = 0;
+    public float forwardSpeed;
+    public float maximumForwardSpeed;
     private float countdownToPointGain = 0f;
     public bool gameOver = false;
     public bool gameOverMenuOpen = false;

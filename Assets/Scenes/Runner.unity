@@ -1586,9 +1586,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fader: {fileID: 745140566}
   calculatedScore: 0
+  forwardSpeed: 10
+  maximumForwardSpeed: 20
   gameOver: 0
   gameOverMenuOpen: 0
   isGameStarted: 0
+  loaded: 0
   gameOverSound: {fileID: 8300000, guid: 69108f1ca978f454ead667a7b66132cb, type: 3}
 --- !u!4 &1317883519
 Transform:

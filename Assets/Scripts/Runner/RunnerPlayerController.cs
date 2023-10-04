@@ -21,8 +21,8 @@ public class RunnerPlayerController : MonoBehaviour
 
     [SerializeField] private CharacterController controller;
     private Vector3 direction;
-    public float forwardSpeed;
-    public float maximumForwardSpeed;
+    //private float forwardSpeed;
+    //private float maximumForwardSpeed;
 
     public int desiredLane = 1;
     public float laneDistance = 4;
@@ -47,6 +47,8 @@ public class RunnerPlayerController : MonoBehaviour
         currentState = PlayerState.idle;
         controller = GetComponent<CharacterController>();
         Time.timeScale = 1;
+        //forwardSpeed = GameManager.Instance.forwardSpeed;
+        //maximumForwardSpeed = GameManager.Instance.forwardSpeed;
     }
 
     private void OnEnable()
@@ -89,15 +91,14 @@ public class RunnerPlayerController : MonoBehaviour
         {
             animator.runtimeAnimatorController = Resources.Load<AnimatorController>("BasicMotions@Run");
             // increases speed of player slowly as game progresses to a maximum amount
-            if (forwardSpeed < maximumForwardSpeed)
+            if (GameManager.Instance.forwardSpeed < GameManager.Instance.maximumForwardSpeed)
             {
-                forwardSpeed += 0.1f * Time.deltaTime;
+                GameManager.Instance.forwardSpeed += 0.1f * Time.deltaTime;
             }
-            
-            direction.z = forwardSpeed;
-            direction.y += gravity * Time.deltaTime;
         }
 
+        direction.z = GameManager.Instance.forwardSpeed;
+        direction.y += gravity * Time.deltaTime;
 
         // determines the location of the player based on desired lane
         Vector3 targetPosition = transform.position.z * transform.forward + transform.position.y * transform.up;
