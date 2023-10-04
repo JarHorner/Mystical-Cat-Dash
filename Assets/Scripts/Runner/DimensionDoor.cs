@@ -16,6 +16,7 @@ public class DimensionDoor : MonoBehaviour
 
     void Update()
     {
+        // opens for the player when a certain distance is reached.
         if (closed)
         {
             float distance = Vector3.Distance(playerTransform.position, gameObject.transform.position);

@@ -22,6 +22,7 @@ public class SwipeDetection : MonoBehaviour
 
     void Update()
     {
+        // needed to ensure the runnerPlayer varible is assigned
         if (SceneManager.GetActiveScene().name == "Runner" && runnerPlayer == null)
         {
             runnerPlayer = GameObject.FindWithTag("Player").GetComponent<RunnerPlayerController>();
@@ -53,6 +54,7 @@ public class SwipeDetection : MonoBehaviour
         DetectSwipe();
     }
 
+    // helps detect if a swipe has occcured and not a random touch on the screen.
     private void DetectSwipe()
     {
         if (Vector3.Distance(startPosition, endPosition) >= minimumDistance &&
@@ -66,6 +68,7 @@ public class SwipeDetection : MonoBehaviour
         }
     }
 
+    // depending on the swipe direction, different actions occur
     private void SwipeDirection(Vector2 direction)
     {
         if (Vector2.Dot(Vector2.up, direction) > directionThreshhold)

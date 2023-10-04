@@ -20,16 +20,19 @@ public class Events : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
+    // allows the player to restart the game by resetting all the values of the GameManager.
     public void ReplayGame()
     {
         GameManager.Instance.gameOver = false;
         GameManager.Instance.gameOverMenuOpen = false;
         GameManager.Instance.calculatedScore = 0;
-        GameUI.Instance.gameOverPanel.SetActive(false);
+        GameManager.Instance.isGameStarted = false;
         GameUI.Instance.score.GetComponent<TMP_Text>().text = "0";
         SceneManager.LoadScene("Runner");
     }
 
+    // quits out of the game
     public void QuitGame()
     {
         Application.Quit();

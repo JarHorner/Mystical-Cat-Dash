@@ -9,7 +9,6 @@ public enum PlayerState
     idle,
     run,
     sprint,
-    slide,
 }
 public class RunnerPlayerController : MonoBehaviour
 {
@@ -85,23 +84,23 @@ public class RunnerPlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // when in run state, run animation will be playing.
         if (currentState == PlayerState.run)
         {
             animator.runtimeAnimatorController = Resources.Load<AnimatorController>("BasicMotions@Run");
+            // increases speed of player slowly as game progresses to a maximum amount
+            if (forwardSpeed < maximumForwardSpeed)
+            {
+                forwardSpeed += 0.1f * Time.deltaTime;
+            }
+            
+            direction.z = forwardSpeed;
+            direction.y += gravity * Time.deltaTime;
         }
 
-        // increases speed of player slowly as game progresses to a maximum amount
-        if (forwardSpeed < maximumForwardSpeed)
-        {
-            forwardSpeed += 0.1f * Time.deltaTime;
-        }
-
-        direction.z = forwardSpeed;
-        direction.y += gravity * Time.deltaTime;
 
         // determines the location of the player based on desired lane
         Vector3 targetPosition = transform.position.z * transform.forward + transform.position.y * transform.up;
-
         if (desiredLane == 0)
         {
             targetPosition += Vector3.left * laneDistance;
@@ -126,6 +125,7 @@ public class RunnerPlayerController : MonoBehaviour
         }
     }
 
+    // ensures the player is moving at a fixed amount
     void FixedUpdate()
     {
         if (controller.isGrounded)

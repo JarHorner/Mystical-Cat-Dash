@@ -6,6 +6,7 @@ using UnityEngine.InputSystem;
 [DefaultExecutionOrder(-1)]
 public class InputManager : MonoBehaviour
 {
+    // these are the delegate events for the input actions used by the player when playing the runner section.
     #region Events
     public delegate void StartTouch(Vector2 position, float time);
     public event StartTouch OnStartTouch;
@@ -41,10 +42,6 @@ public class InputManager : MonoBehaviour
         tap = playerActionMap.FindAction("StartGame");
     }
 
-    void Start()
-    {
-    }
-
     void OnEnable()
     {
         Debug.Log("enable");
@@ -76,6 +73,7 @@ public class InputManager : MonoBehaviour
 
     void Update()
     {
+        // needed to ensure the mainCamera varible is assigned
         if (mainCamera == null)
         {
             mainCamera = Camera.main;
@@ -102,11 +100,11 @@ public class InputManager : MonoBehaviour
     {
         if (!GameManager.Instance.isGameStarted)
         {
-            Debug.Log("tap");
             OnTapStart();
         }
     }
 
+    // helper method to map the touch based on real-world position on screen
     public Vector2 PrimaryPosition()
     {
         return Utils.ScreenToWorld(mainCamera, player.RunnerPlayer.PrimaryPosition.ReadValue<Vector2>());
