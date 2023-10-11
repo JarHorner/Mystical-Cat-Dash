@@ -89,7 +89,6 @@ public class RunnerPlayerController : MonoBehaviour
         // when in run state, run animation will be playing.
         if (currentState == PlayerState.run)
         {
-            animator.runtimeAnimatorController = Resources.Load<AnimatorController>("BasicMotions@Run");
             // increases speed of player slowly as game progresses to a maximum amount
             if (GameManager.Instance.forwardSpeed < GameManager.Instance.maximumForwardSpeed)
             {

@@ -1072,8 +1072,6 @@ MonoBehaviour:
   inputMaster: {fileID: -944628639613478452, guid: 97a8dd31ec7c04a41a350e52d0086a16, type: 3}
   animator: {fileID: 1978468359818719094}
   controller: {fileID: 2457871527586346379}
-  forwardSpeed: 10
-  maximumForwardSpeed: 20
   desiredLane: 1
   laneDistance: 2
   jumpForce: 10

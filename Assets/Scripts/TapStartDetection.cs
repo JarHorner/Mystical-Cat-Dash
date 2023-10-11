@@ -32,6 +32,6 @@ public class TapStartDetection : MonoBehaviour
         runnerPlayer.currentState = PlayerState.run;
 
         Animator runnerPlayerAnim = runnerPlayer.gameObject.GetComponent<Animator>();
-        runnerPlayerAnim.runtimeAnimatorController = Resources.Load<AnimatorController>("BasicMotions@Run");
+        runnerPlayerAnim.SetBool("Run", true);
     }
 }
