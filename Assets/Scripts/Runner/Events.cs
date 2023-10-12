@@ -33,8 +33,8 @@ public class Events : MonoBehaviour
     }
 
     // quits out of the game
-    public void QuitGame()
+    public void QuitToMainMenu()
     {
-        Application.Quit();
+        SceneManager.LoadScene("Main Menu");
     }
 }

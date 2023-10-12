@@ -24,14 +24,4 @@ public class GameUI : MonoBehaviour
             Destroy(gameObject);
         }
     }
-
-    void Start() 
-    {
-
-    }
-
-    void Update()
-    {
-
-    }
 }

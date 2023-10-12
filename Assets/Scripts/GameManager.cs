@@ -18,6 +18,7 @@ public class GameManager : MonoBehaviour
     private GameUI gameUI;
     public bool loaded = false;
     [SerializeField] private AudioClip gameOverSound;
+    [SerializeField] private AudioClip gameMusic;
 
     private void Awake()
     {
@@ -36,6 +37,7 @@ public class GameManager : MonoBehaviour
     {
         gameUI = GameUI.Instance;
         isGameStarted = false;
+        SoundManager.Instance.changeBackground(gameMusic);
     }
 
     void Update()
@@ -73,6 +75,8 @@ public class GameManager : MonoBehaviour
                 if (!gameOverMenuOpen)
                 {
                     SoundManager.Instance.Play(gameOverSound);
+                    AudioSource bgMusic = GameObject.Find("BG Music").GetComponent<AudioSource>();
+                    bgMusic.volume = 0.5f;
 
                     Time.timeScale = 0;
 

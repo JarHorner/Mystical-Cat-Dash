@@ -580,53 +580,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 621576770}
   m_CullTransparentMesh: 1
---- !u!1 &631408394
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 631408396}
-  - component: {fileID: 631408395}
-  m_Layer: 0
-  m_Name: SoundManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &631408395
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 631408394}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e2666e7907e1120458c38974fb98a21d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  backgroundMusic: {fileID: 0}
-  backgroundAudioMixer: {fileID: 7475056275970922468, guid: 24c3af73bb3f2a54ca17c7547b62baad, type: 2}
-  soundEffectAudioMixer: {fileID: 3779383027512372783, guid: 24c3af73bb3f2a54ca17c7547b62baad, type: 2}
---- !u!4 &631408396
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 631408394}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.1376339, y: 5.3512874, z: -1.6587029}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -1121,7 +1074,7 @@ GameObject:
   - component: {fileID: 1127930869}
   - component: {fileID: 1127930868}
   m_Layer: 5
-  m_Name: QuitButton
+  m_Name: MainMenuButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1593,6 +1546,7 @@ MonoBehaviour:
   isGameStarted: 0
   loaded: 0
   gameOverSound: {fileID: 8300000, guid: 69108f1ca978f454ead667a7b66132cb, type: 3}
+  gameMusic: {fileID: 8300000, guid: 652c0be956a935a4484d3e404dbd5d5f, type: 3}
 --- !u!4 &1317883519
 Transform:
   m_ObjectHideFlags: 0
@@ -1865,7 +1819,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Quit
+  m_text: Main Menu
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: dcc7d7d9f9397834a8c9aa5cbca95093, type: 2}
   m_sharedMaterial: {fileID: -6128795908488516109, guid: dcc7d7d9f9397834a8c9aa5cbca95093, type: 2}
@@ -2366,7 +2320,6 @@ SceneRoots:
   m_Roots:
   - {fileID: 1220725980}
   - {fileID: 1317883519}
-  - {fileID: 631408396}
   - {fileID: 2110484876}
   - {fileID: 4828332072910564387}
   - {fileID: 705507995}

@@ -10,6 +10,7 @@ public class SoundManager : MonoBehaviour
     [SerializeField] private AudioClip backgroundMusic;
     [SerializeField] private AudioMixerGroup backgroundAudioMixer;
     [SerializeField] private AudioMixerGroup soundEffectAudioMixer;
+    private GameObject bgPlayer;
 
     void Awake()
     {
@@ -26,7 +27,7 @@ public class SoundManager : MonoBehaviour
 
     void Start()
     {
-        //starts by playing background music when entering scene
+        //starts by playing background music when entering first scene
         PlayBackground(backgroundMusic);
     }
 
@@ -44,7 +45,7 @@ public class SoundManager : MonoBehaviour
         source.outputAudioMixerGroup = soundEffectAudioMixer;
         source.clip = clip;
         source.priority = 0;
-        source.volume = 0.2f;
+        source.volume = 0.5f;
         source.Play();
         Destroy(newSound, 1f);
     }
@@ -53,17 +54,23 @@ public class SoundManager : MonoBehaviour
     //Used for background music. difference between this and Play are the volume and priority levels, also looping.
     private void PlayBackground(AudioClip clip)
     {
-        GameObject newSound = new GameObject();
-        newSound.name = clip.name;
-        newSound.transform.position = this.transform.position;
-        newSound.transform.parent = gameObject.transform;
+        bgPlayer = new GameObject();
+        bgPlayer.name = "BG Music";
+        bgPlayer.transform.position = this.transform.position;
+        bgPlayer.transform.parent = gameObject.transform;
 
-        newSound.AddComponent(typeof(AudioSource));
-        AudioSource source = newSound.GetComponent<AudioSource>();
+        bgPlayer.AddComponent(typeof(AudioSource));
+        AudioSource source = bgPlayer.GetComponent<AudioSource>();
         source.outputAudioMixerGroup = backgroundAudioMixer;
         source.clip = clip;
         source.priority = 0;
         source.loop = true;
         source.Play();
+    }
+
+    public void changeBackground(AudioClip newClip)
+    {
+        bgPlayer.GetComponent<AudioSource>().clip = newClip;
+        bgPlayer.GetComponent<AudioSource>().Play();
     }
 }
