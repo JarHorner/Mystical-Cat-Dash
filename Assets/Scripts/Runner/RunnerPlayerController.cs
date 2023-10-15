@@ -9,6 +9,8 @@ public enum PlayerState
     idle,
     run,
     sprint,
+    slide,
+    jump,
 }
 public class RunnerPlayerController : MonoBehaviour
 {
@@ -21,9 +23,6 @@ public class RunnerPlayerController : MonoBehaviour
 
     [SerializeField] private CharacterController controller;
     private Vector3 direction;
-    //private float forwardSpeed;
-    //private float maximumForwardSpeed;
-
     public int desiredLane = 1;
     public float laneDistance = 4;
 
@@ -47,8 +46,6 @@ public class RunnerPlayerController : MonoBehaviour
         currentState = PlayerState.idle;
         controller = GetComponent<CharacterController>();
         Time.timeScale = 1;
-        //forwardSpeed = GameManager.Instance.forwardSpeed;
-        //maximumForwardSpeed = GameManager.Instance.forwardSpeed;
     }
 
     private void OnEnable()
@@ -87,7 +84,7 @@ public class RunnerPlayerController : MonoBehaviour
     void Update()
     {
         // when in run state, run animation will be playing.
-        if (currentState == PlayerState.run)
+        if (currentState != PlayerState.idle)
         {
             // increases speed of player slowly as game progresses to a maximum amount
             if (GameManager.Instance.forwardSpeed < GameManager.Instance.maximumForwardSpeed)
@@ -128,10 +125,10 @@ public class RunnerPlayerController : MonoBehaviour
     // ensures the player is moving at a fixed amount
     void FixedUpdate()
     {
-        if (controller.isGrounded)
-        {
-            currentState = PlayerState.run;
-        }
+        // if (controller.isGrounded)
+        // {
+        //     currentState = PlayerState.run;
+        // }
 
         if (!GameManager.Instance.isGameStarted)
             return;
@@ -193,10 +190,26 @@ public class RunnerPlayerController : MonoBehaviour
 
     public void SwipeJump()
     {
-        if (controller.isGrounded)
+        if (controller.isGrounded && currentState != PlayerState.slide)
         {
+            StartCoroutine(RunnerJump());
             direction.y = jumpForce;
         }
+    }
+
+    private IEnumerator RunnerJump()
+    {
+        Debug.Log("Jump!");
+        direction.y = jumpForce;
+        currentState = PlayerState.jump;
+        animator.SetBool("Run", false);
+        animator.SetTrigger("Jump");
+
+        yield return new WaitForSeconds(1f);
+
+        currentState = PlayerState.run;
+        animator.SetBool("Run", true);
+        animator.SetTrigger("Land");
     }
 
     private void Slide(InputAction.CallbackContext context)
@@ -209,7 +222,7 @@ public class RunnerPlayerController : MonoBehaviour
 
     public void SwipeSlide()
     {
-        if (controller.isGrounded)
+        if (controller.isGrounded && currentState != PlayerState.jump)
         {
             StartCoroutine(RunnerSlide());
         }
@@ -218,9 +231,24 @@ public class RunnerPlayerController : MonoBehaviour
     private IEnumerator RunnerSlide()
     {
         Debug.Log("Slide!");
-        gameObject.transform.localScale = new Vector3(1f, 0.5f, 1f);
+        currentState = PlayerState.slide;
+        animator.SetBool("Run", false);
+        animator.SetTrigger("SleepStart");
+        // these are needed as I cannot edit the animations themselves, this would be in the animations if I could.
+        this.gameObject.transform.position =
+        controller.center = new Vector3(0.002f, 0.015f, 0.04f);
+        controller.radius = 0.01f;
+        controller.height = 0f;
+
         yield return new WaitForSeconds(1f);
-        gameObject.transform.localScale = new Vector3(1f, 1f, 1f);
+
+        animator.SetTrigger("SleepEnd");
+        currentState = PlayerState.run;
+        animator.SetBool("Run", true);
+        // these are needed as I cannot edit the animations themselves, this would be in the animations if I could.
+        controller.center = new Vector3(0f, 0.025f, 0f);
+        controller.radius = 0.01f;
+        controller.height = 0.055f;
     }
 
 

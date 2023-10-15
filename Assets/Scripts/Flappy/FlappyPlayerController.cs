@@ -87,6 +87,7 @@ public class FlappyPlayerController : MonoBehaviour
         if (!GameManager.Instance.gameOver && context.performed)
         {
             Debug.Log("JUMP!");
+            anim.SetTrigger("Flap");
             rb.AddForce(new Vector2(0, jumpSpeed));
             rb.velocity = Vector2.zero;
         }
