@@ -7,7 +7,9 @@ using UnityEngine.UI;
 public class MainMenu : MonoBehaviour
 {
     [SerializeField] private Image credits;
+    [SerializeField] private Image settings;
     private bool creditMenuOpen = false;
+    private bool settingsMenuOpen = false;
 
     public void StartGame()
     {
@@ -30,6 +32,20 @@ public class MainMenu : MonoBehaviour
         {
             credits.gameObject.SetActive(true);
             creditMenuOpen = true;
+        }
+    }
+
+    public void ToggleSettingsMenu()
+    {
+        if (settingsMenuOpen)
+        {
+            settings.gameObject.SetActive(false);
+            settingsMenuOpen = false;
+        }
+        else
+        {
+            settings.gameObject.SetActive(true);
+            settingsMenuOpen = true;
         }
     }
 
