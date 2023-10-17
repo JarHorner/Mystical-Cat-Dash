@@ -4,20 +4,14 @@ using UnityEngine.SceneManagement;
 
 public class SwipeDetection : MonoBehaviour
 {
-    [SerializeField]
-    private float minimumDistance = 0.2f;
-    [SerializeField]
-    private float maximumTime = 1f;
-    [SerializeField, Range(0f, 1f)]
-    private float directionThreshhold = 0.9f;
-    [SerializeField]
-
-    private Vector2 startPosition;
+    [SerializeField] private float minimumDistance = 0.2f;
+    [SerializeField] private float maximumTime = 1f;
+    [SerializeField, Range(0f, 1f)] private float directionThreshhold = 0.9f;
+    [SerializeField] private Vector2 startPosition;
     private float startTime;
     private Vector2 endPosition;
     private float endTime;
-    [SerializeField]
-    private RunnerPlayerController runnerPlayer;
+    [SerializeField] private RunnerPlayerController runnerPlayer;
 
 
     void Update()

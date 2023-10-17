@@ -157,7 +157,7 @@ MonoBehaviour:
   - {fileID: 1876835430686383551, guid: 963d92eb10b5ac64a837a5462afa41eb, type: 3}
   - {fileID: 2992694648310732138, guid: a793766d6ee0fe24eaf1fc46db73e148, type: 3}
   swapGameTile: {fileID: 472977540979237916, guid: 11683c1ee36f76448b57b77419e0ee77, type: 3}
-  swapGameTileSpawnNum: 2
+  swapGameTileSpawnNum: 1
   zSpawn: 0
   tileLength: 20
   numOfTiles: 15

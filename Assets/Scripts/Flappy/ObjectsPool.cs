@@ -42,7 +42,7 @@ public class ObjectsPool : MonoBehaviour
         {
             timeSinceLastSpawned = 0f;
 
-            if (pillarsPast == 3)
+            if (pillarsPast == 1)
             {
                 float spawnYPosition = 0;
                 pillars[currentPillar] = (GameObject)Instantiate(portalPillarPrefab, new Vector2(spawnXPosition, spawnYPosition), Quaternion.identity);

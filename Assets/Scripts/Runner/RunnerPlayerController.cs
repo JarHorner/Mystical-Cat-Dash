@@ -31,6 +31,7 @@ public class RunnerPlayerController : MonoBehaviour
 
     void Awake()
     {
+        // Getting action and and setting up each action for the player
         var playerActionMap = inputMaster.FindActionMap("RunnerPlayer");
 
         primaryContact = playerActionMap.FindAction("PrimaryContact");
@@ -43,11 +44,21 @@ public class RunnerPlayerController : MonoBehaviour
 
     void Start()
     {
-        currentState = PlayerState.idle;
+        // if game is not started, player is idle. if it is the player will be running
+        if (!GameManager.Instance.isGameStarted)
+        {
+            currentState = PlayerState.idle;
+        }
+        else
+        {
+            currentState = PlayerState.run;
+            animator.SetBool("Run", true);
+        }
         controller = GetComponent<CharacterController>();
         Time.timeScale = 1;
     }
 
+    // enables all the actions
     private void OnEnable()
     {
         shiftLeft.Enable();
@@ -63,6 +74,7 @@ public class RunnerPlayerController : MonoBehaviour
         slide.performed += Slide;
     }
 
+    // disables all the actions
     void OnDisable()
     {
         shiftLeft.performed -= ShiftLeft;
@@ -80,10 +92,9 @@ public class RunnerPlayerController : MonoBehaviour
         Debug.Log("Player deleted");
     }
 
-    // Update is called once per frame
     void Update()
     {
-        // when in run state, run animation will be playing.
+        // when not idle the game will slowly increase speed until capped
         if (currentState != PlayerState.idle)
         {
             // increases speed of player slowly as game progresses to a maximum amount
@@ -93,6 +104,7 @@ public class RunnerPlayerController : MonoBehaviour
             }
         }
 
+        // moves the player along the z axis
         direction.z = GameManager.Instance.forwardSpeed;
         direction.y += gravity * Time.deltaTime;
 
@@ -125,17 +137,13 @@ public class RunnerPlayerController : MonoBehaviour
     // ensures the player is moving at a fixed amount
     void FixedUpdate()
     {
-        // if (controller.isGrounded)
-        // {
-        //     currentState = PlayerState.run;
-        // }
-
         if (!GameManager.Instance.isGameStarted)
             return;
 
         controller.Move(direction * Time.fixedDeltaTime);
     }
 
+    // based on the collider hit, does something.
     private void OnControllerColliderHit(ControllerColliderHit hit)
     {
         if (hit.transform.tag == "Object")
@@ -156,6 +164,7 @@ public class RunnerPlayerController : MonoBehaviour
         }
     }
 
+    // shifts the players lane to the left
     public void SwipeShiftLeft()
     {
         if (desiredLane > 0 && currentState != PlayerState.idle)
@@ -172,6 +181,7 @@ public class RunnerPlayerController : MonoBehaviour
         }
     }
 
+    // shifts the players lane to the right
     public void SwipeShiftRight()
     {
         if (desiredLane < 2 && currentState != PlayerState.idle)
@@ -188,6 +198,7 @@ public class RunnerPlayerController : MonoBehaviour
         }
     }
 
+    // jumps the player up
     public void SwipeJump()
     {
         if (controller.isGrounded && currentState != PlayerState.slide)
@@ -220,6 +231,7 @@ public class RunnerPlayerController : MonoBehaviour
         }
     }
 
+    // slides the player along the ground
     public void SwipeSlide()
     {
         if (controller.isGrounded && currentState != PlayerState.jump)
@@ -234,6 +246,7 @@ public class RunnerPlayerController : MonoBehaviour
         currentState = PlayerState.slide;
         animator.SetBool("Run", false);
         animator.SetTrigger("SleepStart");
+
         // these are needed as I cannot edit the animations themselves, this would be in the animations if I could.
         this.gameObject.transform.position =
         controller.center = new Vector3(0.002f, 0.015f, 0.04f);
@@ -245,6 +258,7 @@ public class RunnerPlayerController : MonoBehaviour
         animator.SetTrigger("SleepEnd");
         currentState = PlayerState.run;
         animator.SetBool("Run", true);
+        
         // these are needed as I cannot edit the animations themselves, this would be in the animations if I could.
         controller.center = new Vector3(0f, 0.025f, 0f);
         controller.radius = 0.01f;

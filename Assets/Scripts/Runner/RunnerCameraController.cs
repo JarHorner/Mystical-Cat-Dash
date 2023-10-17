@@ -17,6 +17,7 @@ public class RunnerCameraController : MonoBehaviour
 
     void LateUpdate()
     {
+        // ensures the camera is properly following the player while moving.
         Vector3 newPosition = new Vector3(transform.position.x, transform.position.y, offset.z + target.position.z);
         transform.position = Vector3.Lerp(transform.position, newPosition, 10 * Time.fixedDeltaTime);
     }

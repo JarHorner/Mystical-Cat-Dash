@@ -8,8 +8,11 @@ public class MainMenu : MonoBehaviour
 {
     [SerializeField] private Image credits;
     [SerializeField] private Image settings;
+    [SerializeField] private Image linkWarning;
     private bool creditMenuOpen = false;
     private bool settingsMenuOpen = false;
+    private bool linkWarningMenuOpen = false;
+    private string linkName;
 
     public void StartGame()
     {
@@ -49,11 +52,13 @@ public class MainMenu : MonoBehaviour
         }
     }
 
-    public void OpenLink(GameObject credit)
+    // opens a webpage of the url chosen
+    public void OpenLink()
     {
-        string creditName = credit.name;
 
-        switch (creditName)
+        linkWarning.gameObject.SetActive(false);
+
+        switch (linkName)
         {
             case "Font":
                 Application.OpenURL("https://www.fontspace.com/medieval-sharp-font-f17170");
@@ -76,5 +81,22 @@ public class MainMenu : MonoBehaviour
             default:
                 break;
         }
+    }
+
+    // opens the link warning panel
+    public void ToggleLinkWarning(string credit = "")
+    {
+        if (linkWarningMenuOpen)
+        {
+            linkWarning.gameObject.SetActive(false);
+            linkWarningMenuOpen = false;
+        }
+        else
+        {
+            linkWarning.gameObject.SetActive(true);
+            linkWarningMenuOpen = true;
+        }
+
+        linkName = credit;
     }
 }
