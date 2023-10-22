@@ -9,8 +9,8 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance { get; private set; }
     public RectTransform fader;
     public int calculatedScore = 0;
-    public float forwardSpeed;
-    public float maximumForwardSpeed;
+    public float forwardSpeed = 10f;
+    public float maximumForwardSpeed = 20f;
     private float countdownToPointGain = 0f;
     public bool gameOver = false;
     public bool gameOverMenuOpen = false;
@@ -60,6 +60,7 @@ public class GameManager : MonoBehaviour
         // if game is started and no game over, points start adding up.
         if (!isGameStarted)
         {
+            forwardSpeed = 10f;
             gameUI.gameOverPanel.SetActive(false);
             gameUI.startingText.SetActive(true);
         }
@@ -79,7 +80,7 @@ public class GameManager : MonoBehaviour
                     AudioSource bgMusic = GameObject.Find("BG Music").GetComponent<AudioSource>();
                     bgMusic.volume = 0.5f;
 
-                    Time.timeScale = 0;
+                    //Time.timeScale = 0;
 
 
                     gameUI.gameOverScore.GetComponent<TMP_Text>().text = calculatedScore.ToString();

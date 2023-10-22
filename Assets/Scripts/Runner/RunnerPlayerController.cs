@@ -8,9 +8,9 @@ public enum PlayerState
 {
     idle,
     run,
-    sprint,
     slide,
     jump,
+    dead,
 }
 public class RunnerPlayerController : MonoBehaviour
 {
@@ -95,7 +95,7 @@ public class RunnerPlayerController : MonoBehaviour
     void Update()
     {
         // when not idle the game will slowly increase speed until capped
-        if (currentState != PlayerState.idle || Powerups.Instance.speedPickedUp)
+        if ((currentState != PlayerState.idle && currentState != PlayerState.dead) || Powerups.Instance.speedPickedUp)
         {
             // increases speed of player slowly as game progresses to a maximum amount
             if (GameManager.Instance.forwardSpeed < GameManager.Instance.maximumForwardSpeed)
@@ -113,6 +113,7 @@ public class RunnerPlayerController : MonoBehaviour
         {
             direction.z = (GameManager.Instance.forwardSpeed * Powerups.Instance.speedValue);
         }
+
 
         direction.y += gravity * Time.deltaTime;
 
@@ -132,20 +133,24 @@ public class RunnerPlayerController : MonoBehaviour
             return;
         Vector3 diff = targetPosition - transform.position;
         Vector3 moveDir = diff.normalized * 25 * Time.deltaTime;
-        if (moveDir.sqrMagnitude < diff.sqrMagnitude)
+        if (currentState != PlayerState.dead)
         {
-            controller.Move(moveDir);
+            if (moveDir.sqrMagnitude < diff.sqrMagnitude)
+            {
+                controller.Move(moveDir);
+            }
+            else
+            {
+                controller.Move(diff);
+            }
         }
-        else
-        {
-            controller.Move(diff);
-        }
+
     }
 
     // ensures the player is moving at a fixed amount
     void FixedUpdate()
     {
-        if (!GameManager.Instance.isGameStarted)
+        if (!GameManager.Instance.isGameStarted || currentState == PlayerState.dead)
             return;
 
         controller.Move(direction * Time.fixedDeltaTime);
@@ -160,10 +165,21 @@ public class RunnerPlayerController : MonoBehaviour
             if (Powerups.Instance.shieldPickedUp)
             {
                 StartCoroutine(Powerups.Instance.Invulnerable(2f));
-                Powerups.Instance.shieldPickedUp = false;
+                Powerups.Instance.currentShieldTime = 0;
             }
             else
             {
+                animator.SetTrigger("Die");
+                animator.SetBool("Run", false);
+                currentState = PlayerState.dead;
+                controller.enabled = false;
+
+
+                Powerups.Instance.currentMultiplierTime = 0;
+                Powerups.Instance.currentMagnetTime = 0;
+                Powerups.Instance.currentShieldTime = 0;
+                Powerups.Instance.currentSpeedTime = 0;
+
                 GameManager.Instance.gameOver = true;
             }
         }

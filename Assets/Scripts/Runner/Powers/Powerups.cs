@@ -49,6 +49,9 @@ public class Powerups : MonoBehaviour
             if (currentMultiplierTime <= 0)
             {
                 multiplyPickedUp = false;
+
+                GameUI.Instance.powerupImage.enabled = false;
+
                 currentMultiplierTime = 0;
             }
         }
@@ -59,6 +62,9 @@ public class Powerups : MonoBehaviour
             if (currentMagnetTime <= 0)
             {
                 magnetPickedUp = false;
+
+                GameUI.Instance.powerupImage.enabled = false;
+
                 currentMagnetTime = 0;
             }
         }
@@ -69,6 +75,10 @@ public class Powerups : MonoBehaviour
             if (currentShieldTime <= 0)
             {
                 shieldPickedUp = false;
+
+                GameUI.Instance.powerupImage.enabled = false;
+                GameUI.Instance.powerupImage.gameObject.transform.localScale = new Vector3(1f, 1f, 1f);
+
                 currentShieldTime = 0;
             }
         }
@@ -79,6 +89,10 @@ public class Powerups : MonoBehaviour
             if (currentSpeedTime <= 0)
             {
                 speedPickedUp = false;
+
+                GameUI.Instance.powerupImage.enabled = false;
+                GameUI.Instance.powerupImage.gameObject.transform.localScale = new Vector3(1f, 1f, 1f);
+
                 currentSpeedTime = 0;
             }
         }

@@ -16,6 +16,14 @@ public class MainMenu : MonoBehaviour
 
     public void StartGame()
     {
+        if (GameManager.Instance)
+        {
+            GameManager.Instance.gameObject.SetActive(true);
+        }
+        if (GameUI.Instance)
+        {
+            GameUI.Instance.gameObject.SetActive(true);
+        }
         SceneManager.LoadScene("Runner");
     }
 
