@@ -156,11 +156,14 @@ public class RunnerPlayerController : MonoBehaviour
         }
         else if (hit.transform.tag == "Coin")
         {
-            Debug.Log("Collect Coin");
             Coin coin = hit.gameObject.GetComponent<Coin>();
-            Debug.Log(coin);
             coin.Scored();
         }
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        Debug.Log("powerup entered");
     }
 
     private void ShiftLeft(InputAction.CallbackContext context)
