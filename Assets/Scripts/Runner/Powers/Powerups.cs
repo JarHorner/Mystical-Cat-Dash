@@ -14,6 +14,7 @@ public class Powerups : MonoBehaviour
 
     // Magnet powerup variables
     public float magnetLength;
+    public float magnetSize = 5;
     public float currentMagnetTime;
     public bool magnetPickedUp;
 
@@ -24,6 +25,7 @@ public class Powerups : MonoBehaviour
 
     // Speed powerup variables
     public float speedLength;
+    public int speedValue = 2;
     public float currentSpeedTime;
     public bool speedPickedUp;
 
@@ -80,5 +82,12 @@ public class Powerups : MonoBehaviour
                 currentSpeedTime = 0;
             }
         }
+    }
+
+    public IEnumerator Invulnerable(float invulnerableTime)
+    {
+        Physics.IgnoreLayerCollision(6, 7, true);
+        yield return new WaitForSeconds(invulnerableTime);
+        Physics.IgnoreLayerCollision(6, 7, false);
     }
 }

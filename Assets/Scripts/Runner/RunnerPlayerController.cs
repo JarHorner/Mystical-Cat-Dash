@@ -95,7 +95,7 @@ public class RunnerPlayerController : MonoBehaviour
     void Update()
     {
         // when not idle the game will slowly increase speed until capped
-        if (currentState != PlayerState.idle)
+        if (currentState != PlayerState.idle || Powerups.Instance.speedPickedUp)
         {
             // increases speed of player slowly as game progresses to a maximum amount
             if (GameManager.Instance.forwardSpeed < GameManager.Instance.maximumForwardSpeed)
@@ -104,8 +104,16 @@ public class RunnerPlayerController : MonoBehaviour
             }
         }
 
-        // moves the player along the z axis
-        direction.z = GameManager.Instance.forwardSpeed;
+        // moves the player along the z axis, speed based on whether player has speed buff
+        if (!Powerups.Instance.speedPickedUp)
+        {
+            direction.z = GameManager.Instance.forwardSpeed;
+        }
+        else
+        {
+            direction.z = (GameManager.Instance.forwardSpeed * Powerups.Instance.speedValue);
+        }
+
         direction.y += gravity * Time.deltaTime;
 
         // determines the location of the player based on desired lane
@@ -151,7 +159,7 @@ public class RunnerPlayerController : MonoBehaviour
             // if player has shield powerup, he does not die and enters invulnerable state
             if (Powerups.Instance.shieldPickedUp)
             {
-                StartCoroutine(Invulnerable(2f));
+                StartCoroutine(Powerups.Instance.Invulnerable(2f));
                 Powerups.Instance.shieldPickedUp = false;
             }
             else
@@ -163,41 +171,35 @@ public class RunnerPlayerController : MonoBehaviour
         {
             GameManager.Instance.SwitchDimensions();
         }
-        else if (hit.transform.tag == "Coin")
-        {
-            Coin coin = hit.gameObject.GetComponent<Coin>();
-            coin.CoinScored();
-        }
     }
 
     void OnTriggerEnter(Collider other)
     {
-        Debug.Log("powerup entered");
-        if (other.tag == "Multiplier")
+        if (other.tag == "Coin")
+        {
+            Coin coin = other.gameObject.GetComponent<Coin>();
+            coin.CoinScored();
+        }
+        else if (other.tag == "Multiplier")
         {
             Multiplier multiplier = other.gameObject.GetComponent<Multiplier>();
-            multiplier.MultiplyScore();
+            multiplier.MultiplyBuff();
         }
         else if (other.tag == "Magnet")
         {
-
+            Magnet magnet = other.gameObject.GetComponent<Magnet>();
+            magnet.MagnetBuff();
         }
         else if (other.tag == "Shield")
         {
             Shield shield = other.gameObject.GetComponent<Shield>();
-            shield.ShieldHit();
+            shield.ShieldBuff();
         }
         else if (other.tag == "Speed")
         {
-
+            Speed speed = other.gameObject.GetComponent<Speed>();
+            speed.SpeedBuff();
         }
-    }
-
-    public IEnumerator Invulnerable(float invulnerableTime)
-    {
-        Physics.IgnoreLayerCollision(6, 7, true);
-        yield return new WaitForSeconds(invulnerableTime);
-        Physics.IgnoreLayerCollision(6, 7, false);
     }
 
     private void ShiftLeft(InputAction.CallbackContext context)

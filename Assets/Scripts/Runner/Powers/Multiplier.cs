@@ -7,9 +7,10 @@ public class Multiplier : MonoBehaviour
     [SerializeField] private Powerups powerups;
     
     // starts the timer of the multiplier powerup
-    public void MultiplyScore()
+    public void MultiplyBuff()
     {
         powerups.currentMultiplierTime = powerups.multiplierLength;
         powerups.multiplyPickedUp = true;
+        Destroy(this.gameObject);
     }
 }
