@@ -154,6 +154,13 @@ public class RunnerPlayerController : MonoBehaviour
         {
             GameManager.Instance.SwitchDimensions();
         }
+        else if (hit.transform.tag == "Coin")
+        {
+            Debug.Log("Collect Coin");
+            Coin coin = hit.gameObject.GetComponent<Coin>();
+            Debug.Log(coin);
+            coin.Scored();
+        }
     }
 
     private void ShiftLeft(InputAction.CallbackContext context)

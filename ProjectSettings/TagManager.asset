@@ -7,6 +7,7 @@ TagManager:
   - Object
   - Portal
   - OutOfBounds
+  - Coin
   layers:
   - Default
   - TransparentFX
