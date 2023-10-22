@@ -4,11 +4,12 @@ using UnityEngine;
 
 public class Pillar : MonoBehaviour
 {
-    private void OnTriggerEnter2D(Collider2D other) 
+    [SerializeField] private int clearedPointsWorth;
+    private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.GetComponent<FlappyPlayerController>() != null)
         {
-            GameManager.Instance.Scored();
+            GameManager.Instance.Scored(clearedPointsWorth);
         }
     }
 }

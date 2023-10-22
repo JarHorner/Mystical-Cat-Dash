@@ -8,6 +8,10 @@ TagManager:
   - Portal
   - OutOfBounds
   - Coin
+  - Multiplier
+  - Magnet
+  - Speed
+  - Shield
   layers:
   - Default
   - TransparentFX
@@ -15,8 +19,8 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - 
+  - Player
+  - Object
   - 
   - 
   - 

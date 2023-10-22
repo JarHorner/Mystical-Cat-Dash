@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1380271851653681508}
   - component: {fileID: 7744962940539795864}
   - component: {fileID: 3122731859368811243}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cloud1
   m_TagString: Object
   m_Icon: {fileID: 0}
@@ -473,7 +473,7 @@ GameObject:
   - component: {fileID: 340648968962822086}
   - component: {fileID: 8920310119607166605}
   - component: {fileID: 7547419556740362039}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cloud2
   m_TagString: Object
   m_Icon: {fileID: 0}
@@ -578,7 +578,7 @@ GameObject:
   - component: {fileID: 287191410099059159}
   - component: {fileID: 6697399158135435261}
   - component: {fileID: 3084118395153254424}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cloud3
   m_TagString: Object
   m_Icon: {fileID: 0}

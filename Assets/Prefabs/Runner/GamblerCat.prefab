@@ -1224,7 +1224,7 @@ GameObject:
   - component: {fileID: 2534013830944007244}
   - component: {fileID: 8405417370364571492}
   - component: {fileID: 8333854438277381128}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: GamblerCat
   m_TagString: Player
   m_Icon: {fileID: 0}

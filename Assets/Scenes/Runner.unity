@@ -928,7 +928,7 @@ GameObject:
   - component: {fileID: 658695202}
   m_Layer: 0
   m_Name: Magnet Powerup
-  m_TagString: Untagged
+  m_TagString: Magnet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -942,7 +942,7 @@ Transform:
   m_GameObject: {fileID: 658695200}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalPosition: {x: 0, y: 1, z: 5}
   m_LocalScale: {x: 0.2, y: 0.2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -965,7 +965,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -1546,13 +1546,14 @@ GameObject:
   m_Component:
   - component: {fileID: 963154047}
   - component: {fileID: 963154048}
+  - component: {fileID: 963154049}
   m_Layer: 0
   m_Name: 2X Powerup
-  m_TagString: Untagged
+  m_TagString: Multiplier
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &963154047
 Transform:
   m_ObjectHideFlags: 0
@@ -1592,6 +1593,19 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 7, y: 6, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &963154049
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 963154046}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a18d9d4c124d8d64ea3de3ad82528b7a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  powerups: {fileID: 1317883520}
 --- !u!1 &972122308
 GameObject:
   m_ObjectHideFlags: 0
@@ -1770,13 +1784,14 @@ GameObject:
   m_Component:
   - component: {fileID: 1077615487}
   - component: {fileID: 1077615488}
+  - component: {fileID: 1077615489}
   m_Layer: 0
   m_Name: Shield Powerup
-  m_TagString: Untagged
+  m_TagString: Shield
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1077615487
 Transform:
   m_ObjectHideFlags: 0
@@ -1786,7 +1801,7 @@ Transform:
   m_GameObject: {fileID: 1077615486}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalPosition: {x: 0, y: 1, z: 5}
   m_LocalScale: {x: 0.2, y: 0.2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1809,12 +1824,25 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 7, y: 6, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1077615489
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1077615486}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2d37309f48be0141a873df9fe0ba193, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  powerups: {fileID: 1317883520}
 --- !u!1 &1127930866
 GameObject:
   m_ObjectHideFlags: 0
@@ -2248,6 +2276,7 @@ MonoBehaviour:
   gameOver: 0
   gameOverMenuOpen: 0
   isGameStarted: 0
+  powerups: {fileID: 1317883520}
   loaded: 0
   gameOverSound: {fileID: 8300000, guid: 69108f1ca978f454ead667a7b66132cb, type: 3}
   gameMusic: {fileID: 8300000, guid: 652c0be956a935a4484d3e404dbd5d5f, type: 3}
@@ -2278,10 +2307,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93d90f5b777dc4a4e94c99d10e1f2ab3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  multiplierValues: {fileID: 11400000, guid: 0d61d48b4f2b13c4c9cc5004217268c6, type: 2}
-  magnetValues: {fileID: 11400000, guid: f6de56149432f564898f6b94c34b365f, type: 2}
-  shieldValues: {fileID: 11400000, guid: bc4b1922f0677924ba889de038008ca4, type: 2}
-  speedValues: {fileID: 11400000, guid: c19b3aa4aba13554a8a54a772a02a3bc, type: 2}
+  multiplierLength: 20
+  multiplyValue: 2
+  currentMultiplierTime: 0
+  multiplyPickedUp: 0
+  shieldLength: 30
+  currentShieldTime: 0
+  shieldPickedUp: 0
 --- !u!1 &1318915018
 GameObject:
   m_ObjectHideFlags: 0
@@ -2578,7 +2610,7 @@ GameObject:
   - component: {fileID: 1521774823}
   m_Layer: 0
   m_Name: Speed Powerup
-  m_TagString: Untagged
+  m_TagString: Speed
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2592,7 +2624,7 @@ Transform:
   m_GameObject: {fileID: 1521774821}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalPosition: {x: 0, y: 1, z: 5}
   m_LocalScale: {x: 0.2, y: 0.2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2615,7 +2647,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -2954,7 +2986,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7877816323059648940, guid: 6fe8cb20b9f7a4f458305f79e1ba1527, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 5
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 7877816323059648940, guid: 6fe8cb20b9f7a4f458305f79e1ba1527, type: 3}
       propertyPath: m_LocalRotation.w

@@ -148,7 +148,16 @@ public class RunnerPlayerController : MonoBehaviour
     {
         if (hit.transform.tag == "Object")
         {
-            GameManager.Instance.gameOver = true;
+            // if player has shield powerup, he does not die and enters invulnerable state
+            if (Powerups.Instance.shieldPickedUp)
+            {
+                StartCoroutine(Invulnerable(2f));
+                Powerups.Instance.shieldPickedUp = false;
+            }
+            else
+            {
+                GameManager.Instance.gameOver = true;
+            }
         }
         else if (hit.transform.tag == "Portal")
         {
@@ -157,13 +166,38 @@ public class RunnerPlayerController : MonoBehaviour
         else if (hit.transform.tag == "Coin")
         {
             Coin coin = hit.gameObject.GetComponent<Coin>();
-            coin.Scored();
+            coin.CoinScored();
         }
     }
 
     void OnTriggerEnter(Collider other)
     {
         Debug.Log("powerup entered");
+        if (other.tag == "Multiplier")
+        {
+            Multiplier multiplier = other.gameObject.GetComponent<Multiplier>();
+            multiplier.MultiplyScore();
+        }
+        else if (other.tag == "Magnet")
+        {
+
+        }
+        else if (other.tag == "Shield")
+        {
+            Shield shield = other.gameObject.GetComponent<Shield>();
+            shield.ShieldHit();
+        }
+        else if (other.tag == "Speed")
+        {
+
+        }
+    }
+
+    public IEnumerator Invulnerable(float invulnerableTime)
+    {
+        Physics.IgnoreLayerCollision(6, 7, true);
+        yield return new WaitForSeconds(invulnerableTime);
+        Physics.IgnoreLayerCollision(6, 7, false);
     }
 
     private void ShiftLeft(InputAction.CallbackContext context)
@@ -268,7 +302,7 @@ public class RunnerPlayerController : MonoBehaviour
         animator.SetTrigger("SleepEnd");
         currentState = PlayerState.run;
         animator.SetBool("Run", true);
-        
+
         // these are needed as I cannot edit the animations themselves, this would be in the animations if I could.
         controller.center = new Vector3(0f, 0.025f, 0f);
         controller.radius = 0.01f;

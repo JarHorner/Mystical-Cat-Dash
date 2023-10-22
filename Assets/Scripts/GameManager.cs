@@ -16,6 +16,7 @@ public class GameManager : MonoBehaviour
     public bool gameOverMenuOpen = false;
     public bool isGameStarted;
     private GameUI gameUI;
+    [SerializeField] private Powerups powerups;
     public bool loaded = false;
     [SerializeField] private AudioClip gameOverSound;
     [SerializeField] private AudioClip gameMusic;
@@ -96,16 +97,19 @@ public class GameManager : MonoBehaviour
     {
         if (countdownToPointGain >= 1)
         {
-            calculatedScore += 100;
-            gameUI.score.GetComponent<TMP_Text>().text = calculatedScore.ToString();
+            Scored(100);
             countdownToPointGain = 0;
         }
     }
 
-    // adds score to calculated score
-    public void Scored()
+    // adds score to calculated score based on if the player has a multiplier power or not
+    public void Scored(int pointsWorth)
     {
-        calculatedScore += 200;
+        if(!powerups.multiplyPickedUp)
+            calculatedScore += pointsWorth;
+        else
+            calculatedScore += (pointsWorth * powerups.multiplyValue);
+        
         gameUI.score.GetComponent<TMP_Text>().text = calculatedScore.ToString();
     }
 
