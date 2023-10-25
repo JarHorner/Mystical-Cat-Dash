@@ -71,10 +71,16 @@ public class MainMenu : MonoBehaviour
             case "Font":
                 Application.OpenURL("https://www.fontspace.com/medieval-sharp-font-f17170");
                 break;
-            case "3D Runner":
+            case "GUI Panels":
+                Application.OpenURL("https://kanekizlf.itch.io/fantasy-wooden-gui-free");
+                break;
+            case "GUI Buttons":
+                Application.OpenURL("https://assetstore.unity.com/packages/2d/gui/icons/game-gui-buttons-96277");
+                break;
+            case "3D Player":
                 Application.OpenURL("https://assetstore.unity.com/packages/3d/characters/creatures/gambler-cat-20897");
                 break;
-            case "2D Runner":
+            case "2D Player":
                 Application.OpenURL("https://assetstore.unity.com/packages/tools/game-toolkits/platformer-game-kit-200756");
                 break;
             case "3D Environment":
@@ -82,6 +88,24 @@ public class MainMenu : MonoBehaviour
                 break;
             case "2D Environment":
                 Application.OpenURL("https://aamatniekss.itch.io/free-pixelart-tileset-cute-forest");
+                break;
+            case "Coin":
+                Application.OpenURL("https://skfb.ly/oqGSQ");
+                break;
+            case "Running Cat":
+                Application.OpenURL("https://www.clipartmax.com/middle/m2K9A0A0K9K9m2b1_clipart-cat-running-cats-free-stock-photo-illustration-cat-running-clip-art/");
+                break;
+            case "Shield":
+                Application.OpenURL("https://pngtree.com/so/shield");
+                break;
+            case "Magnet":
+                Application.OpenURL("https://www.flaticon.com/free-icon/magnet-hand-drawn-tool-outline_35593");
+                break;
+            case "X":
+                Application.OpenURL("https://favpng.com/png_view/symbol-multiplication-sign-symbol-clip-art-number-png/Z0Z0VSwu");
+                break;
+            case "2":
+                Application.OpenURL("https://www.freebiefindingmom.com/free-printable-number-bubble-letters-bubble-number-2/");
                 break;
             case "Music":
                 Application.OpenURL("www.soundimage.org");
