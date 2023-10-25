@@ -13,18 +13,32 @@ public class MainMenu : MonoBehaviour
     private bool settingsMenuOpen = false;
     private bool linkWarningMenuOpen = false;
     private string linkName;
+    private bool loaded = false;
+    [SerializeField] private RectTransform fader;
+
+    void Update()
+    {
+        if (Tween.Instance.backToMainMenu)
+        {
+            Tween.Instance.backToMainMenu = false;
+            Tween.Instance.TweenEnd();
+        }
+
+    }
 
     public void StartGame()
     {
         if (GameManager.Instance)
         {
             GameManager.Instance.gameObject.SetActive(true);
+            //GameManager.Instance.loaded = false;
         }
         if (GameUI.Instance)
         {
-            GameUI.Instance.gameObject.SetActive(true);
+            GameUI.Instance.score.transform.parent.gameObject.SetActive(true);
         }
-        SceneManager.LoadScene("Runner");
+
+        Tween.Instance.TweenStartGame(fader);
     }
 
     public void QuitGame()

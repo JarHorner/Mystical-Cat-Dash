@@ -24,26 +24,13 @@ public class Events : MonoBehaviour
     // allows the player to restart the game by resetting all the values of the GameManager.
     public void ReplayGame()
     {
-        GameManager.Instance.gameOver = false;
-        GameManager.Instance.gameOverMenuOpen = false;
-        GameManager.Instance.calculatedScore = 0;
-        GameManager.Instance.isGameStarted = false;
-        GameUI.Instance.score.GetComponent<TMP_Text>().text = "0";
-        GameUI.Instance.powerupImage.enabled = false;
-        SceneManager.LoadScene("Runner");
+        Tween.Instance.TweenReplayGame();
     }
 
     // quits out of the game
     public void QuitToMainMenu()
     {
-        GameManager.Instance.gameOver = false;
-        GameManager.Instance.gameOverMenuOpen = false;
-        GameManager.Instance.calculatedScore = 0;
-        GameManager.Instance.isGameStarted = false;
-        GameUI.Instance.score.GetComponent<TMP_Text>().text = "0";
-        GameUI.Instance.powerupImage.enabled = false;
-        //GameManager.Instance.gameObject.SetActive(false);
-        GameUI.Instance.gameObject.SetActive(false);
-        SceneManager.LoadScene("MainMenu");
+        Tween.Instance.backToMainMenu = true;
+        Tween.Instance.TweenMainMenu();
     }
 }

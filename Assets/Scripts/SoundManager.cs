@@ -47,7 +47,7 @@ public class SoundManager : MonoBehaviour
         source.priority = 0;
         source.volume = 0.5f;
         source.Play();
-        Destroy(newSound, 1f);
+        Destroy(newSound, clip.length);
     }
 
     //creates a new GameObject, gives it a AudioSource component and adds the parameter as the clip then plays it.

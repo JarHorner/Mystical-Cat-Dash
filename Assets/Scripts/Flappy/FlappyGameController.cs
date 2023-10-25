@@ -28,17 +28,8 @@ public class FlappyGameController : MonoBehaviour
         // if not loaded, uses a transition into the scene.
         if (!loaded)
         {
-            RectTransform fader = GameObject.Find("Fader").GetComponent<RectTransform>();
-
-            // uses LeanTween to fade in at the start of the game.
-            fader.gameObject.SetActive(true);
+            Tween.Instance.TweenEnd();
             loaded = true;
-            LeanTween.scale(fader, new Vector3(1f, 1f, 1f), 0);
-            // instead of using coroutine, append what happens after using anonymous function setOnComplete.
-            LeanTween.scale(fader, Vector3.zero, 0.5f).setOnComplete(() =>
-            {
-                fader.gameObject.SetActive(false);
-            });
         }
     }
 

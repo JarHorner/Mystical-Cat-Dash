@@ -7,7 +7,6 @@ using TMPro;
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
-    public RectTransform fader;
     public int calculatedScore = 0;
     public float forwardSpeed = 10f;
     public float maximumForwardSpeed = 20f;
@@ -45,17 +44,10 @@ public class GameManager : MonoBehaviour
     {
         if (!loaded)
         {
-            // uses LeanTween to fade in at the start of the game.
-            fader.gameObject.SetActive(true);
+            Tween.Instance.TweenEnd();
             loaded = true;
-            LeanTween.scale(fader, new Vector3(1.1f, 1.1f, 1.1f), 0);
-            // instead of using coroutine, append what happens after using anonymous function setOnComplete.
-            LeanTween.scale(fader, Vector3.zero, 0.5f).setOnComplete(() =>
-            {
-                fader.gameObject.SetActive(false);
-            });
         }
-        
+
         // if game is not started, start game text will appear and game over panel will be hidden
         // if game is started and no game over, points start adding up.
         if (!isGameStarted)
@@ -106,34 +98,17 @@ public class GameManager : MonoBehaviour
     // adds score to calculated score based on if the player has a multiplier power or not
     public void Scored(int pointsWorth)
     {
-        if(!powerups.multiplyPickedUp)
+        if (!powerups.multiplyPickedUp)
             calculatedScore += pointsWorth;
         else
             calculatedScore += (pointsWorth * powerups.multiplyValue);
-        
+
         gameUI.score.GetComponent<TMP_Text>().text = calculatedScore.ToString();
     }
 
     // depending on what scene you are in, swaps to the other with transitions
     public void SwitchDimensions()
     {
-        Scene scene = SceneManager.GetActiveScene();
-        Debug.Log(scene.name);
-
-
-        fader.gameObject.SetActive(true);
-        LeanTween.scale(fader, Vector3.zero, 0);
-        LeanTween.scale(fader, new Vector3(1.5f, 1.5f, 1.5f), 0.5f).setOnComplete(() =>
-        {
-            if (scene.name == "Runner")
-            {
-                SceneManager.LoadScene("Flappy");
-            }
-            else if (scene.name == "Flappy")
-            {
-                loaded = false;
-                SceneManager.LoadScene("Runner");
-            }
-        });
+        Tween.Instance.TweenBetweenScenes();
     }
 }

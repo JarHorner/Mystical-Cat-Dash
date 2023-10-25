@@ -14,6 +14,7 @@ public class GameUI : MonoBehaviour
     public GameObject gameOverScore;
     public GameObject gameOverPanel;
     public GameObject startingText;
+    public RectTransform fader;
     private void Awake()
     {
         if (Instance == null)

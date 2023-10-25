@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor.Animations;
+using UnityEngine.SceneManagement;
 
 public class TapStartDetection : MonoBehaviour
 {
@@ -25,13 +26,16 @@ public class TapStartDetection : MonoBehaviour
     // enables the player to start the game by taping the screen.
     private void TapStart()
     {
-        GameManager.Instance.isGameStarted = true;
-        gameUI.startingText.SetActive(false);
+        if (SceneManager.GetActiveScene().name == "Runner")
+        {
+            GameManager.Instance.isGameStarted = true;
+            gameUI.startingText.SetActive(false);
 
-        RunnerPlayerController runnerPlayer = GameObject.FindWithTag("Player").GetComponent<RunnerPlayerController>();
-        runnerPlayer.currentState = PlayerState.run;
+            RunnerPlayerController runnerPlayer = GameObject.FindWithTag("Player").GetComponent<RunnerPlayerController>();
+            runnerPlayer.currentState = PlayerState.run;
 
-        Animator runnerPlayerAnim = runnerPlayer.gameObject.GetComponent<Animator>();
-        runnerPlayerAnim.SetBool("Run", true);
+            Animator runnerPlayerAnim = runnerPlayer.gameObject.GetComponent<Animator>();
+            runnerPlayerAnim.SetBool("Run", true);
+        }
     }
 }
