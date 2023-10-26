@@ -7,6 +7,11 @@ public class Magnet : MonoBehaviour
     [SerializeField] private Powerups powerups;
     [SerializeField] private Sprite magnetSprite;
 
+    void Start()
+    {
+        powerups = GameObject.Find("GameManager").GetComponent<Powerups>();
+    }
+
     // starts the timer of the shield powerup
     public void MagnetBuff()
     {
