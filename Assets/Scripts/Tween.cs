@@ -100,11 +100,12 @@ public class Tween : MonoBehaviour
         LeanTween.scale(GameUI.Instance.fader, Vector3.zero, 0);
         LeanTween.scale(GameUI.Instance.fader, new Vector3(1.5f, 1.5f, 1.5f), 0.5f).setOnComplete(() =>
         {
-            GameManager.Instance.gameOver = false;
-            GameManager.Instance.gameOverMenuOpen = false;
-            GameManager.Instance.calculatedScore = 0;
-            GameManager.Instance.isGameStarted = false;
-            GameManager.Instance.gameObject.SetActive(false);
+            //GameManager.Instance.gameOver = false;
+            //GameManager.Instance.gameOverMenuOpen = false;
+            //GameManager.Instance.calculatedScore = 0;
+            //GameManager.Instance.isGameStarted = false;
+            //GameManager.Instance.gameObject.SetActive(false);
+            Destroy(GameManager.Instance.gameObject);
 
             GameUI.Instance.score.GetComponent<TMP_Text>().text = "0";
             GameUI.Instance.powerupImage.enabled = false;

@@ -13,7 +13,6 @@ public class MainMenu : MonoBehaviour
     private bool settingsMenuOpen = false;
     private bool linkWarningMenuOpen = false;
     private string linkName;
-    private bool loaded = false;
     [SerializeField] private RectTransform fader;
 
     void Update()

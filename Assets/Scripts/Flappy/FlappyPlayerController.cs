@@ -14,7 +14,6 @@ public class FlappyPlayerController : MonoBehaviour
     [SerializeField] private InputActionAsset inputMaster;
     private InputAction jump;
     [SerializeField] private float jumpSpeed;
-    private bool isDead = false;
 
     void Awake()
     {
