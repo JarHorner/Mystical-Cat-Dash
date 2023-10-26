@@ -7,6 +7,12 @@ public class Speed : MonoBehaviour
     [SerializeField] private Powerups powerups;
     [SerializeField] private Sprite speedSprite;
 
+
+    void Start()
+    {
+        powerups = GameObject.Find("GameManager").GetComponent<Powerups>();
+    }
+
     // starts the timer of the speed powerup
     public void SpeedBuff()
     {
