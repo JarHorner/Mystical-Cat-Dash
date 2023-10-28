@@ -14523,7 +14523,7 @@ GameObject:
   - component: {fileID: 7932266248185453306}
   - component: {fileID: 9035735023942958365}
   m_Layer: 0
-  m_Name: Buff
+  m_Name: Speed Buff
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -19461,5 +19461,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac7ff9c223aedac4abd6dcd9a5ffa7af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  powerups: {fileID: 0}
   speedSprite: {fileID: 21300000, guid: d11739342b7ec314884e810d73239bd6, type: 3}

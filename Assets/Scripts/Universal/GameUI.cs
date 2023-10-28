@@ -15,6 +15,7 @@ public class GameUI : MonoBehaviour
     public GameObject gameOverPanel;
     public GameObject startingText;
     public RectTransform fader;
+    public GameObject megaflapButton;
     private void Awake()
     {
         if (Instance == null)

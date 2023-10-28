@@ -1567,21 +1567,83 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93d90f5b777dc4a4e94c99d10e1f2ab3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 0}
+  multiplyBuff: {fileID: 4986265526958573320, guid: c84266e257bc36a4caf028b47e08096b, type: 3}
   multiplierLength: 20
   multiplyValue: 2
   currentMultiplierTime: 0
   multiplyPickedUp: 0
-  magnetLength: 10
+  magnetBuff: {fileID: 999629478647861084, guid: cb82268100d69824880f0608b6a8d78a, type: 3}
+  magnetLength: 20
   magnetSize: 10
   currentMagnetTime: 0
   magnetPickedUp: 0
+  shieldBuff: {fileID: 4314670640209028044, guid: 1c896c75de4e3ab4c8287d5f8f68cd1e, type: 3}
   shieldLength: 30
   currentShieldTime: 0
   shieldPickedUp: 0
+  speedBuff: {fileID: 6875293492743381735, guid: 7fc14290cba989c4d93620b1db6d2af9, type: 3}
   speedLength: 5
   speedValue: 2
   currentSpeedTime: 0
   speedPickedUp: 0
+--- !u!1001 &1370789892
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 782431648164839485, guid: b345ace19c455c74c94620f2e2e01e49, type: 3}
+      propertyPath: m_Name
+      value: Shield Powerup
+      objectReference: {fileID: 0}
+    - target: {fileID: 2705507518564327176, guid: b345ace19c455c74c94620f2e2e01e49, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2705507518564327176, guid: b345ace19c455c74c94620f2e2e01e49, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2705507518564327176, guid: b345ace19c455c74c94620f2e2e01e49, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 2705507518564327176, guid: b345ace19c455c74c94620f2e2e01e49, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2705507518564327176, guid: b345ace19c455c74c94620f2e2e01e49, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2705507518564327176, guid: b345ace19c455c74c94620f2e2e01e49, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2705507518564327176, guid: b345ace19c455c74c94620f2e2e01e49, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2705507518564327176, guid: b345ace19c455c74c94620f2e2e01e49, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2705507518564327176, guid: b345ace19c455c74c94620f2e2e01e49, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2705507518564327176, guid: b345ace19c455c74c94620f2e2e01e49, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: b345ace19c455c74c94620f2e2e01e49, type: 3}
 --- !u!1 &1387962355
 GameObject:
   m_ObjectHideFlags: 0
@@ -1785,6 +1847,7 @@ MonoBehaviour:
   gameOverPanel: {fileID: 926055064}
   startingText: {fileID: 729360949}
   fader: {fileID: 745140566}
+  megaflapButton: {fileID: 0}
 --- !u!1 &1792000497
 GameObject:
   m_ObjectHideFlags: 0
@@ -2337,3 +2400,4 @@ SceneRoots:
   - {fileID: 758203450}
   - {fileID: 1387962358}
   - {fileID: 4538437336795528}
+  - {fileID: 1370789892}

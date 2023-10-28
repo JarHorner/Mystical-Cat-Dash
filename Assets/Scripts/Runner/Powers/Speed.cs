@@ -4,14 +4,7 @@ using UnityEngine;
 
 public class Speed : MonoBehaviour
 {
-    [SerializeField] private Powerups powerups;
     [SerializeField] private Sprite speedSprite;
-
-
-    void Start()
-    {
-        powerups = GameObject.Find("GameManager").GetComponent<Powerups>();
-    }
 
     // starts the timer of the speed powerup
     public void SpeedBuff()
@@ -23,7 +16,9 @@ public class Speed : MonoBehaviour
 
         Powerups.Instance.currentSpeedTime = Powerups.Instance.speedLength;
         Powerups.Instance.speedPickedUp = true;
-        StartCoroutine(powerups.Invulnerable(powerups.speedLength));
+        StartCoroutine(Powerups.Instance.Invulnerable(Powerups.Instance.speedLength));
+
+        Destroy(this.gameObject);
     }
 
 }

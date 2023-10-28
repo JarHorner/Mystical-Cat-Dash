@@ -6,24 +6,31 @@ public class Powerups : MonoBehaviour
 {
     public static Powerups Instance { get; private set; }
 
+    public GameObject player;
+
     // Multiplier powerup variables
+    public GameObject multiplyBuff;
     public float multiplierLength;
     public int multiplyValue = 2;
     public float currentMultiplierTime;
     public bool multiplyPickedUp;
 
-    // Magnet powerup variables
+    // Magnet powerup variables    
+    public GameObject magnetBuff;
     public float magnetLength;
     public float magnetSize = 5;
     public float currentMagnetTime;
     public bool magnetPickedUp;
 
+
     // Shield powerup variables
+    public GameObject shieldBuff;
     public float shieldLength;
     public float currentShieldTime;
     public bool shieldPickedUp;
 
     // Speed powerup variables
+    public GameObject speedBuff;
     public float speedLength;
     public int speedValue = 2;
     public float currentSpeedTime;
@@ -41,6 +48,12 @@ public class Powerups : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
+    void Start()
+    {
+        player = GameObject.FindWithTag("Player");
+    }
+
     void Update()
     {
         if (multiplyPickedUp)
@@ -48,6 +61,8 @@ public class Powerups : MonoBehaviour
             currentMultiplierTime -= Time.deltaTime;
             if (currentMultiplierTime <= 0)
             {
+                Destroy(player.transform.GetChild(2).gameObject);
+
                 multiplyPickedUp = false;
 
                 GameUI.Instance.powerupImage.enabled = false;
@@ -61,6 +76,8 @@ public class Powerups : MonoBehaviour
             currentMagnetTime -= Time.deltaTime;
             if (currentMagnetTime <= 0)
             {
+                Destroy(player.transform.GetChild(2).gameObject);
+
                 magnetPickedUp = false;
 
                 GameUI.Instance.powerupImage.enabled = false;
@@ -74,6 +91,8 @@ public class Powerups : MonoBehaviour
             currentShieldTime -= Time.deltaTime;
             if (currentShieldTime <= 0)
             {
+                Destroy(player.transform.GetChild(2).gameObject);
+
                 shieldPickedUp = false;
 
                 GameUI.Instance.powerupImage.enabled = false;
@@ -88,6 +107,8 @@ public class Powerups : MonoBehaviour
             currentSpeedTime -= Time.deltaTime;
             if (currentSpeedTime <= 0)
             {
+                Destroy(player.transform.GetChild(2).gameObject);
+
                 speedPickedUp = false;
 
                 GameUI.Instance.powerupImage.enabled = false;

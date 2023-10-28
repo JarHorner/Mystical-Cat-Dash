@@ -6,6 +6,7 @@ public class Multiplier : MonoBehaviour
 {
     [SerializeField] private Sprite multiplySprite;
 
+
     // starts the timer of the multiplier powerup
     public void MultiplyBuff()
     {
@@ -15,6 +16,7 @@ public class Multiplier : MonoBehaviour
 
         Powerups.Instance.currentMultiplierTime = Powerups.Instance.multiplierLength;
         Powerups.Instance.multiplyPickedUp = true;
+        
         Destroy(this.gameObject);
     }
 }

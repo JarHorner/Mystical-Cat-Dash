@@ -4,13 +4,8 @@ using UnityEngine;
 
 public class Shield : MonoBehaviour
 {
-    [SerializeField] private Powerups powerups;
     [SerializeField] private Sprite shieldSprite;
 
-    void Start()
-    {
-        powerups = GameObject.Find("GameManager").GetComponent<Powerups>();
-    }
     
     // starts the timer of the shield powerup
     public void ShieldBuff()
@@ -22,6 +17,8 @@ public class Shield : MonoBehaviour
 
         Powerups.Instance.currentShieldTime = Powerups.Instance.shieldLength;
         Powerups.Instance.shieldPickedUp = true;
+
+        Destroy(this.gameObject);
     }
 
 }

@@ -199,21 +199,38 @@ public class RunnerPlayerController : MonoBehaviour
         else if (other.tag == "Multiplier")
         {
             Multiplier multiplier = other.gameObject.GetComponent<Multiplier>();
+
+            // gives the buff VFX to the player
+            multiplier.gameObject.transform.GetChild(0).parent = this.gameObject.transform;
+
             multiplier.MultiplyBuff();
+
         }
         else if (other.tag == "Magnet")
         {
             Magnet magnet = other.gameObject.GetComponent<Magnet>();
+
+            // gives the buff VFX to the player
+            magnet.gameObject.transform.GetChild(0).parent = this.gameObject.transform;
+
             magnet.MagnetBuff();
         }
         else if (other.tag == "Shield")
         {
             Shield shield = other.gameObject.GetComponent<Shield>();
+
+            // gives the buff VFX to the player
+            shield.gameObject.transform.GetChild(0).parent = this.gameObject.transform;
+
             shield.ShieldBuff();
         }
         else if (other.tag == "Speed")
         {
             Speed speed = other.gameObject.GetComponent<Speed>();
+
+            // gives the buff VFX to the player
+            speed.gameObject.transform.GetChild(0).parent = this.gameObject.transform;
+
             speed.SpeedBuff();
         }
     }
