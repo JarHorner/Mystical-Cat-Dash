@@ -14,6 +14,7 @@ public class MainMenu : MonoBehaviour
     private bool linkWarningMenuOpen = false;
     private string linkName;
     [SerializeField] private RectTransform fader;
+    [SerializeField] private AudioClip buttonPress;
 
     void Update()
     {
@@ -27,6 +28,8 @@ public class MainMenu : MonoBehaviour
 
     public void StartGame()
     {
+        SoundManager.Instance.Play(buttonPress);
+        
         if (GameManager.Instance)
         {
             GameManager.Instance.gameObject.SetActive(true);
@@ -47,6 +50,8 @@ public class MainMenu : MonoBehaviour
 
     public void ToggleCreditsMenu()
     {
+        SoundManager.Instance.Play(buttonPress);
+
         if (creditMenuOpen)
         {
             credits.gameObject.SetActive(false);
@@ -61,6 +66,8 @@ public class MainMenu : MonoBehaviour
 
     public void ToggleSettingsMenu()
     {
+        SoundManager.Instance.Play(buttonPress);
+
         if (settingsMenuOpen)
         {
             settings.gameObject.SetActive(false);
@@ -76,7 +83,6 @@ public class MainMenu : MonoBehaviour
     // opens a webpage of the url chosen
     public void OpenLink()
     {
-
         linkWarning.gameObject.SetActive(false);
 
         switch (linkName)
@@ -131,6 +137,8 @@ public class MainMenu : MonoBehaviour
     // opens the link warning panel
     public void ToggleLinkWarning(string credit = "")
     {
+        SoundManager.Instance.Play(buttonPress);
+
         if (linkWarningMenuOpen)
         {
             linkWarning.gameObject.SetActive(false);

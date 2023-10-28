@@ -6,6 +6,7 @@ using TMPro;
 public class Coin : MonoBehaviour
 {
     [SerializeField] private int pointsWorth;
+    [SerializeField] private AudioClip collectCoinSound;
     public float moveSpeed = 5f;
     private Transform player;
 
@@ -35,6 +36,7 @@ public class Coin : MonoBehaviour
     // adds score to calculated score
     public void CoinScored()
     {
+        SoundManager.Instance.Play(collectCoinSound);
         GameManager.Instance.Scored(pointsWorth);
 
         Debug.Log("Coin Collected");

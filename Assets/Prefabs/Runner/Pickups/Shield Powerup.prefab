@@ -120,6 +120,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shieldSprite: {fileID: 21300000, guid: 2ead222564f277546ba7ee18c06f6745, type: 3}
+  collectPowerupSound: {fileID: 8300000, guid: 0a7ef0fbfe436e843943388c23f0fc3d, type: 3}
 --- !u!1 &2976475875021459375
 GameObject:
   m_ObjectHideFlags: 0

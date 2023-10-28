@@ -1,40 +1,41 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Powerups : MonoBehaviour
 {
     public static Powerups Instance { get; private set; }
 
-    public GameObject player;
+    public GameObject runnerPlayer;
 
     // Multiplier powerup variables
     public GameObject multiplyBuff;
     public float multiplierLength;
     public int multiplyValue = 2;
     public float currentMultiplierTime;
-    public bool multiplyPickedUp;
+    public bool multiplyPickedUp = false;
 
     // Magnet powerup variables    
     public GameObject magnetBuff;
     public float magnetLength;
     public float magnetSize = 5;
     public float currentMagnetTime;
-    public bool magnetPickedUp;
+    public bool magnetPickedUp = false;
 
 
     // Shield powerup variables
     public GameObject shieldBuff;
     public float shieldLength;
     public float currentShieldTime;
-    public bool shieldPickedUp;
+    public bool shieldPickedUp = false;
 
     // Speed powerup variables
     public GameObject speedBuff;
     public float speedLength;
     public int speedValue = 2;
     public float currentSpeedTime;
-    public bool speedPickedUp;
+    public bool speedPickedUp = false;
 
     private void Awake()
     {
@@ -49,19 +50,20 @@ public class Powerups : MonoBehaviour
         }
     }
 
-    void Start()
-    {
-        player = GameObject.FindWithTag("Player");
-    }
-
     void Update()
     {
+                // needed to ensure the runnerPlayer varible is assigned
+        if (SceneManager.GetActiveScene().name == "Runner" && runnerPlayer == null)
+        {
+            runnerPlayer = GameObject.FindWithTag("Player");
+        }
+
         if (multiplyPickedUp)
         {
             currentMultiplierTime -= Time.deltaTime;
             if (currentMultiplierTime <= 0)
             {
-                Destroy(player.transform.GetChild(2).gameObject);
+                Destroy(runnerPlayer.transform.GetChild(2).gameObject);
 
                 multiplyPickedUp = false;
 
@@ -76,7 +78,7 @@ public class Powerups : MonoBehaviour
             currentMagnetTime -= Time.deltaTime;
             if (currentMagnetTime <= 0)
             {
-                Destroy(player.transform.GetChild(2).gameObject);
+                Destroy(runnerPlayer.transform.GetChild(2).gameObject);
 
                 magnetPickedUp = false;
 
@@ -91,7 +93,7 @@ public class Powerups : MonoBehaviour
             currentShieldTime -= Time.deltaTime;
             if (currentShieldTime <= 0)
             {
-                Destroy(player.transform.GetChild(2).gameObject);
+                Destroy(runnerPlayer.transform.GetChild(2).gameObject);
 
                 shieldPickedUp = false;
 
@@ -107,7 +109,7 @@ public class Powerups : MonoBehaviour
             currentSpeedTime -= Time.deltaTime;
             if (currentSpeedTime <= 0)
             {
-                Destroy(player.transform.GetChild(2).gameObject);
+                Destroy(runnerPlayer.transform.GetChild(2).gameObject);
 
                 speedPickedUp = false;
 

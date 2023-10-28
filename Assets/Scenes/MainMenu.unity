@@ -3710,6 +3710,7 @@ MonoBehaviour:
   settings: {fileID: 1477063103}
   linkWarning: {fileID: 1983505304}
   fader: {fileID: 1413589832}
+  buttonPress: {fileID: 8300000, guid: cf9505f1c1e4fb946b4641b3133f81ad, type: 3}
 --- !u!114 &780610483
 MonoBehaviour:
   m_ObjectHideFlags: 0

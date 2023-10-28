@@ -5,11 +5,13 @@ using UnityEngine;
 public class Shield : MonoBehaviour
 {
     [SerializeField] private Sprite shieldSprite;
+    [SerializeField] private AudioClip collectPowerupSound;
 
-    
     // starts the timer of the shield powerup
     public void ShieldBuff()
     {
+        SoundManager.Instance.Play(collectPowerupSound);
+
         // shows the buff symbol on the screen
         GameUI.Instance.powerupImage.sprite = shieldSprite;
         GameUI.Instance.powerupImage.gameObject.transform.localScale = new Vector3(1.25f, 1.25f, 1f);

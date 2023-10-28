@@ -5,10 +5,13 @@ using UnityEngine;
 public class Speed : MonoBehaviour
 {
     [SerializeField] private Sprite speedSprite;
+    [SerializeField] private AudioClip collectPowerupSound;
 
     // starts the timer of the speed powerup
     public void SpeedBuff()
     {
+        SoundManager.Instance.Play(collectPowerupSound);
+
         // shows the buff symbol on the screen
         GameUI.Instance.powerupImage.sprite = speedSprite;
         GameUI.Instance.powerupImage.gameObject.transform.localScale = new Vector3(1.5f, 2f, 1);

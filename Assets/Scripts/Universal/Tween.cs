@@ -40,7 +40,7 @@ public class Tween : MonoBehaviour
     {
         fader.gameObject.SetActive(true);
         LeanTween.scale(fader, Vector3.zero, 0);
-        LeanTween.scale(fader, new Vector3(1.5f, 1.5f, 1.5f), 0.3f).setOnComplete(() =>
+        LeanTween.scale(fader, new Vector3(1.5f, 1.5f, 1.5f), 0.5f).setOnComplete(() =>
         {
             if (GameManager.Instance)
             {
@@ -61,6 +61,13 @@ public class Tween : MonoBehaviour
         {
             if (scene.name == "Runner")
             {
+                GameUI.Instance.powerupImage.enabled = false;
+
+                Powerups.Instance.multiplyPickedUp = false;
+                Powerups.Instance.magnetPickedUp = false;
+                Powerups.Instance.shieldPickedUp = false;
+                Powerups.Instance.speedPickedUp = false;
+
                 SceneManager.LoadScene("Flappy");
             }
             else if (scene.name == "Flappy")
@@ -80,14 +87,11 @@ public class Tween : MonoBehaviour
         LeanTween.scale(GameUI.Instance.fader, Vector3.zero, 0);
         LeanTween.scale(GameUI.Instance.fader, new Vector3(1.5f, 1.5f, 1.5f), 0.5f).setOnComplete(() =>
         {
-            GameManager.Instance.gameOver = false;
-            GameManager.Instance.gameOverMenuOpen = false;
-            GameManager.Instance.calculatedScore = 0;
-            GameManager.Instance.isGameStarted = false;
-            GameUI.Instance.score.GetComponent<TMP_Text>().text = "0";
+            Destroy(GameManager.Instance.gameObject);
+
+            GameUI.Instance.score.GetComponent<TMP_Text>().text = "000";
             GameUI.Instance.powerupImage.enabled = false;
 
-            GameManager.Instance.loaded = false;
             SceneManager.LoadScene("Runner");
         });
     }
@@ -102,7 +106,7 @@ public class Tween : MonoBehaviour
         {
             Destroy(GameManager.Instance.gameObject);
 
-            GameUI.Instance.score.GetComponent<TMP_Text>().text = "0";
+            GameUI.Instance.score.GetComponent<TMP_Text>().text = "000";
             GameUI.Instance.powerupImage.enabled = false;
             GameUI.Instance.score.transform.parent.gameObject.SetActive(false);
             GameUI.Instance.gameOverPanel.SetActive(false);
