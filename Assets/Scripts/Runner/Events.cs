@@ -8,6 +8,7 @@ public class Events : MonoBehaviour
 {
     public static Events Instance { get; private set; }
     [SerializeField] private AudioClip buttonPress;
+    private bool pauseGame = false;
 
     private void Awake()
     {
@@ -33,9 +34,30 @@ public class Events : MonoBehaviour
     // quits out of the game
     public void QuitToMainMenu()
     {
+        PauseGame();
+
         SoundManager.Instance.Play(buttonPress);
         
         Tween.Instance.backToMainMenu = true;
         Tween.Instance.TweenMainMenu();
+    }
+
+    // open/closes the pause menu
+    public void PauseGame()
+    {
+        SoundManager.Instance.Play(buttonPress);
+        
+        pauseGame = !pauseGame;
+
+        if (!pauseGame)
+        {
+            Time.timeScale = 1;
+            GameUI.Instance.pausePanel.SetActive(false);
+        }
+        else
+        {
+            Time.timeScale = 0;
+            GameUI.Instance.pausePanel.SetActive(true);
+        }
     }
 }

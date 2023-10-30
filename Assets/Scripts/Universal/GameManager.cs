@@ -12,11 +12,11 @@ public class GameManager : MonoBehaviour
     public float maximumForwardSpeed = 20f;
     private float countdownToPointGain = 0f;
     public bool gameOver = false;
+    public bool loaded = false;
     public bool gameOverMenuOpen = false;
     public bool isGameStarted = false;
     private GameUI gameUI;
     [SerializeField] private Powerups powerups;
-    public bool loaded = false;
     [SerializeField] private AudioClip gameOverSound;
     [SerializeField] private AudioClip enterPortalSound;
     [SerializeField] private AudioClip gameMusic;
@@ -56,6 +56,7 @@ public class GameManager : MonoBehaviour
             forwardSpeed = 10f;
             gameUI.gameOverPanel.SetActive(false);
             gameUI.startingText.SetActive(true);
+            gameUI.pauseButton.SetActive(true);
         }
         else
         {
@@ -110,7 +111,7 @@ public class GameManager : MonoBehaviour
     // depending on what scene you are in, swaps to the other with transitions
     public void SwitchDimensions()
     {
-        // SoundManager.Instance.Play(enterPortalSound);
+        SoundManager.Instance.Play(enterPortalSound);
 
         Tween.Instance.TweenBetweenScenes();
     }

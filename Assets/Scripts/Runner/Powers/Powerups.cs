@@ -120,11 +120,4 @@ public class Powerups : MonoBehaviour
             }
         }
     }
-
-    public IEnumerator Invulnerable(float invulnerableTime)
-    {
-        Physics.IgnoreLayerCollision(6, 7, true);
-        yield return new WaitForSeconds(invulnerableTime);
-        Physics.IgnoreLayerCollision(6, 7, false);
-    }
 }

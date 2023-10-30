@@ -6,11 +6,14 @@ public class Speed : MonoBehaviour
 {
     [SerializeField] private Sprite speedSprite;
     [SerializeField] private AudioClip collectPowerupSound;
+    [SerializeField] private AudioClip speedUpSound;
 
     // starts the timer of the speed powerup
     public void SpeedBuff()
     {
         SoundManager.Instance.Play(collectPowerupSound);
+
+        SoundManager.Instance.Play(speedUpSound);
 
         // shows the buff symbol on the screen
         GameUI.Instance.powerupImage.sprite = speedSprite;
@@ -19,7 +22,6 @@ public class Speed : MonoBehaviour
 
         Powerups.Instance.currentSpeedTime = Powerups.Instance.speedLength;
         Powerups.Instance.speedPickedUp = true;
-        StartCoroutine(Powerups.Instance.Invulnerable(Powerups.Instance.speedLength));
 
         Destroy(this.gameObject);
     }

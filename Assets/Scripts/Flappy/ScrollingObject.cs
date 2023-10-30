@@ -29,10 +29,10 @@ public class ScrollingObject : MonoBehaviour
         //     ChangeScrollSpeed();
         // }
 
-        // if (GameManager.Instance.gameOver)
-        // {
-        //     rb.velocity = Vector2.zero;
-        // }
+        if (GameManager.Instance.gameOver)
+        {
+            rb.velocity = Vector2.zero;
+        }
     }
 
     // private void ChangeScrollSpeed()

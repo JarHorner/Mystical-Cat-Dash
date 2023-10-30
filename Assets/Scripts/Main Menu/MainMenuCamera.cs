@@ -6,7 +6,8 @@ public class MainMenuCamera : MonoBehaviour
 {
     [SerializeField] private Transform target;
     private Vector3 offset;
-    [SerializeField] private GameObject sky;
+
+     [SerializeField] private GameObject sky;
 
     void Start()
     {
@@ -19,8 +20,9 @@ public class MainMenuCamera : MonoBehaviour
         Vector3 newPosition = new Vector3(transform.position.x, transform.position.y, offset.z + target.position.z);
         transform.position = Vector3.Lerp(transform.position, newPosition, 10 * Time.fixedDeltaTime);
 
-        // ensures the clouds is properly following the player while moving.
-        Vector3 newCloudPosition = new Vector3(sky.transform.position.x, sky.transform.position.y, 95 + target.position.z);
-        sky.transform.position = Vector3.Lerp(sky.transform.position, newCloudPosition, 10 * Time.fixedDeltaTime);
+        // ensures the sky is properly following the player while moving.
+        Vector3 newSkyPosition = new Vector3(sky.transform.position.x, sky.transform.position.y, 95 + target.position.z);
+        sky.transform.position = Vector3.Lerp(sky.transform.position, newSkyPosition, 10 * Time.fixedDeltaTime);
     }
 }
+

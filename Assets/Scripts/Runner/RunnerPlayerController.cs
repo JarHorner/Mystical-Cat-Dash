@@ -22,12 +22,15 @@ public class RunnerPlayerController : MonoBehaviour
     private Vector2 currentPos => primaryPosition.ReadValue<Vector2>();
 
     [SerializeField] private CharacterController controller;
+    [SerializeField] private AudioClip hitSound;
+    [SerializeField] private AudioClip swapLaneSound;
+    [SerializeField] private AudioClip jumpSound;
     private Vector3 direction;
     public int desiredLane = 1;
     public float laneDistance = 4;
-
     public float jumpForce;
     public float gravity = -20;
+    private bool hitPortal = false;
 
     void Awake()
     {
@@ -40,6 +43,8 @@ public class RunnerPlayerController : MonoBehaviour
         shiftRight = playerActionMap.FindAction("ShiftRight");
         jump = playerActionMap.FindAction("Jump");
         slide = playerActionMap.FindAction("Slide");
+
+        hitPortal = false;
     }
 
     void Start()
@@ -161,10 +166,13 @@ public class RunnerPlayerController : MonoBehaviour
     {
         if (hit.transform.tag == "Object")
         {
+
+            SoundManager.Instance.Play(hitSound);
             // if player has shield powerup, he does not die and enters invulnerable state
             if (Powerups.Instance.shieldPickedUp)
             {
-                StartCoroutine(Powerups.Instance.Invulnerable(2f));
+                Debug.Log("Shielded!");
+                StartCoroutine(Invulnerable(2f));
                 Powerups.Instance.currentShieldTime = 0;
             }
             else
@@ -172,7 +180,6 @@ public class RunnerPlayerController : MonoBehaviour
                 animator.SetTrigger("Die");
                 animator.SetBool("Run", false);
                 currentState = PlayerState.dead;
-                controller.enabled = false;
 
 
                 Powerups.Instance.currentMultiplierTime = 0;
@@ -183,8 +190,10 @@ public class RunnerPlayerController : MonoBehaviour
                 GameManager.Instance.gameOver = true;
             }
         }
-        else if (hit.transform.tag == "Portal")
+        else if (hit.transform.tag == "Portal" && !hitPortal)
         {
+            hitPortal = true;
+
             GameManager.Instance.SwitchDimensions();
         }
     }
@@ -226,6 +235,7 @@ public class RunnerPlayerController : MonoBehaviour
         }
         else if (other.tag == "Speed")
         {
+            StartCoroutine(Invulnerable(Powerups.Instance.speedLength));
             Speed speed = other.gameObject.GetComponent<Speed>();
 
             // gives the buff VFX to the player
@@ -233,6 +243,13 @@ public class RunnerPlayerController : MonoBehaviour
 
             speed.SpeedBuff();
         }
+    }
+
+    public IEnumerator Invulnerable(float invulnerableTime)
+    {
+        Physics.IgnoreLayerCollision(6, 7, true);
+        yield return new WaitForSeconds(invulnerableTime);
+        Physics.IgnoreLayerCollision(6, 7, false);
     }
 
     private void ShiftLeft(InputAction.CallbackContext context)
@@ -248,12 +265,14 @@ public class RunnerPlayerController : MonoBehaviour
     {
         if (desiredLane > 0 && currentState != PlayerState.idle)
         {
+            SoundManager.Instance.Play(swapLaneSound);
             desiredLane--;
         }
     }
 
     private void ShiftRight(InputAction.CallbackContext context)
     {
+
         if (desiredLane < 2 && currentState != PlayerState.idle)
         {
             desiredLane++;
@@ -265,6 +284,7 @@ public class RunnerPlayerController : MonoBehaviour
     {
         if (desiredLane < 2 && currentState != PlayerState.idle)
         {
+            SoundManager.Instance.Play(swapLaneSound);
             desiredLane++;
         }
     }
@@ -282,6 +302,7 @@ public class RunnerPlayerController : MonoBehaviour
     {
         if (controller.isGrounded && currentState != PlayerState.slide)
         {
+            SoundManager.Instance.Play(jumpSound);
             StartCoroutine(RunnerJump());
             direction.y = jumpForce;
         }
@@ -297,9 +318,12 @@ public class RunnerPlayerController : MonoBehaviour
 
         yield return new WaitForSeconds(1f);
 
-        currentState = PlayerState.run;
-        animator.SetBool("Run", true);
-        animator.SetTrigger("Land");
+        if (currentState != PlayerState.dead)
+        {
+            currentState = PlayerState.run;
+            animator.SetTrigger("Land");
+            animator.SetBool("Run", true);
+        }
     }
 
     private void Slide(InputAction.CallbackContext context)
@@ -315,6 +339,7 @@ public class RunnerPlayerController : MonoBehaviour
     {
         if (controller.isGrounded && currentState != PlayerState.jump)
         {
+            SoundManager.Instance.Play(swapLaneSound);
             StartCoroutine(RunnerSlide());
         }
     }
@@ -334,9 +359,12 @@ public class RunnerPlayerController : MonoBehaviour
 
         yield return new WaitForSeconds(1f);
 
-        animator.SetTrigger("SleepEnd");
-        currentState = PlayerState.run;
-        animator.SetBool("Run", true);
+        if (currentState != PlayerState.dead)
+        {
+            currentState = PlayerState.run;
+            animator.SetTrigger("SleepEnd");
+            animator.SetBool("Run", true);
+        }
 
         // these are needed as I cannot edit the animations themselves, this would be in the animations if I could.
         controller.center = new Vector3(0f, 0.025f, 0f);

@@ -7,7 +7,6 @@ using TMPro;
 public class Tween : MonoBehaviour
 {
     public static Tween Instance { get; private set; }
-
     public bool backToMainMenu = false;
 
     private void Awake()
@@ -73,6 +72,7 @@ public class Tween : MonoBehaviour
             else if (scene.name == "Flappy")
             {
                 GameManager.Instance.loaded = false;
+
                 SceneManager.LoadScene("Runner");
             }
         });
@@ -108,6 +108,7 @@ public class Tween : MonoBehaviour
 
             GameUI.Instance.score.GetComponent<TMP_Text>().text = "000";
             GameUI.Instance.powerupImage.enabled = false;
+            GameUI.Instance.pauseButton.SetActive(false);
             GameUI.Instance.score.transform.parent.gameObject.SetActive(false);
             GameUI.Instance.gameOverPanel.SetActive(false);
 

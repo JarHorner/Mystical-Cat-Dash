@@ -18,11 +18,13 @@ public class RunnerCameraController : MonoBehaviour
     void LateUpdate()
     {
         // ensures the camera is properly following the player while moving.
-        Vector3 newPosition = new Vector3(transform.position.x, transform.position.y, offset.z + target.position.z);
+        Vector3 newPosition = new Vector3(transform.position.x, target.position.y + 5, offset.z + target.position.z);
         transform.position = Vector3.Lerp(transform.position, newPosition, 10 * Time.fixedDeltaTime);
 
-        // ensures the clouds is properly following the player while moving.
-        Vector3 newCloudPosition = new Vector3(sky.transform.position.x, sky.transform.position.y, 180 + target.position.z);
-        sky.transform.position = Vector3.Lerp(sky.transform.position, newCloudPosition, 10 * Time.fixedDeltaTime);
+
+
+        // ensures the sky is properly following the player while moving.
+        Vector3 newSkyPosition = new Vector3(sky.transform.position.x, sky.transform.position.y, 180 + target.position.z);
+        sky.transform.position = Vector3.Lerp(sky.transform.position, newSkyPosition, 10 * Time.fixedDeltaTime);
     }
 }

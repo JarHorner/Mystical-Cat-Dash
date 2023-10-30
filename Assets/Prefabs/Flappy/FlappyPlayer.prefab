@@ -103,6 +103,7 @@ MonoBehaviour:
   anim: {fileID: 3502630665357547890}
   flappyGameController: {fileID: 0}
   inputMaster: {fileID: -944628639613478452, guid: 97a8dd31ec7c04a41a350e52d0086a16, type: 3}
+  flapSound: {fileID: 8300000, guid: 2f6734f027a7803428f640f4ca3a558a, type: 3}
   jumpSpeed: 300
 --- !u!95 &3502630665357547890
 Animator:

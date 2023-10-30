@@ -12,7 +12,9 @@ public class GameUI : MonoBehaviour
     public GameObject score;
     public Image powerupImage;
     public GameObject gameOverScore;
+    public GameObject pauseButton;
     public GameObject gameOverPanel;
+    public GameObject pausePanel;
     public GameObject startingText;
     public RectTransform fader;
     public GameObject megaflapButton;

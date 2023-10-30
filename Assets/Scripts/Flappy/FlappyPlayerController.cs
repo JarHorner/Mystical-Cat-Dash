@@ -13,6 +13,7 @@ public class FlappyPlayerController : MonoBehaviour
     [SerializeField] private FlappyGameController flappyGameController;
     [SerializeField] private InputActionAsset inputMaster;
     private InputAction jump;
+    [SerializeField] private AudioClip flapSound;
     [SerializeField] private float jumpSpeed;
 
     void Awake()
@@ -71,20 +72,14 @@ public class FlappyPlayerController : MonoBehaviour
         if (col.gameObject.tag == "Portal")
         {
             GameManager.Instance.SwitchDimensions();
-            //SceneManager.LoadScene("Runner");
         }
     }
 
     public void Jump(InputAction.CallbackContext context)
     {
-        // if (!isDead && context.performed)
-        // {
-        //     Debug.Log("JUMP!");
-        //     rb.AddForce(new Vector2(0, jumpSpeed));
-        //     rb.velocity = Vector2.zero;
-        // }
         if (!GameManager.Instance.gameOver && context.performed)
         {
+            SoundManager.Instance.Play(flapSound);
             Debug.Log("JUMP!");
             anim.SetTrigger("Flap");
             rb.AddForce(new Vector2(0, jumpSpeed));
@@ -97,7 +92,6 @@ public class FlappyPlayerController : MonoBehaviour
     {
         rb.constraints = RigidbodyConstraints2D.None;
         rb.velocity = Vector2.zero;
-        //isDead = true;
         GameManager.Instance.gameOver = true;
         yield return new WaitForSeconds(2f);
         Destroy(this.gameObject);
