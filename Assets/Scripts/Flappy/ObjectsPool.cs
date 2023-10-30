@@ -101,6 +101,7 @@ public class ObjectsPool : MonoBehaviour
 
         if (GameManager.Instance.timesEntered2DWorld == 1) // 1
         {
+            // easy pillar spawn
             spawnYPosition = Random.Range(easyColumnMin, easyColumnMax);
             pillars.Add((GameObject)Instantiate(easyPillarPrefab, new Vector2(spawnXPosition, spawnYPosition), Quaternion.identity));
         }
@@ -108,6 +109,7 @@ public class ObjectsPool : MonoBehaviour
         {
             float chosenPillarNum = Random.Range(0, 2);
 
+            // easy or regular pillar spawn
             switch (chosenPillarNum)
             {
                 case 0:
@@ -124,6 +126,7 @@ public class ObjectsPool : MonoBehaviour
         }
         else if (GameManager.Instance.timesEntered2DWorld == 3) // 3
         {
+            // regular pillar spawn
             spawnYPosition = Random.Range(regColumnMin, regColumnMax);
             pillars.Add((GameObject)Instantiate(regularPillarPrefab, new Vector2(spawnXPosition, spawnYPosition), Quaternion.identity));
         }
@@ -131,6 +134,7 @@ public class ObjectsPool : MonoBehaviour
         {
             float chosenPillarNum = Random.Range(0, 2);
 
+            // regular or hard pillar spawn
             switch (chosenPillarNum)
             {
                 case 0:
@@ -147,11 +151,13 @@ public class ObjectsPool : MonoBehaviour
         }
         else if (GameManager.Instance.timesEntered2DWorld >= 5) // 5
         {
+            // hard pillar spawn
             spawnYPosition = Random.Range(hardColumnMin, hardColumnMax);
             pillars.Add((GameObject)Instantiate(hardPillarPrefab, new Vector2(spawnXPosition, spawnYPosition), Quaternion.identity));
         }
     }
 
+    // based on the amount of time player enters 2D world, spawn rate will be decreased.
     private void ChangeSpawnRate()
     {
         if (GameManager.Instance.timesEntered2DWorld == 2)

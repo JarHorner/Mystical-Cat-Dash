@@ -30,6 +30,7 @@ public class ScrollingObject : MonoBehaviour
         }
     }
 
+    // based on the amount of time player enters 2D world, scrollspeed will be increased.
     private void ChangeScrollSpeed()
     {
         if (GameManager.Instance.timesEntered2DWorld == 1)

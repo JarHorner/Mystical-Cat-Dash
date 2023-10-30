@@ -83,6 +83,7 @@ public class TileManager : MonoBehaviour
 
     public void SpawnSwapGameTile()
     {
+        // resets number so tons of portals do not open
         tilesSpawnedUntilPortal = 0;
         GameObject tile = Instantiate(swapGameTile, transform.forward * zSpawn, transform.rotation);
         activeTiles.Add(tile);
