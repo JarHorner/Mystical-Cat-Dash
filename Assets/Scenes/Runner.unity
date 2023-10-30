@@ -5439,7 +5439,7 @@ MonoBehaviour:
   cloudPrefabs:
   - {fileID: 582326915600719706, guid: 60e01771cdd4bfe4fbca75de62465cf5, type: 3}
   zSpawn: 0
-  distanceBehindToDelete: 300
+  distanceBehindToDelete: 400
   cloudLength: 250
   numOfClouds: 5
   totalCloudsSpawned: 0
@@ -11653,10 +11653,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   calculatedScore: 0
+  timesEntered2DWorld: 0
   forwardSpeed: 10
   maximumForwardSpeed: 20
   gameOver: 0
   loaded: 0
+  loadedInto2DWorld: 0
   loadedFrom2DWorld: 0
   gameOverMenuOpen: 0
   isGameStarted: 0

@@ -2890,7 +2890,7 @@ MonoBehaviour:
   cloudPrefabs:
   - {fileID: 6504083485607210925, guid: 5f9a270ec2026fa419338ed276422f90, type: 3}
   zSpawn: 0
-  distanceBehindToDelete: 175
+  distanceBehindToDelete: 200
   cloudLength: 150
   numOfClouds: 5
   totalCloudsSpawned: 0

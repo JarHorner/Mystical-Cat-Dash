@@ -10,7 +10,7 @@ public class TileManager : MonoBehaviour
     public float zSpawn = 0;
     public float tileLength = 20;
     public int numOfTiles = 5;
-    public int totalTilesSpawned = 0;
+    public int tilesSpawnedUntilPortal = 0;
     private List<GameObject> activeTiles = new List<GameObject>();
 
     public Transform playerTransform;
@@ -24,7 +24,7 @@ public class TileManager : MonoBehaviour
             {
                 SpawnTile(0);
             }
-            if (i == swapGameTileSpawnNum)
+            if (i == swapGameTileSpawnNum) // this will be removed
             {
                 SpawnSwapGameTile();
             }
@@ -39,21 +39,43 @@ public class TileManager : MonoBehaviour
     {
         if (playerTransform.position.z - 25 > zSpawn - (numOfTiles * tileLength))
         {
-            if (totalTilesSpawned == swapGameTileSpawnNum)
+            if (tilesSpawnedUntilPortal == swapGameTileSpawnNum) // this will be removed
             {
                 SpawnSwapGameTile();
             }
             else
             {
-                SpawnTile(Random.Range(0, tilePrefabs.Length));
+                DetermineTileSpawn();
             }
             DeleteTile();
         }
     }
 
+    private void DetermineTileSpawn()
+    {
+        float portalSpawnPercentage = Random.Range(1, 101); // range of 1 - 100
+
+        if (tilesSpawnedUntilPortal >= 16 && tilesSpawnedUntilPortal >= 30 && portalSpawnPercentage >= 90)
+        {
+            SpawnSwapGameTile();
+        }
+        else if (tilesSpawnedUntilPortal >= 31 && tilesSpawnedUntilPortal >= 45 && portalSpawnPercentage >= 85)
+        {
+            SpawnSwapGameTile();
+        }
+        else if (tilesSpawnedUntilPortal > 46 && portalSpawnPercentage >= 80)
+        {
+            SpawnSwapGameTile();
+        }
+        else
+        {
+            SpawnTile(Random.Range(0, tilePrefabs.Length));
+        }
+    }
+
     public void SpawnTile(int index)
     {
-        totalTilesSpawned++;
+        tilesSpawnedUntilPortal++;
         GameObject tile = Instantiate(tilePrefabs[index], transform.forward * zSpawn, transform.rotation);
         activeTiles.Add(tile);
         zSpawn += tileLength;
@@ -61,7 +83,7 @@ public class TileManager : MonoBehaviour
 
     public void SpawnSwapGameTile()
     {
-        totalTilesSpawned++;
+        tilesSpawnedUntilPortal = 0;
         GameObject tile = Instantiate(swapGameTile, transform.forward * zSpawn, transform.rotation);
         activeTiles.Add(tile);
         zSpawn += tileLength;
