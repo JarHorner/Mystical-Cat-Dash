@@ -14,7 +14,9 @@ public class FlappyPlayerController : MonoBehaviour
     [SerializeField] private InputActionAsset inputMaster;
     private InputAction jump;
     [SerializeField] private AudioClip flapSound;
-    [SerializeField] private float jumpSpeed;
+    [SerializeField] private float flapStrength = 5;
+    private Vector3 direction;
+    [SerializeField] private float gravity = -9.8f;
 
     void Awake()
     {
@@ -55,6 +57,9 @@ public class FlappyPlayerController : MonoBehaviour
         {
             flappyGameController.playerPositioned = true;
         }
+
+        direction.y += gravity * Time.deltaTime;
+        transform.position += direction * Time.deltaTime;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -82,8 +87,11 @@ public class FlappyPlayerController : MonoBehaviour
             SoundManager.Instance.Play(flapSound);
             Debug.Log("JUMP!");
             anim.SetTrigger("Flap");
-            rb.AddForce(new Vector2(0, jumpSpeed));
-            rb.velocity = Vector2.zero;
+
+            direction = Vector3.up * flapStrength;
+
+            // rb.AddForce(new Vector2(0, flapStrength));
+            // rb.velocity = Vector2.zero;
         }
 
     }

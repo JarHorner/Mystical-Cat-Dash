@@ -17,6 +17,7 @@ public class GameUI : MonoBehaviour
     public GameObject pausePanel;
     public GameObject startingText;
     public RectTransform fader;
+    public RectTransform portalFader;
     public GameObject megaflapButton;
     private void Awake()
     {

@@ -8,11 +8,14 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
     public int calculatedScore = 0;
+    public int timesEntered2DWorld = 0;
     public float forwardSpeed = 10f;
     public float maximumForwardSpeed = 20f;
     private float countdownToPointGain = 0f;
     public bool gameOver = false;
     public bool loaded = false;
+    public bool loadedInto2DWorld = false;
+    public bool loadedFrom2DWorld = false;
     public bool gameOverMenuOpen = false;
     public bool isGameStarted = false;
     private GameUI gameUI;
@@ -38,6 +41,7 @@ public class GameManager : MonoBehaviour
     {
         gameUI = GameUI.Instance;
         isGameStarted = false;
+
         // SoundManager.Instance.changeBackground(gameMusic);
     }
 
@@ -47,6 +51,11 @@ public class GameManager : MonoBehaviour
         {
             Tween.Instance.TweenEnd();
             loaded = true;
+        }
+        else if (loadedFrom2DWorld)
+        {
+            Tween.Instance.TweenInNewScene();
+            loadedFrom2DWorld = false;
         }
 
         // if game is not started, start game text will appear and game over panel will be hidden

@@ -21651,7 +21651,7 @@ GameObject:
   - component: {fileID: 4098836383037905535}
   - component: {fileID: 6766385446099201897}
   m_Layer: 0
-  m_Name: Aparment_Door
+  m_Name: Apartment_Door
   m_TagString: Portal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

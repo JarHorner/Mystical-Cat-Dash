@@ -34,7 +34,8 @@ public class Events : MonoBehaviour
     // quits out of the game
     public void QuitToMainMenu()
     {
-        PauseGame();
+        if (pauseGame)
+            PauseGame();
 
         SoundManager.Instance.Play(buttonPress);
         

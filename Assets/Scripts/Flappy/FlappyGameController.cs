@@ -28,7 +28,7 @@ public class FlappyGameController : MonoBehaviour
         // if not loaded, uses a transition into the scene.
         if (!loaded)
         {
-            Tween.Instance.TweenEnd();
+            Tween.Instance.TweenInNewScene();
             loaded = true;
         }
     }

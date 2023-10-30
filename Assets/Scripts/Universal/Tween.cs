@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 using TMPro;
 
 public class Tween : MonoBehaviour
@@ -25,6 +26,7 @@ public class Tween : MonoBehaviour
     public void TweenEnd()
     {
         Debug.Log("Tween end");
+
         // uses LeanTween to fade in at the start of the game.
         GameUI.Instance.fader.gameObject.SetActive(true);
         LeanTween.scale(GameUI.Instance.fader, new Vector3(1.1f, 1.1f, 1.1f), 0);
@@ -54,12 +56,17 @@ public class Tween : MonoBehaviour
         Debug.Log("Tween between scenes");
         Scene scene = SceneManager.GetActiveScene();
 
-        GameUI.Instance.fader.gameObject.SetActive(true);
-        LeanTween.scale(GameUI.Instance.fader, Vector3.zero, 0);
-        LeanTween.scale(GameUI.Instance.fader, new Vector3(1.5f, 1.5f, 1.5f), 0.5f).setOnComplete(() =>
+        GameUI.Instance.portalFader.gameObject.SetActive(true);
+        LeanTween.rotate(GameUI.Instance.portalFader, 360f, 0.5f);
+
+        LeanTween.scale(GameUI.Instance.portalFader, Vector3.zero, 0);
+        LeanTween.scale(GameUI.Instance.portalFader, new Vector3(1.5f, 1.5f, 1.5f), 0.5f).setOnComplete(() =>
         {
             if (scene.name == "Runner")
             {
+                GameManager.Instance.loadedInto2DWorld = true;
+                GameManager.Instance.timesEntered2DWorld++;
+
                 GameUI.Instance.powerupImage.enabled = false;
 
                 Powerups.Instance.multiplyPickedUp = false;
@@ -71,10 +78,26 @@ public class Tween : MonoBehaviour
             }
             else if (scene.name == "Flappy")
             {
-                GameManager.Instance.loaded = false;
+                GameManager.Instance.loadedFrom2DWorld = true;
 
                 SceneManager.LoadScene("Runner");
             }
+        });
+    }
+
+    public void TweenInNewScene()
+    {
+        Debug.Log("Tween New Scene");
+
+        // uses LeanTween to fade in at the start of the game.
+        GameUI.Instance.portalFader.gameObject.SetActive(true);
+        LeanTween.rotate(GameUI.Instance.portalFader, 360f, 0.5f);
+
+        LeanTween.scale(GameUI.Instance.portalFader, new Vector3(1.1f, 1.1f, 1.1f), 0);
+        // instead of using coroutine, append what happens after using anonymous function setOnComplete.
+        LeanTween.scale(GameUI.Instance.portalFader, Vector3.zero, 0.5f).setOnComplete(() =>
+        {
+            GameUI.Instance.portalFader.gameObject.SetActive(false);
         });
     }
 
