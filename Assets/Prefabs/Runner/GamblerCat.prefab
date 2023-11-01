@@ -1312,13 +1312,18 @@ MonoBehaviour:
   animator: {fileID: 2534013830944007244}
   playIdleAnimTimer: 6
   controller: {fileID: 8405417370364571492}
+  powerupSpawner: {fileID: 0}
   hitSound: {fileID: 8300000, guid: e8d89b25d9a25364ab7b1774c38a853f, type: 3}
   swapLaneSound: {fileID: 8300000, guid: 6e8f1015c7b6f834683ef9919e0dc9ab, type: 3}
   jumpSound: {fileID: 8300000, guid: 3e04f0232798a774a8bcf578408e4f4c, type: 3}
   desiredLane: 1
-  laneDistance: 2
+  laneDistance: 1.5
   jumpForce: 10
   gravity: -20
+  multiplierBuffVFX: {fileID: 0}
+  magnetBuffVFX: {fileID: 0}
+  shieldBuffVFX: {fileID: 0}
+  speedBuffVFX: {fileID: 0}
 --- !u!1 &7664261861719427889
 GameObject:
   m_ObjectHideFlags: 0

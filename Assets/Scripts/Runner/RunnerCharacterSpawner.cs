@@ -15,12 +15,12 @@ public class RunnerCharacterSpawner : MonoBehaviour
         // air with a portal.
         if (!GameManager.Instance.isGameStarted)
         {
-            GameObject newRunnerPlayer = Instantiate(runnerPlayer, new Vector3(0, 0, -2), Quaternion.identity);
+            GameObject newRunnerPlayer = Instantiate(runnerPlayer, new Vector3(0, 0, 0), Quaternion.identity);
             newRunnerPlayer.name = runnerPlayer.name;
         }
         else
         {
-            GameObject newRunnerPlayer = Instantiate(runnerPlayer, new Vector3(0, 8.5f, -2), Quaternion.identity);
+            GameObject newRunnerPlayer = Instantiate(runnerPlayer, new Vector3(0, 8.5f, 0), Quaternion.identity);
             newRunnerPlayer.name = runnerPlayer.name;
         }
 

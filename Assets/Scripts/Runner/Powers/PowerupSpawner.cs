@@ -5,7 +5,7 @@ using UnityEngine;
 public class PowerupSpawner : MonoBehaviour
 {
     [SerializeField] private GameObject[] powerups;
-    private int[] lanes = new int[] { -2, 0, 2 };
+    private float[] lanes = new float[] { -1.5f, 0f, 1.5f };
     private int[] heights = new int[] { 1, 3, 5 };
     [SerializeField] private Transform runnerPlayerTransform;
     [SerializeField] private float zSpawnDistance = 140f;
@@ -61,7 +61,7 @@ public class PowerupSpawner : MonoBehaviour
     private Vector3 DeterminePowerupLocation()
     {
         int randomIndexForLane = Random.Range(0, 3); // range of 0 - 2 for lanes array
-        int randomLane = lanes[randomIndexForLane];
+        float randomLane = lanes[randomIndexForLane];
 
         int randomIndexForHeight = Random.Range(0, 2); // range of 0 - 2 for Height array
         int randomHeight = heights[randomIndexForHeight];

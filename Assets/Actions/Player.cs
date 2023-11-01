@@ -44,6 +44,15 @@ public partial class @Player: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""StartGame"",
+                    ""type"": ""Button"",
+                    ""id"": ""faa2505d-b0ba-454f-817c-662b00b9ebb5"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -68,6 +77,17 @@ public partial class @Player: IInputActionCollection2, IDisposable
                     ""action"": ""PrimaryPosition"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d7be4e54-9876-4aca-80d6-2dbf6bfebf19"",
+                    ""path"": ""<Touchscreen>/Press"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Mobile"",
+                    ""action"": ""StartGame"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -88,19 +108,8 @@ public partial class @Player: IInputActionCollection2, IDisposable
             ""bindings"": [
                 {
                     ""name"": """",
-                    ""id"": ""4d73d3c5-7f8e-4051-91e9-abb4b407a3f5"",
-                    ""path"": ""<Mouse>/leftButton"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard&Mouse"",
-                    ""action"": ""Jump"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""19b7bc42-ce9d-41ce-92bc-3ec1c5a5d9de"",
-                    ""path"": ""<Touchscreen>/primaryTouch/tap"",
+                    ""path"": ""<Touchscreen>/Press"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Mobile"",
@@ -302,6 +311,7 @@ public partial class @Player: IInputActionCollection2, IDisposable
         m_RunnerPlayer = asset.FindActionMap("RunnerPlayer", throwIfNotFound: true);
         m_RunnerPlayer_PrimaryContact = m_RunnerPlayer.FindAction("PrimaryContact", throwIfNotFound: true);
         m_RunnerPlayer_PrimaryPosition = m_RunnerPlayer.FindAction("PrimaryPosition", throwIfNotFound: true);
+        m_RunnerPlayer_StartGame = m_RunnerPlayer.FindAction("StartGame", throwIfNotFound: true);
         // FlappyPlayer
         m_FlappyPlayer = asset.FindActionMap("FlappyPlayer", throwIfNotFound: true);
         m_FlappyPlayer_Jump = m_FlappyPlayer.FindAction("Jump", throwIfNotFound: true);
@@ -375,12 +385,14 @@ public partial class @Player: IInputActionCollection2, IDisposable
     private List<IRunnerPlayerActions> m_RunnerPlayerActionsCallbackInterfaces = new List<IRunnerPlayerActions>();
     private readonly InputAction m_RunnerPlayer_PrimaryContact;
     private readonly InputAction m_RunnerPlayer_PrimaryPosition;
+    private readonly InputAction m_RunnerPlayer_StartGame;
     public struct RunnerPlayerActions
     {
         private @Player m_Wrapper;
         public RunnerPlayerActions(@Player wrapper) { m_Wrapper = wrapper; }
         public InputAction @PrimaryContact => m_Wrapper.m_RunnerPlayer_PrimaryContact;
         public InputAction @PrimaryPosition => m_Wrapper.m_RunnerPlayer_PrimaryPosition;
+        public InputAction @StartGame => m_Wrapper.m_RunnerPlayer_StartGame;
         public InputActionMap Get() { return m_Wrapper.m_RunnerPlayer; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -396,6 +408,9 @@ public partial class @Player: IInputActionCollection2, IDisposable
             @PrimaryPosition.started += instance.OnPrimaryPosition;
             @PrimaryPosition.performed += instance.OnPrimaryPosition;
             @PrimaryPosition.canceled += instance.OnPrimaryPosition;
+            @StartGame.started += instance.OnStartGame;
+            @StartGame.performed += instance.OnStartGame;
+            @StartGame.canceled += instance.OnStartGame;
         }
 
         private void UnregisterCallbacks(IRunnerPlayerActions instance)
@@ -406,6 +421,9 @@ public partial class @Player: IInputActionCollection2, IDisposable
             @PrimaryPosition.started -= instance.OnPrimaryPosition;
             @PrimaryPosition.performed -= instance.OnPrimaryPosition;
             @PrimaryPosition.canceled -= instance.OnPrimaryPosition;
+            @StartGame.started -= instance.OnStartGame;
+            @StartGame.performed -= instance.OnStartGame;
+            @StartGame.canceled -= instance.OnStartGame;
         }
 
         public void RemoveCallbacks(IRunnerPlayerActions instance)
@@ -569,6 +587,7 @@ public partial class @Player: IInputActionCollection2, IDisposable
     {
         void OnPrimaryContact(InputAction.CallbackContext context);
         void OnPrimaryPosition(InputAction.CallbackContext context);
+        void OnStartGame(InputAction.CallbackContext context);
     }
     public interface IFlappyPlayerActions
     {
