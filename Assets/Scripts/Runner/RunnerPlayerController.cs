@@ -172,13 +172,6 @@ public class RunnerPlayerController : MonoBehaviour
                 controller.Move(diff);
             }
         }
-
-        // if powerup is done, will destory the buff VFX
-        if (Powerups.Instance.powerupDone)
-        {
-            Destroy(currentBuff);
-            Powerups.Instance.powerupDone = false;
-        }
     }
 
     // ensures the player is moving at a fixed amount
@@ -195,12 +188,10 @@ public class RunnerPlayerController : MonoBehaviour
     {
         if (hit.transform.tag == "Object")
         {
-
             SoundManager.Instance.Play(hitSound);
             // if player has shield powerup, he does not die and enters invulnerable state
             if (Powerups.Instance.shieldPickedUp)
             {
-                Destroy(currentBuff);
                 StartCoroutine(Powerups.Instance.PlayerBlink(0.1f));
                 Debug.Log("Shielded!");
                 StartCoroutine(Invulnerable(2f));
@@ -236,9 +227,8 @@ public class RunnerPlayerController : MonoBehaviour
             Coin coin = other.gameObject.GetComponent<Coin>();
             coin.CoinScored();
         }
-        else if (other.tag == "Multiplier" && !Powerups.Instance.hasPowerup)
+        else if (other.tag == "Multiplier")
         {
-            Powerups.Instance.hasPowerup = true;
 
             Multiplier multiplier = other.gameObject.GetComponent<Multiplier>();
 
@@ -249,9 +239,8 @@ public class RunnerPlayerController : MonoBehaviour
             multiplier.MultiplyBuff();
 
         }
-        else if (other.tag == "Magnet" && !Powerups.Instance.hasPowerup)
+        else if (other.tag == "Magnet")
         {
-            Powerups.Instance.hasPowerup = true;
 
             Magnet magnet = other.gameObject.GetComponent<Magnet>();
 
@@ -261,9 +250,8 @@ public class RunnerPlayerController : MonoBehaviour
 
             magnet.MagnetBuff();
         }
-        else if (other.tag == "Shield" && !Powerups.Instance.hasPowerup)
+        else if (other.tag == "Shield")
         {
-            Powerups.Instance.hasPowerup = true;
 
             Shield shield = other.gameObject.GetComponent<Shield>();
 
@@ -273,9 +261,8 @@ public class RunnerPlayerController : MonoBehaviour
 
             shield.ShieldBuff();
         }
-        else if (other.tag == "Speed" && !Powerups.Instance.hasPowerup)
+        else if (other.tag == "Speed")
         {
-            Powerups.Instance.hasPowerup = true;
 
             StartCoroutine(Invulnerable(Powerups.Instance.speedLength));
             Speed speed = other.gameObject.GetComponent<Speed>();
