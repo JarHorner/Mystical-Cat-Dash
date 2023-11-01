@@ -13,11 +13,17 @@ public class Multiplier : MonoBehaviour
         SoundManager.Instance.Play(collectPowerupSound);
 
         // shows the buff symbol on the screen
-        GameUI.Instance.powerupImage.sprite = multiplySprite;
-        GameUI.Instance.powerupImage.enabled = true;
+        GameUI.Instance.powerupImages[0].enabled = true;
 
         Powerups.Instance.currentMultiplierTime = Powerups.Instance.multiplierLength;
         Powerups.Instance.multiplyPickedUp = true;
+
+        Destroy(this.gameObject);
+    }
+
+    public void ExtendBuff()
+    {
+        Powerups.Instance.currentMultiplierTime = Powerups.Instance.multiplierLength;
 
         Destroy(this.gameObject);
     }

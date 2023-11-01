@@ -16,12 +16,17 @@ public class Speed : MonoBehaviour
         SoundManager.Instance.Play(speedUpSound);
 
         // shows the buff symbol on the screen
-        GameUI.Instance.powerupImage.sprite = speedSprite;
-        GameUI.Instance.powerupImage.gameObject.transform.localScale = new Vector3(1.5f, 2f, 1);
-        GameUI.Instance.powerupImage.enabled = true;
+        GameUI.Instance.powerupImages[3].enabled = true;
 
         Powerups.Instance.currentSpeedTime = Powerups.Instance.speedLength;
         Powerups.Instance.speedPickedUp = true;
+
+        Destroy(this.gameObject);
+    }
+
+    public void ExtendBuff()
+    {
+        Powerups.Instance.currentSpeedTime = Powerups.Instance.speedLength;
 
         Destroy(this.gameObject);
     }

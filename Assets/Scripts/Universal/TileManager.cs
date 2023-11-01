@@ -8,7 +8,7 @@ public class TileManager : MonoBehaviour
     public GameObject swapGameTile;
     public int swapGameTileSpawnNum;
     public float zSpawn = 0;
-    public float tileLength = 20;
+    public float tileLength = 30;
     public int numOfTiles = 5;
     public int tilesSpawnedUntilPortal = 0;
     private List<GameObject> activeTiles = new List<GameObject>();

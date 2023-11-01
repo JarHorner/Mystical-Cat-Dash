@@ -23,6 +23,7 @@ public class RunnerPlayerController : MonoBehaviour
     private Vector2 currentPos => primaryPosition.ReadValue<Vector2>();
 
     [SerializeField] private CharacterController controller;
+    [SerializeField] private PowerupSpawner powerupSpawner;
     [SerializeField] private AudioClip hitSound;
     [SerializeField] private AudioClip swapLaneSound;
     [SerializeField] private AudioClip jumpSound;
@@ -33,6 +34,7 @@ public class RunnerPlayerController : MonoBehaviour
     public float gravity = -20;
     private bool hitPortal = false;
     public GameObject currentBuff;
+    private IEnumerator invulIEnumerator;
 
     void Awake()
     {
@@ -62,6 +64,7 @@ public class RunnerPlayerController : MonoBehaviour
             animator.SetBool("Run", true);
         }
         controller = GetComponent<CharacterController>();
+        powerupSpawner = GameObject.Find("PowerupSpawner").GetComponent<PowerupSpawner>();
         Time.timeScale = 1;
     }
 
@@ -227,51 +230,84 @@ public class RunnerPlayerController : MonoBehaviour
             Coin coin = other.gameObject.GetComponent<Coin>();
             coin.CoinScored();
         }
+        else if (other.tag == "PowerupSpawn")
+        {
+            powerupSpawner.DeterminePowerupSpawn();
+        }
         else if (other.tag == "Multiplier")
         {
-
             Multiplier multiplier = other.gameObject.GetComponent<Multiplier>();
+            if (!Powerups.Instance.multiplyPickedUp)
+            {
+                // gives the buff VFX to the player
+                multiplier.gameObject.transform.GetChild(0).parent = this.gameObject.transform;
+                currentBuff = this.transform.GetChild(2).gameObject;
 
-            // gives the buff VFX to the player
-            multiplier.gameObject.transform.GetChild(0).parent = this.gameObject.transform;
-            currentBuff = this.transform.GetChild(2).gameObject;
-
-            multiplier.MultiplyBuff();
+                multiplier.MultiplyBuff();
+            }
+            else
+            {
+                multiplier.ExtendBuff();
+            }
 
         }
         else if (other.tag == "Magnet")
         {
-
             Magnet magnet = other.gameObject.GetComponent<Magnet>();
 
-            // gives the buff VFX to the player
-            magnet.gameObject.transform.GetChild(0).parent = this.gameObject.transform;
-            currentBuff = this.transform.GetChild(2).gameObject;
+            if (!Powerups.Instance.magnetPickedUp)
+            {
+                // gives the buff VFX to the player
+                magnet.gameObject.transform.GetChild(0).parent = this.gameObject.transform;
+                currentBuff = this.transform.GetChild(2).gameObject;
 
-            magnet.MagnetBuff();
+                magnet.MagnetBuff();
+            }
+            else
+            {
+                magnet.ExtendBuff();
+            }
         }
         else if (other.tag == "Shield")
         {
-
             Shield shield = other.gameObject.GetComponent<Shield>();
 
-            // gives the buff VFX to the player
-            shield.gameObject.transform.GetChild(0).parent = this.gameObject.transform;
-            currentBuff = this.transform.GetChild(2).gameObject;
+            if (!Powerups.Instance.shieldPickedUp)
+            {
+                // gives the buff VFX to the player
+                shield.gameObject.transform.GetChild(0).parent = this.gameObject.transform;
+                currentBuff = this.transform.GetChild(2).gameObject;
 
-            shield.ShieldBuff();
+                shield.ShieldBuff();
+            }
+            else
+            {
+                shield.ExtendBuff();
+            }
         }
         else if (other.tag == "Speed")
         {
-
-            StartCoroutine(Invulnerable(Powerups.Instance.speedLength));
             Speed speed = other.gameObject.GetComponent<Speed>();
+            invulIEnumerator = Invulnerable(Powerups.Instance.speedLength);
 
-            // gives the buff VFX to the player
-            speed.gameObject.transform.GetChild(0).parent = this.gameObject.transform;
-            currentBuff = this.transform.GetChild(2).gameObject;
+            if (!Powerups.Instance.speedPickedUp)
+            {
+                invulIEnumerator = Invulnerable(Powerups.Instance.speedLength);
+                StartCoroutine(invulIEnumerator);
+                // gives the buff VFX to the player
+                speed.gameObject.transform.GetChild(0).parent = this.gameObject.transform;
+                currentBuff = this.transform.GetChild(2).gameObject;
 
-            speed.SpeedBuff();
+                speed.SpeedBuff();
+            }
+            else
+            {
+                StopCoroutine(invulIEnumerator);
+
+                invulIEnumerator = Invulnerable(Powerups.Instance.speedLength);
+                StartCoroutine(invulIEnumerator);
+                speed.ExtendBuff();
+            }
         }
     }
 

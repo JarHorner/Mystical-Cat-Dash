@@ -13,9 +13,7 @@ public class Shield : MonoBehaviour
         SoundManager.Instance.Play(collectPowerupSound);
 
         // shows the buff symbol on the screen
-        GameUI.Instance.powerupImage.sprite = shieldSprite;
-        GameUI.Instance.powerupImage.gameObject.transform.localScale = new Vector3(1.25f, 1.25f, 1f);
-        GameUI.Instance.powerupImage.enabled = true;
+        GameUI.Instance.powerupImages[2].enabled = true;
 
         Powerups.Instance.currentShieldTime = Powerups.Instance.shieldLength;
         Powerups.Instance.shieldPickedUp = true;
@@ -23,4 +21,10 @@ public class Shield : MonoBehaviour
         Destroy(this.gameObject);
     }
 
+    public void ExtendBuff()
+    {
+        Powerups.Instance.currentShieldTime = Powerups.Instance.shieldLength;
+
+        Destroy(this.gameObject);
+    }
 }

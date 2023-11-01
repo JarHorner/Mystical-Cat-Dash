@@ -13,8 +13,7 @@ public class Magnet : MonoBehaviour
         SoundManager.Instance.Play(collectPowerupSound);
 
         // shows the buff symbol on the screen
-        GameUI.Instance.powerupImage.sprite = magnetSprite;
-        GameUI.Instance.powerupImage.enabled = true;
+        GameUI.Instance.powerupImages[1].enabled = true;
 
         Powerups.Instance.currentMagnetTime = Powerups.Instance.magnetLength;
         Powerups.Instance.magnetPickedUp = true;
@@ -22,4 +21,10 @@ public class Magnet : MonoBehaviour
         Destroy(this.gameObject);
     }
 
+    public void ExtendBuff()
+    {
+        Powerups.Instance.currentMagnetTime = Powerups.Instance.magnetLength;
+
+        Destroy(this.gameObject);
+    }
 }

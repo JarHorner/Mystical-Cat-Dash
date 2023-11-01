@@ -111,8 +111,8 @@ public class MainMenu : MonoBehaviour
             case "Coin":
                 Application.OpenURL("https://skfb.ly/oqGSQ");
                 break;
-            case "Running Cat":
-                Application.OpenURL("https://www.clipartmax.com/middle/m2K9A0A0K9K9m2b1_clipart-cat-running-cats-free-stock-photo-illustration-cat-running-clip-art/");
+            case "Running Man":
+                Application.OpenURL("https://www.vecteezy.com/vector-art/12742199-running-vector-icon");
                 break;
             case "Shield":
                 Application.OpenURL("https://pngtree.com/so/shield");

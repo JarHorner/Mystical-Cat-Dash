@@ -10,7 +10,7 @@ public class GameUI : MonoBehaviour
     public static GameUI Instance { get; private set; }
 
     public GameObject score;
-    public Image powerupImage;
+    public Image[] powerupImages; // 0 = Multiplier, 1 = Magnet, 2 = Shield, 3 = Speed
     public GameObject gameOverScore;
     public GameObject pauseButton;
     public GameObject gameOverPanel;
@@ -29,6 +29,14 @@ public class GameUI : MonoBehaviour
         else
         {
             Destroy(gameObject);
+        }
+    }
+
+    public void DisablePowerupImages()
+    {
+        for (int i = 0; i < powerupImages.Length; i++)
+        {
+            powerupImages[i].enabled = false;
         }
     }
 }

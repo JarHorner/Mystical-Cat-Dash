@@ -11,6 +11,7 @@ public class Powerups : MonoBehaviour
     [SerializeField] private SkinnedMeshRenderer playerMesh;
     [SerializeField] private float powerupAlmostDoneTimer = 2f; // used to determine when to blink and for how long
     public bool powerupAlmostDone = false; // used to start the blink coroutine
+    public bool hasPowerup = false; // used to manage having multiple powerups
 
     // Multiplier powerup variables
     [SerializeField] private GameObject multiplyBuff;
@@ -73,7 +74,7 @@ public class Powerups : MonoBehaviour
                 multiplyPickedUp = false;
                 powerupAlmostDone = false;
 
-                GameUI.Instance.powerupImage.enabled = false;
+                GameUI.Instance.powerupImages[0].enabled = false;
 
                 currentMultiplierTime = 0;
             }
@@ -88,7 +89,7 @@ public class Powerups : MonoBehaviour
 
                 magnetPickedUp = false;
 
-                GameUI.Instance.powerupImage.enabled = false;
+                GameUI.Instance.powerupImages[1].enabled = false;
 
                 currentMagnetTime = 0;
             }
@@ -103,8 +104,7 @@ public class Powerups : MonoBehaviour
 
                 shieldPickedUp = false;
 
-                GameUI.Instance.powerupImage.enabled = false;
-                GameUI.Instance.powerupImage.gameObject.transform.localScale = new Vector3(1f, 1f, 1f);
+                GameUI.Instance.powerupImages[2].enabled = false;
 
                 currentShieldTime = 0;
             }
@@ -126,8 +126,7 @@ public class Powerups : MonoBehaviour
                 speedPickedUp = false;
                 powerupAlmostDone = false;
 
-                GameUI.Instance.powerupImage.enabled = false;
-                GameUI.Instance.powerupImage.gameObject.transform.localScale = new Vector3(1f, 1f, 1f);
+                GameUI.Instance.powerupImages[3].enabled = false;
 
                 currentSpeedTime = 0;
             }

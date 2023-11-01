@@ -67,12 +67,13 @@ public class Tween : MonoBehaviour
                 GameManager.Instance.loadedInto2DWorld = true;
                 GameManager.Instance.timesEntered2DWorld++;
 
-                GameUI.Instance.powerupImage.enabled = false;
 
                 Powerups.Instance.multiplyPickedUp = false;
                 Powerups.Instance.magnetPickedUp = false;
                 Powerups.Instance.shieldPickedUp = false;
                 Powerups.Instance.speedPickedUp = false;
+
+                GameUI.Instance.DisablePowerupImages();
 
                 SceneManager.LoadScene("Flappy");
             }
@@ -113,7 +114,8 @@ public class Tween : MonoBehaviour
             Destroy(GameManager.Instance.gameObject);
 
             GameUI.Instance.score.GetComponent<TMP_Text>().text = "000";
-            GameUI.Instance.powerupImage.enabled = false;
+
+            GameUI.Instance.DisablePowerupImages();
 
             SceneManager.LoadScene("Runner");
         });
@@ -130,7 +132,9 @@ public class Tween : MonoBehaviour
             Destroy(GameManager.Instance.gameObject);
 
             GameUI.Instance.score.GetComponent<TMP_Text>().text = "000";
-            GameUI.Instance.powerupImage.enabled = false;
+
+
+            GameUI.Instance.DisablePowerupImages();
             GameUI.Instance.pauseButton.SetActive(false);
             GameUI.Instance.score.transform.parent.gameObject.SetActive(false);
             GameUI.Instance.gameOverPanel.SetActive(false);
