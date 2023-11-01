@@ -101,6 +101,7 @@ public class Powerups : MonoBehaviour
         if (shieldPickedUp)
         {
             currentShieldTime -= Time.deltaTime;
+            
             if (currentShieldTime <= 0)
             {
                 destroyShieldVFX = true;
@@ -126,7 +127,7 @@ public class Powerups : MonoBehaviour
             if (currentSpeedTime <= 0)
             {
                 destroySpeedVFX = true;
-                
+
                 speedPickedUp = false;
                 powerupAlmostDone = false;
 
