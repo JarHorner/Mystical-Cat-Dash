@@ -1307,7 +1307,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b4dfc7132df57745a7dc7ecc7540b4a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  clearedPointsWorth: 1000
+  clearedPointsWorth: 500
 --- !u!114 &1361320829338407934
 MonoBehaviour:
   m_ObjectHideFlags: 0

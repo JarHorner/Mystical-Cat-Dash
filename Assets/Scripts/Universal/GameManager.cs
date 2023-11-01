@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
     public int calculatedScore = 0;
+    public int pointsPerSecond = 50;
     public int timesEntered2DWorld = 0;
     public float forwardSpeed = 10f;
     public float maximumForwardSpeed = 20f;
@@ -19,7 +20,6 @@ public class GameManager : MonoBehaviour
     public bool gameOverMenuOpen = false;
     public bool isGameStarted = false;
     private GameUI gameUI;
-    [SerializeField] private Powerups powerups;
     [SerializeField] private AudioClip gameOverSound;
     [SerializeField] private AudioClip enterPortalSound;
     [SerializeField] private AudioClip gameMusic;
@@ -101,7 +101,7 @@ public class GameManager : MonoBehaviour
     {
         if (countdownToPointGain >= 1)
         {
-            Scored(100);
+            Scored(pointsPerSecond);
             countdownToPointGain = 0;
         }
     }
@@ -109,10 +109,10 @@ public class GameManager : MonoBehaviour
     // adds score to calculated score based on if the player has a multiplier power or not
     public void Scored(int pointsWorth)
     {
-        if (!powerups.multiplyPickedUp)
+        if (!Powerups.Instance.multiplyPickedUp)
             calculatedScore += pointsWorth;
         else
-            calculatedScore += (pointsWorth * powerups.multiplyValue);
+            calculatedScore += (pointsWorth * Powerups.Instance.multiplyValue);
 
         gameUI.score.GetComponent<TMP_Text>().text = calculatedScore.ToString();
     }

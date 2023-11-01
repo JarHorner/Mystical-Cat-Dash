@@ -1,0 +1,66 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &5020923067870002625
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3967899791113323705}
+  - component: {fileID: 8869869082020133624}
+  m_Layer: 0
+  m_Name: Powerups
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3967899791113323705
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5020923067870002625}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 540, y: 960, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8869869082020133624
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5020923067870002625}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93d90f5b777dc4a4e94c99d10e1f2ab3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  runnerPlayer: {fileID: 0}
+  multiplyBuff: {fileID: 8515289557347081945, guid: 73cce168cb1d0ec4c84deb838c11f916, type: 3}
+  multiplierLength: 20
+  multiplyValue: 2
+  currentMultiplierTime: 0
+  multiplyPickedUp: 0
+  magnetBuff: {fileID: 4042660625502987984, guid: 13337154a8ad1724e99ee52e5b2d6333, type: 3}
+  magnetLength: 20
+  magnetSize: 10
+  currentMagnetTime: 0
+  magnetPickedUp: 0
+  shieldBuff: {fileID: 782431648164839485, guid: b345ace19c455c74c94620f2e2e01e49, type: 3}
+  shieldLength: 30
+  currentShieldTime: 0
+  shieldPickedUp: 0
+  speedBuff: {fileID: 6746150071461298513, guid: 6c71f9c657d53d648bc2ecc96e46a463, type: 3}
+  speedLength: 5
+  speedValue: 2
+  currentSpeedTime: 0
+  speedPickedUp: 0

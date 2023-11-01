@@ -18,6 +18,7 @@ public class RunnerPlayerController : MonoBehaviour
     [SerializeField] private InputActionAsset inputMaster;
     private InputAction primaryContact, primaryPosition, shiftLeft, shiftRight, jump, slide;
     public Animator animator;
+    public float playIdleAnimTimer = 6f;
     private Vector2 initialPos;
     private Vector2 currentPos => primaryPosition.ReadValue<Vector2>();
 
@@ -99,6 +100,27 @@ public class RunnerPlayerController : MonoBehaviour
 
     void Update()
     {
+        // when idle, every couple of seconds, an idle animation will play
+        if (currentState == PlayerState.idle)
+        {
+            playIdleAnimTimer -= Time.deltaTime;
+            if (playIdleAnimTimer <= 0)
+            {
+                int randomIdleAnimChoice = Random.Range(0, 2); // 0 or 1
+
+                if (randomIdleAnimChoice == 0)
+                {
+                    animator.SetTrigger("IdleAction");
+                }
+                else if (randomIdleAnimChoice == 1)
+                {
+                    animator.SetTrigger("IdleAction2");
+                }
+                playIdleAnimTimer = 6f;
+            }
+
+        }
+
         // when not idle the game will slowly increase speed until capped
         if ((currentState != PlayerState.idle && currentState != PlayerState.dead) || Powerups.Instance.speedPickedUp)
         {

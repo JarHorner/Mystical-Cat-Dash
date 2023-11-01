@@ -1310,11 +1310,11 @@ MonoBehaviour:
   currentState: 0
   inputMaster: {fileID: -944628639613478452, guid: 97a8dd31ec7c04a41a350e52d0086a16, type: 3}
   animator: {fileID: 2534013830944007244}
+  playIdleAnimTimer: 6
   controller: {fileID: 8405417370364571492}
   hitSound: {fileID: 8300000, guid: e8d89b25d9a25364ab7b1774c38a853f, type: 3}
   swapLaneSound: {fileID: 8300000, guid: 6e8f1015c7b6f834683ef9919e0dc9ab, type: 3}
   jumpSound: {fileID: 8300000, guid: 3e04f0232798a774a8bcf578408e4f4c, type: 3}
-  enterPortalSound: {fileID: 8300000, guid: 37ecbd0cd5fc3dd4f9abc6b7b7240323, type: 3}
   desiredLane: 1
   laneDistance: 2
   jumpForce: 10

@@ -4,9 +4,9 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
 
-public class Events : MonoBehaviour
+public class InGameMenus : MonoBehaviour
 {
-    public static Events Instance { get; private set; }
+    public static InGameMenus Instance { get; private set; }
     [SerializeField] private AudioClip buttonPress;
     private bool pauseGame = false;
 
