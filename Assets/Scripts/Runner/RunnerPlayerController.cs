@@ -33,7 +33,10 @@ public class RunnerPlayerController : MonoBehaviour
     public float jumpForce;
     public float gravity = -20;
     private bool hitPortal = false;
-    public GameObject currentBuff;
+    public GameObject multiplierBuffVFX;
+    public GameObject magnetBuffVFX;
+    public GameObject shieldBuffVFX;
+    public GameObject speedBuffVFX;
     private IEnumerator invulIEnumerator;
 
     void Awake()
@@ -104,6 +107,28 @@ public class RunnerPlayerController : MonoBehaviour
 
     void Update()
     {
+        if (Powerups.Instance.destroyMultiplierVFX)
+        {
+            Powerups.Instance.destroyMultiplierVFX = false;
+            Destroy(multiplierBuffVFX);
+        }
+        else if (Powerups.Instance.destroyMagnetVFX)
+        {
+            Powerups.Instance.destroyMagnetVFX = false;
+            Destroy(magnetBuffVFX);
+        }
+        else if (Powerups.Instance.destroyShieldVFX)
+        {
+            Powerups.Instance.destroyShieldVFX = false;
+            Destroy(shieldBuffVFX);
+        }
+        else if (Powerups.Instance.destroySpeedVFX)
+        {
+            Powerups.Instance.destroySpeedVFX = false;
+            Destroy(speedBuffVFX);
+        }
+
+
         // when idle, every couple of seconds, an idle animation will play
         if (currentState == PlayerState.idle)
         {
@@ -240,8 +265,8 @@ public class RunnerPlayerController : MonoBehaviour
             if (!Powerups.Instance.multiplyPickedUp)
             {
                 // gives the buff VFX to the player
+                multiplierBuffVFX = multiplier.gameObject.transform.GetChild(0).gameObject;
                 multiplier.gameObject.transform.GetChild(0).parent = this.gameObject.transform;
-                currentBuff = this.transform.GetChild(2).gameObject;
 
                 multiplier.MultiplyBuff();
             }
@@ -258,8 +283,8 @@ public class RunnerPlayerController : MonoBehaviour
             if (!Powerups.Instance.magnetPickedUp)
             {
                 // gives the buff VFX to the player
+                magnetBuffVFX = magnet.gameObject.transform.GetChild(0).gameObject;
                 magnet.gameObject.transform.GetChild(0).parent = this.gameObject.transform;
-                currentBuff = this.transform.GetChild(2).gameObject;
 
                 magnet.MagnetBuff();
             }
@@ -275,8 +300,8 @@ public class RunnerPlayerController : MonoBehaviour
             if (!Powerups.Instance.shieldPickedUp)
             {
                 // gives the buff VFX to the player
+                shieldBuffVFX = shield.gameObject.transform.GetChild(0).gameObject;
                 shield.gameObject.transform.GetChild(0).parent = this.gameObject.transform;
-                currentBuff = this.transform.GetChild(2).gameObject;
 
                 shield.ShieldBuff();
             }
@@ -295,8 +320,8 @@ public class RunnerPlayerController : MonoBehaviour
                 invulIEnumerator = Invulnerable(Powerups.Instance.speedLength);
                 StartCoroutine(invulIEnumerator);
                 // gives the buff VFX to the player
+                speedBuffVFX = speed.gameObject.transform.GetChild(0).gameObject;
                 speed.gameObject.transform.GetChild(0).parent = this.gameObject.transform;
-                currentBuff = this.transform.GetChild(2).gameObject;
 
                 speed.SpeedBuff();
             }

@@ -11,7 +11,6 @@ public class Powerups : MonoBehaviour
     [SerializeField] private SkinnedMeshRenderer playerMesh;
     [SerializeField] private float powerupAlmostDoneTimer = 2f; // used to determine when to blink and for how long
     public bool powerupAlmostDone = false; // used to start the blink coroutine
-    public bool hasPowerup = false; // used to manage having multiple powerups
 
     // Multiplier powerup variables
     [SerializeField] private GameObject multiplyBuff;
@@ -19,6 +18,7 @@ public class Powerups : MonoBehaviour
     public int multiplyValue = 2;
     public float currentMultiplierTime;
     public bool multiplyPickedUp = false;
+    public bool destroyMultiplierVFX = false;
 
     // Magnet powerup variables    
     [SerializeField] private GameObject magnetBuff;
@@ -26,6 +26,7 @@ public class Powerups : MonoBehaviour
     public float magnetSize = 10;
     public float currentMagnetTime;
     public bool magnetPickedUp = false;
+    public bool destroyMagnetVFX = false;
 
 
     // Shield powerup variables
@@ -33,6 +34,7 @@ public class Powerups : MonoBehaviour
     public float shieldLength;
     public float currentShieldTime;
     public bool shieldPickedUp = false;
+    public bool destroyShieldVFX = false;
 
     // Speed powerup variables
     [SerializeField] private GameObject speedBuff;
@@ -40,6 +42,7 @@ public class Powerups : MonoBehaviour
     public int speedValue = 2;
     public float currentSpeedTime;
     public bool speedPickedUp = false;
+    public bool destroySpeedVFX = false;
 
     private void Awake()
     {
@@ -69,7 +72,7 @@ public class Powerups : MonoBehaviour
 
             if (currentMultiplierTime <= 0)
             {
-                Destroy(runnerPlayer.transform.GetChild(2).gameObject);
+                destroyMultiplierVFX = true;
 
                 multiplyPickedUp = false;
                 powerupAlmostDone = false;
@@ -85,7 +88,7 @@ public class Powerups : MonoBehaviour
             currentMagnetTime -= Time.deltaTime;
             if (currentMagnetTime <= 0)
             {
-                Destroy(runnerPlayer.transform.GetChild(2).gameObject);
+                destroyMagnetVFX = true;
 
                 magnetPickedUp = false;
 
@@ -100,7 +103,7 @@ public class Powerups : MonoBehaviour
             currentShieldTime -= Time.deltaTime;
             if (currentShieldTime <= 0)
             {
-                Destroy(runnerPlayer.transform.GetChild(2).gameObject);
+                destroyShieldVFX = true;
 
                 shieldPickedUp = false;
 
@@ -122,7 +125,8 @@ public class Powerups : MonoBehaviour
 
             if (currentSpeedTime <= 0)
             {
-                Destroy(runnerPlayer.transform.GetChild(2).gameObject);
+                destroySpeedVFX = true;
+                
                 speedPickedUp = false;
                 powerupAlmostDone = false;
 
