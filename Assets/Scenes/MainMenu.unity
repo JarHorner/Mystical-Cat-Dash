@@ -4640,7 +4640,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Flappy Runner
+  m_text: Mystical Cat Dash
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: dcc7d7d9f9397834a8c9aa5cbca95093, type: 2}
   m_sharedMaterial: {fileID: -6128795908488516109, guid: dcc7d7d9f9397834a8c9aa5cbca95093, type: 2}
