@@ -39,7 +39,6 @@ public class Coin : MonoBehaviour
         SoundManager.Instance.Play(collectCoinSound);
         GameManager.Instance.Scored(pointsWorth);
 
-        Debug.Log("Coin Collected");
         Destroy(this.gameObject);
     }
 

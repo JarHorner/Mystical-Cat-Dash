@@ -66,7 +66,6 @@ public class FlappyPlayerController : MonoBehaviour
     {
         if (collision.gameObject.tag == "OutOfBounds" || collision.gameObject.tag == "Object")
         {
-            Debug.Log("Dying");
             this.GetComponent<BoxCollider2D>().enabled = false;
             StartCoroutine(Death());
         }
@@ -85,7 +84,6 @@ public class FlappyPlayerController : MonoBehaviour
         if (!GameManager.Instance.gameOver && context.performed)
         {
             SoundManager.Instance.Play(flapSound);
-            Debug.Log("JUMP!");
             anim.SetTrigger("Flap");
 
             direction = Vector3.up * flapStrength;

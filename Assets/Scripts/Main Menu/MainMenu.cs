@@ -16,13 +16,6 @@ public class MainMenu : MonoBehaviour
     [SerializeField] private RectTransform fader;
     [SerializeField] private AudioClip buttonPress;
 
-
-    void Start()
-    {
-        // Limit the framerate to 60
-        Application.targetFrameRate = 60;
-    }
-    
     void Update()
     {
         if (Tween.Instance.backToMainMenu)

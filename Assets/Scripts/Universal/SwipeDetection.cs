@@ -4,7 +4,7 @@ using UnityEngine.SceneManagement;
 
 public class SwipeDetection : MonoBehaviour
 {
-    [SerializeField] private float minimumDistance = 0.2f;
+    [SerializeField] private float minimumDistance = 0.1f;
     [SerializeField] private float maximumTime = 1f;
     [SerializeField, Range(0f, 1f)] private float directionThreshhold = 0.9f;
     [SerializeField] private Vector2 startPosition;
@@ -55,7 +55,6 @@ public class SwipeDetection : MonoBehaviour
         (endTime - startTime) <= maximumTime)
         {
             Debug.Log("Swipe Detected");
-            Debug.DrawLine(startPosition, endPosition, Color.red, 5f);
             Vector3 direction = endPosition - startPosition;
             Vector2 direction2D = new Vector2(direction.x, direction.y).normalized;
             SwipeDirection(direction2D);

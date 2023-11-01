@@ -44,7 +44,6 @@ public class InputManager : MonoBehaviour
 
     void OnEnable()
     {
-        Debug.Log("enable");
         primaryPosition.Enable();
         primaryContact.Enable();
         primaryContact.started += ctx => StartTouchPrimary(ctx);
@@ -57,7 +56,6 @@ public class InputManager : MonoBehaviour
 
     void OnDisable()
     {
-        Debug.Log("disable");
         if (!removing)
         {
             primaryContact.started -= ctx => StartTouchPrimary(ctx);

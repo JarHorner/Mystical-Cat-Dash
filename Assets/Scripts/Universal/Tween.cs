@@ -25,8 +25,6 @@ public class Tween : MonoBehaviour
 
     public void TweenEnd()
     {
-        Debug.Log("Tween end");
-
         // uses LeanTween to fade in at the start of the game.
         GameUI.Instance.fader.gameObject.SetActive(true);
         LeanTween.scale(GameUI.Instance.fader, new Vector3(1.1f, 1.1f, 1.1f), 0);
@@ -53,7 +51,6 @@ public class Tween : MonoBehaviour
 
     public void TweenBetweenScenes()
     {
-        Debug.Log("Tween between scenes");
         Scene scene = SceneManager.GetActiveScene();
 
         GameUI.Instance.portalFader.gameObject.SetActive(true);
@@ -88,8 +85,6 @@ public class Tween : MonoBehaviour
 
     public void TweenInNewScene()
     {
-        Debug.Log("Tween New Scene");
-
         // uses LeanTween to fade in at the start of the game.
         GameUI.Instance.portalFader.gameObject.SetActive(true);
         LeanTween.rotate(GameUI.Instance.portalFader, 360f, 0.5f);
@@ -104,8 +99,6 @@ public class Tween : MonoBehaviour
 
     public void TweenReplayGame()
     {
-        Debug.Log("Tween replay game");
-
         // uses LeanTween to fade in at the start of the game.
         GameUI.Instance.fader.gameObject.SetActive(true);
         LeanTween.scale(GameUI.Instance.fader, Vector3.zero, 0);
@@ -123,8 +116,6 @@ public class Tween : MonoBehaviour
 
     public void TweenMainMenu()
     {
-        Debug.Log("Tween Main Menu");
-
         GameUI.Instance.fader.gameObject.SetActive(true);
         LeanTween.scale(GameUI.Instance.fader, Vector3.zero, 0);
         LeanTween.scale(GameUI.Instance.fader, new Vector3(1.5f, 1.5f, 1.5f), 0.5f).setOnComplete(() =>

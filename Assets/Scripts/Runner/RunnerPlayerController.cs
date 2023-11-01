@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEditor.Animations;
 
 public enum PlayerState
 {
@@ -16,7 +15,7 @@ public class RunnerPlayerController : MonoBehaviour
 {
     public PlayerState currentState;
     [SerializeField] private InputActionAsset inputMaster;
-    private InputAction primaryContact, primaryPosition, shiftLeft, shiftRight, jump, slide;
+    private InputAction primaryContact, primaryPosition;
     public Animator animator;
     public float playIdleAnimTimer = 6f;
     private Vector2 initialPos;
@@ -46,10 +45,6 @@ public class RunnerPlayerController : MonoBehaviour
 
         primaryContact = playerActionMap.FindAction("PrimaryContact");
         primaryPosition = playerActionMap.FindAction("PrimaryPosition");
-        shiftLeft = playerActionMap.FindAction("ShiftLeft");
-        shiftRight = playerActionMap.FindAction("ShiftRight");
-        jump = playerActionMap.FindAction("Jump");
-        slide = playerActionMap.FindAction("Slide");
 
         hitPortal = false;
     }
@@ -71,64 +66,8 @@ public class RunnerPlayerController : MonoBehaviour
         Time.timeScale = 1;
     }
 
-    // enables all the actions
-    private void OnEnable()
-    {
-        shiftLeft.Enable();
-        shiftLeft.performed += ShiftLeft;
-
-        shiftRight.Enable();
-        shiftRight.performed += ShiftRight;
-
-        jump.Enable();
-        jump.performed += Jump;
-
-        slide.Enable();
-        slide.performed += Slide;
-    }
-
-    // disables all the actions
-    void OnDisable()
-    {
-        shiftLeft.performed -= ShiftLeft;
-        shiftLeft.Disable();
-
-        shiftRight.performed -= ShiftRight;
-        shiftRight.Disable();
-
-        jump.performed -= Jump;
-        jump.Disable();
-
-        slide.performed -= Slide;
-        slide.Disable();
-
-        Debug.Log("Player deleted");
-    }
-
     void Update()
     {
-        if (Powerups.Instance.destroyMultiplierVFX)
-        {
-            Powerups.Instance.destroyMultiplierVFX = false;
-            Destroy(multiplierBuffVFX);
-        }
-        else if (Powerups.Instance.destroyMagnetVFX)
-        {
-            Powerups.Instance.destroyMagnetVFX = false;
-            Destroy(magnetBuffVFX);
-        }
-        else if (Powerups.Instance.destroyShieldVFX)
-        {
-            Powerups.Instance.destroyShieldVFX = false;
-            Destroy(shieldBuffVFX);
-        }
-        else if (Powerups.Instance.destroySpeedVFX)
-        {
-            Powerups.Instance.destroySpeedVFX = false;
-            Destroy(speedBuffVFX);
-        }
-
-
         // when idle, every couple of seconds, an idle animation will play
         if (currentState == PlayerState.idle)
         {
@@ -158,6 +97,27 @@ public class RunnerPlayerController : MonoBehaviour
             {
                 GameManager.Instance.forwardSpeed += 0.1f * Time.deltaTime;
             }
+        }
+
+        if (Powerups.Instance.destroyMultiplierVFX)
+        {
+            Powerups.Instance.destroyMultiplierVFX = false;
+            Destroy(multiplierBuffVFX);
+        }
+        else if (Powerups.Instance.destroyMagnetVFX)
+        {
+            Powerups.Instance.destroyMagnetVFX = false;
+            Destroy(magnetBuffVFX);
+        }
+        else if (Powerups.Instance.destroyShieldVFX)
+        {
+            Powerups.Instance.destroyShieldVFX = false;
+            Destroy(shieldBuffVFX);
+        }
+        else if (Powerups.Instance.destroySpeedVFX)
+        {
+            Powerups.Instance.destroySpeedVFX = false;
+            Destroy(speedBuffVFX);
         }
 
         // moves the player along the z axis, speed based on whether player has speed buff
@@ -221,7 +181,6 @@ public class RunnerPlayerController : MonoBehaviour
             if (Powerups.Instance.shieldPickedUp)
             {
                 StartCoroutine(Powerups.Instance.PlayerBlink(0.1f));
-                Debug.Log("Shielded!");
                 StartCoroutine(Invulnerable(2f));
                 Powerups.Instance.currentShieldTime = 0;
             }
@@ -343,14 +302,6 @@ public class RunnerPlayerController : MonoBehaviour
         Physics.IgnoreLayerCollision(6, 7, false);
     }
 
-    private void ShiftLeft(InputAction.CallbackContext context)
-    {
-        if (desiredLane > 0 && currentState != PlayerState.idle)
-        {
-            desiredLane--;
-        }
-    }
-
     // shifts the players lane to the left
     public void SwipeShiftLeft()
     {
@@ -361,15 +312,6 @@ public class RunnerPlayerController : MonoBehaviour
         }
     }
 
-    private void ShiftRight(InputAction.CallbackContext context)
-    {
-
-        if (desiredLane < 2 && currentState != PlayerState.idle)
-        {
-            desiredLane++;
-        }
-    }
-
     // shifts the players lane to the right
     public void SwipeShiftRight()
     {
@@ -377,14 +319,6 @@ public class RunnerPlayerController : MonoBehaviour
         {
             SoundManager.Instance.Play(swapLaneSound);
             desiredLane++;
-        }
-    }
-
-    private void Jump(InputAction.CallbackContext context)
-    {
-        if (controller.isGrounded && context.performed)
-        {
-            direction.y = jumpForce;
         }
     }
 
@@ -401,7 +335,6 @@ public class RunnerPlayerController : MonoBehaviour
 
     private IEnumerator RunnerJump()
     {
-        Debug.Log("Jump!");
         direction.y = jumpForce;
         currentState = PlayerState.jump;
         animator.SetBool("Run", false);
@@ -417,13 +350,6 @@ public class RunnerPlayerController : MonoBehaviour
         }
     }
 
-    private void Slide(InputAction.CallbackContext context)
-    {
-        if (controller.isGrounded)
-        {
-            StartCoroutine(RunnerSlide());
-        }
-    }
 
     // slides the player along the ground
     public void SwipeSlide()
@@ -437,7 +363,6 @@ public class RunnerPlayerController : MonoBehaviour
 
     private IEnumerator RunnerSlide()
     {
-        Debug.Log("Slide!");
         currentState = PlayerState.slide;
         animator.SetBool("Run", false);
         animator.SetTrigger("SleepStart");

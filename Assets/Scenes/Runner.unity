@@ -2248,6 +2248,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 3320795679431575941, guid: 332af6dfa4e7b084ca77ef57d0113f26, type: 3}
+      propertyPath: numOfTiles
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3320795679431575941, guid: 332af6dfa4e7b084ca77ef57d0113f26, type: 3}
       propertyPath: tileLength
       value: 40
       objectReference: {fileID: 0}
@@ -3303,6 +3307,14 @@ PrefabInstance:
     - target: {fileID: 7401247102725445496, guid: f778cfe8196bfd24cac85f37f3c9768e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7480474957044026049, guid: f778cfe8196bfd24cac85f37f3c9768e, type: 3}
+      propertyPath: maximumTime
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7480474957044026049, guid: f778cfe8196bfd24cac85f37f3c9768e, type: 3}
+      propertyPath: minimumDistance
+      value: 0.1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
