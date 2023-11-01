@@ -6,6 +6,7 @@ public class FlappyGameController : MonoBehaviour
 {
     [SerializeField] private GameObject player;
     [SerializeField] private GameObject portal;
+    [SerializeField] private FlappyCamera flappyCamera;
     public bool playerPositioned = false;
     private bool loaded = false;
 
@@ -19,6 +20,7 @@ public class FlappyGameController : MonoBehaviour
     {
         yield return new WaitForSeconds(1f);
         Instantiate(player, new Vector3(-3.5f, 3f, 0f), Quaternion.identity);
+        flappyCamera.cameraMove = true;
         yield return new WaitForSeconds(2f);
         Destroy(portal);
     }

@@ -651,6 +651,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 3129398236194735802, guid: 2106413d652b96b44856c2bc3d0a43be, type: 3}
   portal: {fileID: 917362346}
+  flappyCamera: {fileID: 1936870420}
   playerPositioned: 0
 --- !u!1 &295701667
 GameObject:
@@ -2492,25 +2493,32 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   runnerPlayer: {fileID: 0}
+  playerMesh: {fileID: 0}
+  powerupAlmostDoneTimer: 2
+  powerupAlmostDone: 0
   multiplyBuff: {fileID: 4986265526958573320, guid: c84266e257bc36a4caf028b47e08096b, type: 3}
   multiplierLength: 20
   multiplyValue: 2
   currentMultiplierTime: 0
   multiplyPickedUp: 0
+  destroyMultiplierVFX: 0
   magnetBuff: {fileID: 999629478647861084, guid: cb82268100d69824880f0608b6a8d78a, type: 3}
   magnetLength: 20
   magnetSize: 10
   currentMagnetTime: 0
   magnetPickedUp: 0
+  destroyMagnetVFX: 0
   shieldBuff: {fileID: 4314670640209028044, guid: 1c896c75de4e3ab4c8287d5f8f68cd1e, type: 3}
   shieldLength: 30
   currentShieldTime: 0
   shieldPickedUp: 0
+  destroyShieldVFX: 0
   speedBuff: {fileID: 6875293492743381735, guid: 7fc14290cba989c4d93620b1db6d2af9, type: 3}
   speedLength: 5
   speedValue: 2
   currentSpeedTime: 0
   speedPickedUp: 0
+  destroySpeedVFX: 0
 --- !u!114 &1274006326
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2524,6 +2532,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   calculatedScore: 0
+  pointsPerSecond: 50
   timesEntered2DWorld: 0
   forwardSpeed: 10
   maximumForwardSpeed: 20
@@ -2533,7 +2542,6 @@ MonoBehaviour:
   loadedFrom2DWorld: 0
   gameOverMenuOpen: 0
   isGameStarted: 0
-  powerups: {fileID: 1274006325}
   gameOverSound: {fileID: 8300000, guid: 28167732f75396f4aa5a7c076e1bfc34, type: 3}
   enterPortalSound: {fileID: 8300000, guid: 37ecbd0cd5fc3dd4f9abc6b7b7240323, type: 3}
   gameMusic: {fileID: 8300000, guid: 652c0be956a935a4484d3e404dbd5d5f, type: 3}
@@ -2908,7 +2916,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   score: {fileID: 1879636191}
-  powerupImage: {fileID: 343459592}
+  powerupImages: []
   gameOverScore: {fileID: 1513699032}
   pauseButton: {fileID: 193123666}
   gameOverPanel: {fileID: 295701667}
@@ -3786,6 +3794,7 @@ GameObject:
   - component: {fileID: 1936870419}
   - component: {fileID: 1936870418}
   - component: {fileID: 1936870417}
+  - component: {fileID: 1936870420}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -3861,12 +3870,26 @@ Transform:
   m_GameObject: {fileID: 1936870416}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -10}
+  m_LocalPosition: {x: -3.5, y: 0, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1936870420
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1936870416}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 921a124cdc8a8ec4182ea2aff503ae13, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  flappyGameController: {fileID: 273942741}
+  cameraMove: 0
 --- !u!1 &1983537203
 GameObject:
   m_ObjectHideFlags: 0
