@@ -32,6 +32,7 @@ public class RunnerPlayerController : MonoBehaviour
     public float jumpForce;
     public float gravity = -20;
     private bool hitPortal = false;
+    public GameObject currentBuff;
 
     void Awake()
     {
@@ -172,6 +173,12 @@ public class RunnerPlayerController : MonoBehaviour
             }
         }
 
+        // if powerup is done, will destory the buff VFX
+        if (Powerups.Instance.powerupDone)
+        {
+            Destroy(currentBuff);
+            Powerups.Instance.powerupDone = false;
+        }
     }
 
     // ensures the player is moving at a fixed amount
@@ -193,6 +200,8 @@ public class RunnerPlayerController : MonoBehaviour
             // if player has shield powerup, he does not die and enters invulnerable state
             if (Powerups.Instance.shieldPickedUp)
             {
+                Destroy(currentBuff);
+                StartCoroutine(Powerups.Instance.PlayerBlink(0.1f));
                 Debug.Log("Shielded!");
                 StartCoroutine(Invulnerable(2f));
                 Powerups.Instance.currentShieldTime = 0;
@@ -227,41 +236,53 @@ public class RunnerPlayerController : MonoBehaviour
             Coin coin = other.gameObject.GetComponent<Coin>();
             coin.CoinScored();
         }
-        else if (other.tag == "Multiplier")
+        else if (other.tag == "Multiplier" && !Powerups.Instance.hasPowerup)
         {
+            Powerups.Instance.hasPowerup = true;
+
             Multiplier multiplier = other.gameObject.GetComponent<Multiplier>();
 
             // gives the buff VFX to the player
             multiplier.gameObject.transform.GetChild(0).parent = this.gameObject.transform;
+            currentBuff = this.transform.GetChild(2).gameObject;
 
             multiplier.MultiplyBuff();
 
         }
-        else if (other.tag == "Magnet")
+        else if (other.tag == "Magnet" && !Powerups.Instance.hasPowerup)
         {
+            Powerups.Instance.hasPowerup = true;
+
             Magnet magnet = other.gameObject.GetComponent<Magnet>();
 
             // gives the buff VFX to the player
             magnet.gameObject.transform.GetChild(0).parent = this.gameObject.transform;
+            currentBuff = this.transform.GetChild(2).gameObject;
 
             magnet.MagnetBuff();
         }
-        else if (other.tag == "Shield")
+        else if (other.tag == "Shield" && !Powerups.Instance.hasPowerup)
         {
+            Powerups.Instance.hasPowerup = true;
+
             Shield shield = other.gameObject.GetComponent<Shield>();
 
             // gives the buff VFX to the player
             shield.gameObject.transform.GetChild(0).parent = this.gameObject.transform;
+            currentBuff = this.transform.GetChild(2).gameObject;
 
             shield.ShieldBuff();
         }
-        else if (other.tag == "Speed")
+        else if (other.tag == "Speed" && !Powerups.Instance.hasPowerup)
         {
+            Powerups.Instance.hasPowerup = true;
+
             StartCoroutine(Invulnerable(Powerups.Instance.speedLength));
             Speed speed = other.gameObject.GetComponent<Speed>();
 
             // gives the buff VFX to the player
             speed.gameObject.transform.GetChild(0).parent = this.gameObject.transform;
+            currentBuff = this.transform.GetChild(2).gameObject;
 
             speed.SpeedBuff();
         }

@@ -7,10 +7,11 @@ public class Powerups : MonoBehaviour
 {
     public static Powerups Instance { get; private set; }
 
-    [SerializeField] private GameObject runnerPlayer;
     [SerializeField] private SkinnedMeshRenderer playerMesh;
-    [SerializeField] private float powerupAlmostDoneTimer = 2f;
-    public bool powerupAlmostDone = false;
+    [SerializeField] private float blinkTimer = 2f; // the time when to start blinking the player and how long it the blinking will last
+    public bool powerupAlmostDone = false; // a bool to trigger the blinking 
+    public bool powerupDone = false; // used to determine when the powerup is done, used by RunnerPlayerContoller to destroy the buff
+    public bool hasPowerup = false; // used to ensure player does not pickup multiple powers at once
 
     // Multiplier powerup variables
     [SerializeField] private GameObject multiplyBuff;
@@ -56,20 +57,26 @@ public class Powerups : MonoBehaviour
     void Update()
     {
         // need to ensure the runnerPlayer varible is assigned
-        if (SceneManager.GetActiveScene().name == "Runner" && runnerPlayer == null)
+        if (SceneManager.GetActiveScene().name == "Runner" && playerMesh == null)
         {
-            runnerPlayer = GameObject.FindWithTag("Player");
-            playerMesh = runnerPlayer.transform.GetChild(0).GetComponent<SkinnedMeshRenderer>();
+            playerMesh = GameObject.FindWithTag("Player").transform.GetChild(0).GetComponent<SkinnedMeshRenderer>();
         }
 
         if (multiplyPickedUp)
         {
             currentMultiplierTime -= Time.deltaTime;
 
+
+            if (!powerupAlmostDone && currentMultiplierTime <= blinkTimer)
+            {
+                powerupAlmostDone = true;
+                StartCoroutine(PlayerBlink(0.1f));
+            }
+
             if (currentMultiplierTime <= 0)
             {
-                Destroy(runnerPlayer.transform.GetChild(2).gameObject);
-
+                hasPowerup = false;
+                powerupDone = true;
                 multiplyPickedUp = false;
                 powerupAlmostDone = false;
 
@@ -82,11 +89,19 @@ public class Powerups : MonoBehaviour
         if (magnetPickedUp)
         {
             currentMagnetTime -= Time.deltaTime;
+
+            if (!powerupAlmostDone && currentMagnetTime <= blinkTimer)
+            {
+                powerupAlmostDone = true;
+                StartCoroutine(PlayerBlink(0.1f));
+            }
+
             if (currentMagnetTime <= 0)
             {
-                Destroy(runnerPlayer.transform.GetChild(2).gameObject);
-
+                hasPowerup = false;
+                powerupDone = true;
                 magnetPickedUp = false;
+                powerupAlmostDone = false;
 
                 GameUI.Instance.powerupImage.enabled = false;
 
@@ -97,11 +112,19 @@ public class Powerups : MonoBehaviour
         if (shieldPickedUp)
         {
             currentShieldTime -= Time.deltaTime;
+
+            if (!powerupAlmostDone && currentShieldTime <= blinkTimer)
+            {
+                powerupAlmostDone = true;
+                StartCoroutine(PlayerBlink(0.1f));
+            }
+
             if (currentShieldTime <= 0)
             {
-                Destroy(runnerPlayer.transform.GetChild(2).gameObject);
-
+                hasPowerup = false;
+                powerupDone = true;
                 shieldPickedUp = false;
+                powerupAlmostDone = false;
 
                 GameUI.Instance.powerupImage.enabled = false;
                 GameUI.Instance.powerupImage.gameObject.transform.localScale = new Vector3(1f, 1f, 1f);
@@ -114,7 +137,7 @@ public class Powerups : MonoBehaviour
         {
             currentSpeedTime -= Time.deltaTime;
 
-            if (!powerupAlmostDone && currentSpeedTime <= powerupAlmostDoneTimer)
+            if (!powerupAlmostDone && currentSpeedTime <= blinkTimer)
             {
                 powerupAlmostDone = true;
                 StartCoroutine(PlayerBlink(0.1f));
@@ -122,8 +145,8 @@ public class Powerups : MonoBehaviour
 
             if (currentSpeedTime <= 0)
             {
-                Destroy(runnerPlayer.transform.GetChild(2).gameObject);
-
+                hasPowerup = false;
+                powerupDone = true;
                 speedPickedUp = false;
                 powerupAlmostDone = false;
 
@@ -135,9 +158,9 @@ public class Powerups : MonoBehaviour
         }
     }
 
-    IEnumerator PlayerBlink(float waitTime)
+    public IEnumerator PlayerBlink(float waitTime)
     {
-        float counter = powerupAlmostDoneTimer / (waitTime * 2);
+        float counter = blinkTimer / (waitTime * 2);
 
         for (int i = 0; i <= counter; i++)
         {
