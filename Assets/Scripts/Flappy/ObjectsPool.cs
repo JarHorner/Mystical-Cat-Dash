@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class ObjectsPool : MonoBehaviour
 {
+    [SerializeField] private FlappyGameController gameController;
     [SerializeField] private GameObject easyPillarPrefab;
     [SerializeField] private GameObject regularPillarPrefab;
     [SerializeField] private GameObject hardPillarPrefab;
@@ -12,12 +13,10 @@ public class ObjectsPool : MonoBehaviour
     private Vector2 objectPoolPosition = new Vector2(-15, -25f);
     [SerializeField] private int maxPillarPoolSize = 5;
     [SerializeField] float spawnRate = 2.8f; // base 2.8
-    [SerializeField] private float easyColumnMin;
-    [SerializeField] private float easyColumnMax;
-    [SerializeField] private float regColumnMin;
-    [SerializeField] private float regColumnMax;
-    [SerializeField] private float hardColumnMin;
-    [SerializeField] private float hardColumnMax;
+    [SerializeField] private float[] easyPillarYPositions;
+    [SerializeField] private float[] regularPillarYPositions;
+    [SerializeField] private float[] hardPillarYPositions;
+    [SerializeField] private float lastPillarYPosition;
     private float timeSinceLastSpawned = 0f;
     public float spawnXPosition = 15f;
     private int currentPillar = 0;
@@ -38,7 +37,7 @@ public class ObjectsPool : MonoBehaviour
             GameManager.Instance.loadedInto2DWorld = false;
         }
 
-        if (GetComponent<FlappyGameController>().playerPositioned)
+        if (gameController.playerPositioned)
         {
             timeSinceLastSpawned += Time.deltaTime;
         }
@@ -47,13 +46,13 @@ public class ObjectsPool : MonoBehaviour
         {
             timeSinceLastSpawned = 0f;
             // for Testing
-            // if (pillarsPast == 0)
+            // if (pillarsSpawned == 0)
             // {
-            //     pillars.Add((GameObject)Instantiate(easyPillarPrefab, new Vector2(spawnXPosition, easyColumnMin), Quaternion.identity));
+            //     pillars.Add((GameObject)Instantiate(hardPillarPrefab, new Vector2(spawnXPosition, -5f), Quaternion.identity));
             // }
-            // else if (pillarsPast == 1)
+            // else if (pillarsSpawned == 1)
             // {
-            //     pillars.Add((GameObject)Instantiate(easyPillarPrefab, new Vector2(spawnXPosition, easyColumnMax), Quaternion.identity));
+            //     pillars.Add((GameObject)Instantiate(regularPillarPrefab, new Vector2(spawnXPosition, 6f), Quaternion.identity));
             // }
 
             DeterminePillarSpawn();
@@ -90,20 +89,23 @@ public class ObjectsPool : MonoBehaviour
         }
         else
         {
-            SpawnPillar();
+            DetermineSpawnPillar();
         }
     }
 
 
-    private void SpawnPillar()
+    private void DetermineSpawnPillar()
     {
-        float spawnYPosition;
+        int randomYPosition;
+        float chosenYPosition;
 
         if (GameManager.Instance.timesEntered2DWorld == 1) // 1
         {
             // easy pillar spawn
-            spawnYPosition = Random.Range(easyColumnMin, easyColumnMax);
-            pillars.Add((GameObject)Instantiate(easyPillarPrefab, new Vector2(spawnXPosition, spawnYPosition), Quaternion.identity));
+            randomYPosition = Random.Range(0, easyPillarYPositions.Length);
+            chosenYPosition = easyPillarYPositions[randomYPosition];
+            pillars.Add((GameObject)Instantiate(easyPillarPrefab, new Vector2(spawnXPosition, chosenYPosition), Quaternion.identity));
+            lastPillarYPosition = chosenYPosition;
         }
         else if (GameManager.Instance.timesEntered2DWorld == 2) // 2
         {
@@ -113,12 +115,14 @@ public class ObjectsPool : MonoBehaviour
             switch (chosenPillarNum)
             {
                 case 0:
-                    spawnYPosition = Random.Range(easyColumnMin, easyColumnMax);
-                    pillars.Add((GameObject)Instantiate(easyPillarPrefab, new Vector2(spawnXPosition, spawnYPosition), Quaternion.identity));
+                    randomYPosition = Random.Range(0, easyPillarYPositions.Length);
+                    chosenYPosition = easyPillarYPositions[randomYPosition];
+                    pillars.Add((GameObject)Instantiate(easyPillarPrefab, new Vector2(spawnXPosition, chosenYPosition), Quaternion.identity));
                     break;
                 case 1:
-                    spawnYPosition = Random.Range(regColumnMin, regColumnMax);
-                    pillars.Add((GameObject)Instantiate(regularPillarPrefab, new Vector2(spawnXPosition, spawnYPosition), Quaternion.identity));
+                    randomYPosition = Random.Range(0, regularPillarYPositions.Length);
+                    chosenYPosition = regularPillarYPositions[randomYPosition];
+                    pillars.Add((GameObject)Instantiate(regularPillarPrefab, new Vector2(spawnXPosition, chosenYPosition), Quaternion.identity));
                     break;
                 default:
                     break;
@@ -127,8 +131,9 @@ public class ObjectsPool : MonoBehaviour
         else if (GameManager.Instance.timesEntered2DWorld == 3) // 3
         {
             // regular pillar spawn
-            spawnYPosition = Random.Range(regColumnMin, regColumnMax);
-            pillars.Add((GameObject)Instantiate(regularPillarPrefab, new Vector2(spawnXPosition, spawnYPosition), Quaternion.identity));
+            randomYPosition = Random.Range(0, easyPillarYPositions.Length);
+            chosenYPosition = easyPillarYPositions[randomYPosition];
+            pillars.Add((GameObject)Instantiate(regularPillarPrefab, new Vector2(spawnXPosition, chosenYPosition), Quaternion.identity));
         }
         else if (GameManager.Instance.timesEntered2DWorld == 4) // 4
         {
@@ -138,12 +143,14 @@ public class ObjectsPool : MonoBehaviour
             switch (chosenPillarNum)
             {
                 case 0:
-                    spawnYPosition = Random.Range(regColumnMin, regColumnMax);
-                    pillars.Add((GameObject)Instantiate(regularPillarPrefab, new Vector2(spawnXPosition, spawnYPosition), Quaternion.identity));
+                    randomYPosition = Random.Range(0, regularPillarYPositions.Length);
+                    chosenYPosition = regularPillarYPositions[randomYPosition];
+                    pillars.Add((GameObject)Instantiate(regularPillarPrefab, new Vector2(spawnXPosition, chosenYPosition), Quaternion.identity));
                     break;
                 case 1:
-                    spawnYPosition = Random.Range(hardColumnMin, hardColumnMax);
-                    pillars.Add((GameObject)Instantiate(hardPillarPrefab, new Vector2(spawnXPosition, spawnYPosition), Quaternion.identity));
+                    randomYPosition = Random.Range(0, hardPillarYPositions.Length);
+                    chosenYPosition = hardPillarYPositions[randomYPosition];
+                    pillars.Add((GameObject)Instantiate(hardPillarPrefab, new Vector2(spawnXPosition, chosenYPosition), Quaternion.identity));
                     break;
                 default:
                     break;
@@ -152,8 +159,9 @@ public class ObjectsPool : MonoBehaviour
         else if (GameManager.Instance.timesEntered2DWorld >= 5) // 5
         {
             // hard pillar spawn
-            spawnYPosition = Random.Range(hardColumnMin, hardColumnMax);
-            pillars.Add((GameObject)Instantiate(hardPillarPrefab, new Vector2(spawnXPosition, spawnYPosition), Quaternion.identity));
+            randomYPosition = Random.Range(0, hardPillarYPositions.Length + 1);
+            chosenYPosition = hardPillarYPositions[randomYPosition];
+            pillars.Add((GameObject)Instantiate(hardPillarPrefab, new Vector2(spawnXPosition, chosenYPosition), Quaternion.identity));
         }
     }
 

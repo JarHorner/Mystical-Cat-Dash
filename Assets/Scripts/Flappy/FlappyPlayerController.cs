@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
+using UnityEngine.EventSystems;
 
 public class FlappyPlayerController : MonoBehaviour
 {
@@ -81,15 +82,15 @@ public class FlappyPlayerController : MonoBehaviour
 
     public void Jump(InputAction.CallbackContext context)
     {
+        if (EventSystem.current.IsPointerOverGameObject())
+            return;
+
         if (!GameManager.Instance.gameOver && context.performed)
         {
             SoundManager.Instance.Play(flapSound);
             anim.SetTrigger("Flap");
 
             direction = Vector3.up * flapStrength;
-
-            // rb.AddForce(new Vector2(0, flapStrength));
-            // rb.velocity = Vector2.zero;
         }
 
     }

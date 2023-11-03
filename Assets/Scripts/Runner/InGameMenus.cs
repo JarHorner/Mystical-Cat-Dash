@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
+using UnityEngine.EventSystems;
 
 public class InGameMenus : MonoBehaviour
 {
@@ -38,7 +39,7 @@ public class InGameMenus : MonoBehaviour
             PauseGame();
 
         SoundManager.Instance.Play(buttonPress);
-        
+
         Tween.Instance.backToMainMenu = true;
         Tween.Instance.TweenMainMenu();
     }
@@ -46,10 +47,6 @@ public class InGameMenus : MonoBehaviour
     // open/closes the pause menu
     public void PauseGame()
     {
-        SoundManager.Instance.Play(buttonPress);
-        
-        pauseGame = !pauseGame;
-
         if (!pauseGame)
         {
             Time.timeScale = 1;
@@ -60,5 +57,8 @@ public class InGameMenus : MonoBehaviour
             Time.timeScale = 0;
             GameUI.Instance.pausePanel.SetActive(true);
         }
+        SoundManager.Instance.Play(buttonPress);
+
+        pauseGame = !pauseGame;
     }
 }
