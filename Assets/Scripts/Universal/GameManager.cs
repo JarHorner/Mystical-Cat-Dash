@@ -62,7 +62,7 @@ public class GameManager : MonoBehaviour
         // if game is started and no game over, points start adding up.
         if (!isGameStarted)
         {
-            forwardSpeed = 10f;
+            forwardSpeed = 12f;
             gameUI.gameOverPanel.SetActive(false);
             gameUI.startingText.SetActive(true);
             gameUI.pauseButton.SetActive(true);

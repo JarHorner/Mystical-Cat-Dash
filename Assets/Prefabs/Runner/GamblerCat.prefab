@@ -1319,6 +1319,7 @@ MonoBehaviour:
   desiredLane: 1
   laneDistance: 1.5
   jumpForce: 10
+  slideTime: 0.8
   gravity: -20
   multiplierBuffVFX: {fileID: 0}
   magnetBuffVFX: {fileID: 0}

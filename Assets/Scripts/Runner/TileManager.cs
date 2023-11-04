@@ -6,6 +6,7 @@ public class TileManager : MonoBehaviour
 {
     public GameObject[] tilePrefabs;
     public GameObject swapGameTile;
+    public GameObject startTile;
     public int swapGameTileSpawnNum;
     public float zSpawn = 0;
     public float tileLength = 30;
@@ -22,7 +23,7 @@ public class TileManager : MonoBehaviour
         {
             if (i == 0)
             {
-                SpawnTile(0);
+                SpawnStartGameTile();
             }
             if (i == swapGameTileSpawnNum) // this will be removed
             {
@@ -86,6 +87,13 @@ public class TileManager : MonoBehaviour
         // resets number so tons of portals do not open
         tilesSpawnedUntilPortal = 0;
         GameObject tile = Instantiate(swapGameTile, transform.forward * zSpawn, transform.rotation);
+        activeTiles.Add(tile);
+        zSpawn += tileLength;
+    }
+
+    public void SpawnStartGameTile()
+    {
+        GameObject tile = Instantiate(startTile, transform.forward * zSpawn, transform.rotation);
         activeTiles.Add(tile);
         zSpawn += tileLength;
     }

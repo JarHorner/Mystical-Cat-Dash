@@ -46,6 +46,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tilePrefabs: []
   swapGameTile: {fileID: 472977540979237916, guid: 11683c1ee36f76448b57b77419e0ee77, type: 3}
+  startTile: {fileID: 6018399080922412537, guid: 7c895e33cec87b54d83e932ac9273b63, type: 3}
   swapGameTileSpawnNum: 0
   zSpawn: 0
   tileLength: 20

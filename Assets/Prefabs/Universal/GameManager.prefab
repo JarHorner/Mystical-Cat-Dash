@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 6821664170918097899}
   - component: {fileID: 3115567579601899901}
-  - component: {fileID: 7102404045906092811}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -48,7 +47,7 @@ MonoBehaviour:
   calculatedScore: 0
   pointsPerSecond: 50
   timesEntered2DWorld: 0
-  forwardSpeed: 10
+  forwardSpeed: 12
   maximumForwardSpeed: 20
   gameOver: 0
   loaded: 0
@@ -56,39 +55,6 @@ MonoBehaviour:
   loadedFrom2DWorld: 0
   gameOverMenuOpen: 0
   isGameStarted: 0
-  powerups: {fileID: 7102404045906092811}
   gameOverSound: {fileID: 8300000, guid: 28167732f75396f4aa5a7c076e1bfc34, type: 3}
   enterPortalSound: {fileID: 8300000, guid: 37ecbd0cd5fc3dd4f9abc6b7b7240323, type: 3}
   gameMusic: {fileID: 8300000, guid: 652c0be956a935a4484d3e404dbd5d5f, type: 3}
---- !u!114 &7102404045906092811
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8605564590628868359}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 93d90f5b777dc4a4e94c99d10e1f2ab3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  runnerPlayer: {fileID: 0}
-  multiplyBuff: {fileID: 4986265526958573320, guid: c84266e257bc36a4caf028b47e08096b, type: 3}
-  multiplierLength: 20
-  multiplyValue: 2
-  currentMultiplierTime: 0
-  multiplyPickedUp: 0
-  magnetBuff: {fileID: 999629478647861084, guid: cb82268100d69824880f0608b6a8d78a, type: 3}
-  magnetLength: 20
-  magnetSize: 10
-  currentMagnetTime: 0
-  magnetPickedUp: 0
-  shieldBuff: {fileID: 4314670640209028044, guid: 1c896c75de4e3ab4c8287d5f8f68cd1e, type: 3}
-  shieldLength: 30
-  currentShieldTime: 0
-  shieldPickedUp: 0
-  speedBuff: {fileID: 6875293492743381735, guid: 7fc14290cba989c4d93620b1db6d2af9, type: 3}
-  speedLength: 5
-  speedValue: 2
-  currentSpeedTime: 0
-  speedPickedUp: 0

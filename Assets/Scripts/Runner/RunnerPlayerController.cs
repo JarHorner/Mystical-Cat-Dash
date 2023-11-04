@@ -30,6 +30,7 @@ public class RunnerPlayerController : MonoBehaviour
     public int desiredLane = 1;
     public float laneDistance = 4;
     public float jumpForce;
+    public float slideTime;
     public float gravity = -20;
     private bool hitPortal = false;
     public GameObject multiplierBuffVFX;
@@ -86,7 +87,6 @@ public class RunnerPlayerController : MonoBehaviour
                 }
                 playIdleAnimTimer = 6f;
             }
-
         }
 
         // when not idle the game will slowly increase speed until capped
@@ -354,7 +354,7 @@ public class RunnerPlayerController : MonoBehaviour
     // slides the player along the ground
     public void SwipeSlide()
     {
-        if (controller.isGrounded && currentState != PlayerState.jump)
+        if (controller.isGrounded && currentState != PlayerState.jump && currentState != PlayerState.slide)
         {
             SoundManager.Instance.Play(swapLaneSound);
             StartCoroutine(RunnerSlide());
@@ -373,7 +373,7 @@ public class RunnerPlayerController : MonoBehaviour
         controller.radius = 0.01f;
         controller.height = 0f;
 
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(slideTime);
 
         if (currentState != PlayerState.dead)
         {

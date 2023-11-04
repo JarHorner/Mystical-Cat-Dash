@@ -47,7 +47,7 @@ public class InGameMenus : MonoBehaviour
     // open/closes the pause menu
     public void PauseGame()
     {
-        if (!pauseGame)
+        if (pauseGame)
         {
             Time.timeScale = 1;
             GameUI.Instance.pausePanel.SetActive(false);
