@@ -95,7 +95,7 @@ public class FlappyPlayerController : MonoBehaviour
                 return;
             }
         }
-        else if (!GameManager.Instance.gameOver && context.performed)
+        else if (!GameManager.Instance.gameOver && context.performed && Time.timeScale == 1)
         {
             SoundManager.Instance.Play(flapSound);
             anim.SetTrigger("Flap");
