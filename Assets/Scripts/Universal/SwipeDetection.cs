@@ -17,7 +17,7 @@ public class SwipeDetection : MonoBehaviour
     void Update()
     {
         // needed to ensure the runnerPlayer varible is assigned
-        if (SceneManager.GetActiveScene().name == "Runner" && runnerPlayer == null)
+        if (runnerPlayer == null && SceneManager.GetActiveScene().name == "Runner")
         {
             runnerPlayer = GameObject.FindWithTag("Player").GetComponent<RunnerPlayerController>();
         }
