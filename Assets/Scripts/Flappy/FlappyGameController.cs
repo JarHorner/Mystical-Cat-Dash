@@ -19,7 +19,7 @@ public class FlappyGameController : MonoBehaviour
     private IEnumerator SpawnPlayer()
     {
         yield return new WaitForSeconds(1f);
-        Instantiate(player, new Vector3(-3.5f, 3f, 0f), Quaternion.identity);
+        Instantiate(player, new Vector3(-6.5f, 3f, 0f), Quaternion.identity);
         flappyCamera.cameraMove = true;
         yield return new WaitForSeconds(2f);
         Destroy(portal);

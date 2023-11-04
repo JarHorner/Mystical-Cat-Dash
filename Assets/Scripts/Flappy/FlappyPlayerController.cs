@@ -51,7 +51,7 @@ public class FlappyPlayerController : MonoBehaviour
     {
         if (!flappyGameController.playerPositioned)
         {
-            transform.Translate(Vector2.right * 10 * Time.deltaTime);
+            transform.Translate(Vector2.right * 15 * Time.deltaTime);
         }
 
         if (transform.position.x > -2)

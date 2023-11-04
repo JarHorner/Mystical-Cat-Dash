@@ -28,6 +28,7 @@ public class RunnerPlayerController : MonoBehaviour
     [SerializeField] private AudioClip jumpSound;
     private Vector3 direction;
     public int desiredLane = 1;
+    public float laneSwapSpeed = 25;
     public float laneDistance = 4;
     public float jumpForce;
     public float slideTime;
@@ -148,7 +149,7 @@ public class RunnerPlayerController : MonoBehaviour
         if (transform.position == targetPosition)
             return;
         Vector3 diff = targetPosition - transform.position;
-        Vector3 moveDir = diff.normalized * 25 * Time.deltaTime;
+        Vector3 moveDir = diff.normalized * laneSwapSpeed * Time.deltaTime;
         if (currentState != PlayerState.dead)
         {
             if (moveDir.sqrMagnitude < diff.sqrMagnitude)

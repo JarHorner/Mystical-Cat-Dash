@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class FlappyCamera : MonoBehaviour
 {
-    [SerializeField] private float cameraSpeed = 20f;
+    [SerializeField] private float cameraSpeed = 15f;
     public bool cameraMove = false;
     
     // Start is called before the first frame update
