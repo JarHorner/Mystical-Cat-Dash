@@ -89,76 +89,83 @@ public class RunnerPlayerController : MonoBehaviour
                 playIdleAnimTimer = 6f;
             }
         }
-
-        // when not idle the game will slowly increase speed until capped
-        if ((currentState != PlayerState.idle && currentState != PlayerState.dead) || Powerups.Instance.speedPickedUp)
-        {
-            // increases speed of player slowly as game progresses to a maximum amount
-            if (GameManager.Instance.forwardSpeed < GameManager.Instance.maximumForwardSpeed)
-            {
-                GameManager.Instance.forwardSpeed += 0.1f * Time.deltaTime;
-            }
-        }
-
-        if (Powerups.Instance.destroyMultiplierVFX)
-        {
-            Powerups.Instance.destroyMultiplierVFX = false;
-            Destroy(multiplierBuffVFX);
-        }
-        else if (Powerups.Instance.destroyMagnetVFX)
-        {
-            Powerups.Instance.destroyMagnetVFX = false;
-            Destroy(magnetBuffVFX);
-        }
-        else if (Powerups.Instance.destroyShieldVFX)
-        {
-            Powerups.Instance.destroyShieldVFX = false;
-            Destroy(shieldBuffVFX);
-        }
-        else if (Powerups.Instance.destroySpeedVFX)
-        {
-            Powerups.Instance.destroySpeedVFX = false;
-            Destroy(speedBuffVFX);
-        }
-
-        // moves the player along the z axis, speed based on whether player has speed buff
-        if (!Powerups.Instance.speedPickedUp)
-        {
-            direction.z = GameManager.Instance.forwardSpeed;
-        }
         else
         {
-            direction.z = (GameManager.Instance.forwardSpeed * Powerups.Instance.speedValue);
-        }
-
-
-        direction.y += gravity * Time.deltaTime;
-
-        // determines the location of the player based on desired lane
-        Vector3 targetPosition = transform.position.z * transform.forward + transform.position.y * transform.up;
-        if (desiredLane == 0)
-        {
-            targetPosition += Vector3.left * laneDistance;
-        }
-        else if (desiredLane == 2)
-        {
-            targetPosition += Vector3.right * laneDistance;
-        }
-
-        //Normalizes and lerps the player to the different lanes. Allows collisions to occur properly!
-        if (transform.position == targetPosition)
-            return;
-        Vector3 diff = targetPosition - transform.position;
-        Vector3 moveDir = diff.normalized * laneSwapSpeed * Time.deltaTime;
-        if (currentState != PlayerState.dead)
-        {
-            if (moveDir.sqrMagnitude < diff.sqrMagnitude)
+            // when not idle the game will slowly increase speed until capped
+            if ((currentState != PlayerState.idle && currentState != PlayerState.dead) || Powerups.Instance.speedPickedUp)
             {
-                controller.Move(moveDir);
+                // increases speed of player slowly as game progresses to a maximum amount
+                if (GameManager.Instance.forwardSpeed < GameManager.Instance.maximumForwardSpeed)
+                {
+                    GameManager.Instance.forwardSpeed += 0.1f * Time.deltaTime;
+                }
+            }
+
+            if (Powerups.Instance.destroyMultiplierVFX)
+            {
+                Powerups.Instance.destroyMultiplierVFX = false;
+                Destroy(multiplierBuffVFX);
+            }
+            else if (Powerups.Instance.destroyMagnetVFX)
+            {
+                Powerups.Instance.destroyMagnetVFX = false;
+                Destroy(magnetBuffVFX);
+            }
+            else if (Powerups.Instance.destroyShieldVFX)
+            {
+                Powerups.Instance.destroyShieldVFX = false;
+                Destroy(shieldBuffVFX);
+            }
+            else if (Powerups.Instance.destroySpeedVFX)
+            {
+                Powerups.Instance.destroySpeedVFX = false;
+                Destroy(speedBuffVFX);
+            }
+
+            // moves the player along the z axis, speed based on whether player has speed buff
+            if (!Powerups.Instance.speedPickedUp)
+            {
+                direction.z = GameManager.Instance.forwardSpeed;
             }
             else
             {
-                controller.Move(diff);
+                direction.z = (GameManager.Instance.forwardSpeed * Powerups.Instance.speedValue);
+            }
+
+
+            direction.y += gravity * Time.deltaTime;
+
+            // determines the location of the player based on desired lane
+            Vector3 targetPosition = transform.position.z * transform.forward + transform.position.y * transform.up;
+            if (desiredLane == 0)
+            {
+                targetPosition += Vector3.left * laneDistance;
+            }
+            else if (desiredLane == 2)
+            {
+                targetPosition += Vector3.right * laneDistance;
+            }
+
+            //Normalizes and lerps the player to the different lanes. Allows collisions to occur properly!
+            if (transform.position == targetPosition)
+            {
+                return;
+            }
+            else
+            {
+                Vector3 diff = targetPosition - transform.position;
+                Vector3 moveDir = diff.normalized * laneSwapSpeed * Time.deltaTime;
+                if (currentState != PlayerState.dead)
+                {
+                    if (moveDir.sqrMagnitude < diff.sqrMagnitude)
+                    {
+                        controller.Move(moveDir);
+                    }
+                    else
+                    {
+                        controller.Move(diff);
+                    }
+                }
             }
         }
     }

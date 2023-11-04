@@ -12,6 +12,7 @@ public class FlappyPlayerController : MonoBehaviour
     private Vector3 velocity;
     public Animator anim;
     [SerializeField] private FlappyGameController flappyGameController;
+    private Camera camera;
     [SerializeField] private InputActionAsset inputMaster;
     private InputAction jump;
     [SerializeField] private AudioClip flapSound;
@@ -24,6 +25,8 @@ public class FlappyPlayerController : MonoBehaviour
         var playerActionMap = inputMaster.FindActionMap("FlappyPlayer");
 
         jump = playerActionMap.FindAction("Jump");
+
+        camera = GameObject.FindWithTag("MainCamera").GetComponent<Camera>();
     }
 
 
@@ -82,10 +85,17 @@ public class FlappyPlayerController : MonoBehaviour
 
     public void Jump(InputAction.CallbackContext context)
     {
-        if (EventSystem.current.IsPointerOverGameObject())
-            return;
+        Vector3 mousePos = InputManager.Instance.PrimaryPosition(camera);
 
-        if (!GameManager.Instance.gameOver && context.performed)
+        // checks to see if pause button was clicked before jumping. really round-about way to solving a bug.
+        if (mousePos.x >= 3.5f && mousePos.y >= 10.1f)
+        {
+            if (mousePos.x <= 5.1f && mousePos.y <= 11.8f)
+            {
+                return;
+            }
+        }
+        else if (!GameManager.Instance.gameOver && context.performed)
         {
             SoundManager.Instance.Play(flapSound);
             anim.SetTrigger("Flap");

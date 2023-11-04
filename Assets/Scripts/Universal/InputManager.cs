@@ -103,8 +103,8 @@ public class InputManager : MonoBehaviour
     }
 
     // helper method to map the touch based on real-world position on screen
-    public Vector2 PrimaryPosition()
+    public Vector2 PrimaryPosition(Camera camera)
     {
-        return Utils.ScreenToWorld(mainCamera, player.RunnerPlayer.PrimaryPosition.ReadValue<Vector2>());
+        return Utils.ScreenToWorld(camera, primaryPosition.ReadValue<Vector2>());
     }
 }

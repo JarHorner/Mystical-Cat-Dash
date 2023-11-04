@@ -9,7 +9,7 @@ public class InGameMenus : MonoBehaviour
 {
     public static InGameMenus Instance { get; private set; }
     [SerializeField] private AudioClip buttonPress;
-    private bool pauseGame = false;
+    [SerializeField] private bool pauseGame = false;
 
     private void Awake()
     {

@@ -20,7 +20,7 @@ public class RunnerCharacterSpawner : MonoBehaviour
         }
         else
         {
-            GameObject newRunnerPlayer = Instantiate(runnerPlayer, new Vector3(0, 8.5f, 0), Quaternion.identity);
+            GameObject newRunnerPlayer = Instantiate(runnerPlayer, new Vector3(0, 10f, 0), Quaternion.identity);
             newRunnerPlayer.name = runnerPlayer.name;
         }
 

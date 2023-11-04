@@ -84,5 +84,9 @@ public class SwipeDetection : MonoBehaviour
             Debug.Log("RIGHT");
             runnerPlayer.SwipeShiftRight();
         }
+        else
+        {
+            Debug.Log("NOTHING");
+        }
     }
 }
