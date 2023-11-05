@@ -69,15 +69,6 @@ public class InputManager : MonoBehaviour
         }
     }
 
-    void Update()
-    {
-        // needed to ensure the mainCamera varible is assigned
-        if (mainCamera == null)
-        {
-            mainCamera = Camera.main;
-        }
-    }
-
     private void StartTouchPrimary(InputAction.CallbackContext context)
     {
         if (OnStartTouch != null)
