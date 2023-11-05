@@ -82,7 +82,7 @@ public class InputManager : MonoBehaviour
     {
         if (OnStartTouch != null)
         {
-            OnStartTouch(Utils.ScreenToWorld(mainCamera, primaryPosition.ReadValue<Vector2>()), (float)context.startTime);
+           OnStartTouch(primaryPosition.ReadValue<Vector2>(), (float)context.startTime);
         }
     }
 
@@ -90,7 +90,7 @@ public class InputManager : MonoBehaviour
     {
         if (OnStartTouch != null)
         {
-            OnEndTouch(Utils.ScreenToWorld(mainCamera, primaryPosition.ReadValue<Vector2>()), (float)context.time);
+            OnEndTouch(primaryPosition.ReadValue<Vector2>(), (float)context.time);
         }
     }
 
