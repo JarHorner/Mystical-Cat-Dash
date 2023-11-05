@@ -87,6 +87,12 @@ public class MainMenu : MonoBehaviour
 
         switch (linkName)
         {
+            case "Music":
+                Application.OpenURL("www.soundimage.org");
+                break;
+            case "SFX":
+                Application.OpenURL("https://mixkit.co/free-sound-effects/");
+                break;
             case "Font":
                 Application.OpenURL("https://www.fontspace.com/medieval-sharp-font-f17170");
                 break;
@@ -108,8 +114,17 @@ public class MainMenu : MonoBehaviour
             case "2D Environment":
                 Application.OpenURL("https://aamatniekss.itch.io/free-pixelart-tileset-cute-forest");
                 break;
+            case "Water Texture":
+                Application.OpenURL("https://assetstore.unity.com/packages/2d/textures-materials/water/stylize-water-texture-153577");
+                break;
+            case "Ground Texture":
+                Application.OpenURL("https://assetstore.unity.com/packages/2d/textures-materials/nature/handpainted-grass-ground-textures-187634");
+                break;
             case "Coin":
                 Application.OpenURL("https://skfb.ly/oqGSQ");
+                break;
+            case "Powerup VFX":
+                Application.OpenURL("https://assetstore.unity.com/packages/vfx/particles/spells/magic-effects-free-247933");
                 break;
             case "Running Man":
                 Application.OpenURL("https://www.vecteezy.com/vector-art/12742199-running-vector-icon");
@@ -125,9 +140,6 @@ public class MainMenu : MonoBehaviour
                 break;
             case "2":
                 Application.OpenURL("https://www.freebiefindingmom.com/free-printable-number-bubble-letters-bubble-number-2/");
-                break;
-            case "Music":
-                Application.OpenURL("www.soundimage.org");
                 break;
             default:
                 break;
