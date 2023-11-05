@@ -1455,8 +1455,10 @@ MonoBehaviour:
   portalPillarPrefab: {fileID: 8352389468973688260, guid: f0c37869d7f451d4b8636e270b7a7121, type: 3}
   pillars: []
   maxPillarPoolSize: 5
-  spawnRate: 2.8
+  spawnRate: 2.4
   easyPillarYPositions:
+  - -6
+  - -5.5
   - -5
   - -4.5
   - -4
@@ -1479,6 +1481,8 @@ MonoBehaviour:
   - 4.5
   - 5
   regularPillarYPositions:
+  - -6
+  - -5.5
   - -5
   - -4.5
   - -4
@@ -1503,6 +1507,8 @@ MonoBehaviour:
   - 5.5
   - 6
   hardPillarYPositions:
+  - -4
+  - -3.5
   - -3
   - -2.5
   - -2
@@ -1520,6 +1526,8 @@ MonoBehaviour:
   - 4
   - 4.5
   - 5
+  - 5.5
+  - 6
   lastPillarYPosition: 0
   spawnXPosition: 15
 --- !u!4 &699137786
@@ -3751,6 +3759,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   buttonPress: {fileID: 8300000, guid: cf9505f1c1e4fb946b4641b3133f81ad, type: 3}
+  pauseGame: 0
 --- !u!4 &1692131084
 Transform:
   m_ObjectHideFlags: 0

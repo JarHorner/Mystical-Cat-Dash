@@ -46,14 +46,14 @@ public class ObjectsPool : MonoBehaviour
         {
             timeSinceLastSpawned = 0f;
             // for Testing
-            // if (pillarsSpawned == 0)
-            // {
-            //     pillars.Add((GameObject)Instantiate(hardPillarPrefab, new Vector2(spawnXPosition, -5f), Quaternion.identity));
-            // }
-            // else if (pillarsSpawned == 1)
-            // {
-            //     pillars.Add((GameObject)Instantiate(regularPillarPrefab, new Vector2(spawnXPosition, 6f), Quaternion.identity));
-            // }
+            if (pillarsSpawned == 0)
+            {
+                pillars.Add((GameObject)Instantiate(hardPillarPrefab, new Vector2(spawnXPosition, -4f), Quaternion.identity));
+            }
+            else if (pillarsSpawned == 1)
+            {
+                pillars.Add((GameObject)Instantiate(hardPillarPrefab, new Vector2(spawnXPosition, 6f), Quaternion.identity));
+            }
 
             DeterminePillarSpawn();
 
@@ -89,12 +89,12 @@ public class ObjectsPool : MonoBehaviour
         }
         else
         {
-            DetermineSpawnPillar();
+            SpawnPillar();
         }
     }
 
 
-    private void DetermineSpawnPillar()
+    private void SpawnPillar()
     {
         int randomYPosition;
         float chosenYPosition;
@@ -170,19 +170,19 @@ public class ObjectsPool : MonoBehaviour
     {
         if (GameManager.Instance.timesEntered2DWorld == 2)
         {
-            spawnRate -= 0.2f;
+            spawnRate -= 0.1f;
         }
         else if (GameManager.Instance.timesEntered2DWorld == 3)
         {
-            spawnRate -= 0.35f;
+            spawnRate -= 0.2f;
         }
         else if (GameManager.Instance.timesEntered2DWorld == 4)
         {
-            spawnRate -= 0.5f;
+            spawnRate -= 0.3f;
         }
         else if (GameManager.Instance.timesEntered2DWorld >= 5)
         {
-            spawnRate -= 0.65f;
+            spawnRate -= 0.4f;
         }
     }
 }

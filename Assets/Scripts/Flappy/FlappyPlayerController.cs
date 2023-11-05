@@ -110,7 +110,7 @@ public class FlappyPlayerController : MonoBehaviour
         rb.constraints = RigidbodyConstraints2D.None;
         rb.velocity = Vector2.zero;
         GameManager.Instance.gameOver = true;
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(3f);
         Destroy(this.gameObject);
     }
 }
