@@ -46,7 +46,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   coin: {fileID: 8607645797625358742, guid: 6fe8cb20b9f7a4f458305f79e1ba1527, type: 3}
-  spawnZDistance: 150
+  spawnZDistances:
+  - 150
+  - 200
+  - 250
   distanceBetweenCoins: 3
 --- !u!65 &5179481579448163788
 BoxCollider:

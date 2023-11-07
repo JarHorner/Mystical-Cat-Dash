@@ -387,7 +387,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3320795679431575941, guid: 332af6dfa4e7b084ca77ef57d0113f26, type: 3}
       propertyPath: tilePrefabs.Array.size
-      value: 6
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 3320795679431575941, guid: 332af6dfa4e7b084ca77ef57d0113f26, type: 3}
       propertyPath: tilePrefabs.Array.data[0]

@@ -27,7 +27,7 @@ public class TileManager : MonoBehaviour
             }
             if (i == swapGameTileSpawnNum) // this will be removed
             {
-                SpawnSwapGameTile();
+                SpawnPortalGameTile();
             }
             else
             {
@@ -42,7 +42,7 @@ public class TileManager : MonoBehaviour
         {
             if (tilesSpawnedUntilPortal == swapGameTileSpawnNum) // this will be removed
             {
-                SpawnSwapGameTile();
+                SpawnPortalGameTile();
             }
             else
             {
@@ -58,15 +58,15 @@ public class TileManager : MonoBehaviour
 
         if (tilesSpawnedUntilPortal >= 16 && tilesSpawnedUntilPortal >= 30 && portalSpawnPercentage >= 90)
         {
-            SpawnSwapGameTile();
+            SpawnPortalGameTile();
         }
         else if (tilesSpawnedUntilPortal >= 31 && tilesSpawnedUntilPortal >= 45 && portalSpawnPercentage >= 85)
         {
-            SpawnSwapGameTile();
+            SpawnPortalGameTile();
         }
         else if (tilesSpawnedUntilPortal > 46 && portalSpawnPercentage >= 80)
         {
-            SpawnSwapGameTile();
+            SpawnPortalGameTile();
         }
         else
         {
@@ -82,7 +82,7 @@ public class TileManager : MonoBehaviour
         zSpawn += tileLength;
     }
 
-    public void SpawnSwapGameTile()
+    public void SpawnPortalGameTile()
     {
         // resets number so tons of portals do not open
         tilesSpawnedUntilPortal = 0;
