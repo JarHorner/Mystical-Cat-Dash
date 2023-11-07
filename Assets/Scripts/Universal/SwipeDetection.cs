@@ -64,7 +64,6 @@ public class SwipeDetection : MonoBehaviour
     // depending on the swipe direction, different actions occur
     private void SwipeDirection(Vector2 direction)
     {
-        Debug.Log(Vector2.Dot(Vector2.up, direction) );
         if (Vector2.Dot(Vector2.up, direction) > directionThreshhold)
         {
             Debug.Log("UP");

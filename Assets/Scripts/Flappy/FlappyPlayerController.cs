@@ -12,7 +12,7 @@ public class FlappyPlayerController : MonoBehaviour
     private Vector3 velocity;
     public Animator anim;
     [SerializeField] private FlappyGameController flappyGameController;
-    private Camera camera;
+    private Camera flappyCamera;
     [SerializeField] private InputActionAsset inputMaster;
     private InputAction jump;
     [SerializeField] private AudioClip flapSound;
@@ -26,7 +26,7 @@ public class FlappyPlayerController : MonoBehaviour
 
         jump = playerActionMap.FindAction("Jump");
 
-        camera = GameObject.FindWithTag("MainCamera").GetComponent<Camera>();
+        flappyCamera = GameObject.FindWithTag("MainCamera").GetComponent<Camera>();
     }
 
 
@@ -85,7 +85,7 @@ public class FlappyPlayerController : MonoBehaviour
 
     public void Jump(InputAction.CallbackContext context)
     {
-        Vector3 mousePos = InputManager.Instance.PrimaryPosition(camera);
+        Vector3 mousePos = InputManager.Instance.PrimaryPosition(flappyCamera);
 
         // checks to see if pause button was clicked before jumping. really round-about way to solving a bug.
         if (mousePos.x >= 3.5f && mousePos.y >= 10.1f)
