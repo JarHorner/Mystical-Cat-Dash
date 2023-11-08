@@ -173,7 +173,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf8be2beed80ad843b753ce3455b43b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pointsWorth: 25
+  pointsWorth: 100
   collectCoinSound: {fileID: 8300000, guid: 4d1e715a815a2a04fa70858c359feb0e, type: 3}
   moveSpeed: 5
 --- !u!54 &-4404947808466141140

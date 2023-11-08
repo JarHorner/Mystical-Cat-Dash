@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CoinSpawner : MonoBehaviour
 {
-    [SerializeField] private GameObject[] coinLanes;
+    [SerializeField] private List<GameObject> coinLanes;
 
     void Start()
     {
@@ -13,8 +13,22 @@ public class CoinSpawner : MonoBehaviour
 
     private void SpawnCoins()
     {
-        int randomIndexForLane = Random.Range(0, 3); // range of 0 - 2 for lanes array
+        float coinsSpawnPercentage = Random.Range(0, 2); // range of 0 or 1 = 50% chance to spawn coins
 
-        coinLanes[randomIndexForLane].SetActive(true);
+        if (coinsSpawnPercentage == 0)
+        {
+            int randomIndexForLane = Random.Range(0, 3); // range of 0 - 2 for lanes
+            coinLanes[randomIndexForLane].SetActive(true);
+
+            // determines if a different lane of coins spawns
+            float secondCoinsSpawnPercentage = Random.Range(0, 4); // range of 0 - 3 = 25% chance to spawn second row of coins
+            if (secondCoinsSpawnPercentage == 0)
+            {
+                coinLanes.RemoveAt(randomIndexForLane);
+                randomIndexForLane = Random.Range(0, 2); // range of 0 - 1 for remaining lanes
+                coinLanes[randomIndexForLane].SetActive(true);
+            }
+
+        }
     }
 }

@@ -194,17 +194,17 @@ public class RunnerPlayerController : MonoBehaviour
             }
             else
             {
-                animator.SetTrigger("Die");
+                GameManager.Instance.gameOver = true;
+
                 animator.SetBool("Run", false);
                 currentState = PlayerState.dead;
+                animator.SetTrigger("Die");
 
 
                 Powerups.Instance.currentMultiplierTime = 0;
                 Powerups.Instance.currentMagnetTime = 0;
                 Powerups.Instance.currentShieldTime = 0;
                 Powerups.Instance.currentSpeedTime = 0;
-
-                GameManager.Instance.gameOver = true;
             }
         }
         else if (hit.transform.tag == "Portal" && !hitPortal)
@@ -333,7 +333,7 @@ public class RunnerPlayerController : MonoBehaviour
     // jumps the player up
     public void SwipeJump()
     {
-        if (controller.isGrounded && currentState != PlayerState.slide)
+        if (controller.isGrounded)
         {
             SoundManager.Instance.Play(jumpSound);
             StartCoroutine(RunnerJump());
@@ -362,7 +362,7 @@ public class RunnerPlayerController : MonoBehaviour
     // slides the player along the ground
     public void SwipeSlide()
     {
-        if (controller.isGrounded && currentState != PlayerState.jump && currentState != PlayerState.slide)
+        if (controller.isGrounded)
         {
             SoundManager.Instance.Play(swapLaneSound);
             StartCoroutine(RunnerSlide());
