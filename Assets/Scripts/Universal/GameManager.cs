@@ -11,7 +11,7 @@ public class GameManager : MonoBehaviour
     public int pointsPerSecond = 50;
     public int timesEntered2DWorld = 0;
     public float forwardSpeed = 10f;
-    public float maximumForwardSpeed = 20f;
+    public float maximumForwardSpeed = 15f;
     private float countdownToPointGain = 0f;
     public bool gameOver = false;
     public bool loaded = false;
@@ -62,7 +62,7 @@ public class GameManager : MonoBehaviour
         // if game is started and no game over, points start adding up.
         if (!isGameStarted)
         {
-            forwardSpeed = 12f;
+            forwardSpeed = 10f;
             gameUI.gameOverPanel.SetActive(false);
             gameUI.startingText.SetActive(true);
             gameUI.pauseButton.SetActive(true);
