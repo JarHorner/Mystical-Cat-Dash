@@ -54,7 +54,7 @@ public class TileManager : MonoBehaviour
 
     private void DetermineTileSpawn()
     {
-        float portalSpawnPercentage = Random.Range(1, 101); // range of 1 - 100
+        int portalSpawnPercentage = Random.Range(1, 101); // range of 1 - 100
 
         if (tilesSpawnedUntilPortal >= 16 && tilesSpawnedUntilPortal >= 30 && portalSpawnPercentage >= 90)
         {
