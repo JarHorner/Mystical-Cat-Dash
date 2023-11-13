@@ -25,10 +25,11 @@ public class TileManager : MonoBehaviour
             {
                 SpawnStartGameTile();
             }
-            if (i == swapGameTileSpawnNum) // this will be removed
-            {
-                SpawnPortalGameTile();
-            }
+            // For testing flappy bird gameplay
+            // if (i == swapGameTileSpawnNum)
+            // {
+            //     SpawnPortalGameTile();
+            // }
             else
             {
                 SpawnTile(Random.Range(0, tilePrefabs.Length));
@@ -38,7 +39,7 @@ public class TileManager : MonoBehaviour
 
     void Update()
     {
-        if (playerTransform.position.z - 25 > zSpawn - (numOfTiles * tileLength))
+        if (playerTransform.position.z - 35 > zSpawn - (numOfTiles * tileLength))
         {
             if (tilesSpawnedUntilPortal == swapGameTileSpawnNum) // this will be removed
             {
@@ -55,16 +56,17 @@ public class TileManager : MonoBehaviour
     private void DetermineTileSpawn()
     {
         int portalSpawnPercentage = Random.Range(1, 101); // range of 1 - 100
+        Debug.Log("portal tile spawn num: " + portalSpawnPercentage);
 
-        if (tilesSpawnedUntilPortal >= 16 && tilesSpawnedUntilPortal >= 30 && portalSpawnPercentage >= 90)
+        if (tilesSpawnedUntilPortal >= 10 && tilesSpawnedUntilPortal <= 20 && portalSpawnPercentage >= 90) // 10% chance
         {
             SpawnPortalGameTile();
         }
-        else if (tilesSpawnedUntilPortal >= 31 && tilesSpawnedUntilPortal >= 45 && portalSpawnPercentage >= 85)
+        else if (tilesSpawnedUntilPortal >= 21 && tilesSpawnedUntilPortal <= 31 && portalSpawnPercentage >= 80) // 20% chance
         {
             SpawnPortalGameTile();
         }
-        else if (tilesSpawnedUntilPortal > 46 && portalSpawnPercentage >= 80)
+        else if (tilesSpawnedUntilPortal >= 32 && portalSpawnPercentage >= 70) // 30% chance
         {
             SpawnPortalGameTile();
         }
@@ -86,6 +88,7 @@ public class TileManager : MonoBehaviour
     {
         // resets number so tons of portals do not open
         tilesSpawnedUntilPortal = 0;
+        Debug.Log("Portal Spawned");
         GameObject tile = Instantiate(swapGameTile, transform.forward * zSpawn, transform.rotation);
         activeTiles.Add(tile);
         zSpawn += tileLength;

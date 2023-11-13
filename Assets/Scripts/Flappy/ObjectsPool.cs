@@ -46,14 +46,14 @@ public class ObjectsPool : MonoBehaviour
         {
             timeSinceLastSpawned = 0f;
             // for Testing
-            if (pillarsSpawned == 0)
-            {
-                pillars.Add((GameObject)Instantiate(hardPillarPrefab, new Vector2(spawnXPosition, -4f), Quaternion.identity));
-            }
-            else if (pillarsSpawned == 1)
-            {
-                pillars.Add((GameObject)Instantiate(hardPillarPrefab, new Vector2(spawnXPosition, 6f), Quaternion.identity));
-            }
+            // if (pillarsSpawned == 0)
+            // {
+            //     pillars.Add((GameObject)Instantiate(hardPillarPrefab, new Vector2(spawnXPosition, -4f), Quaternion.identity));
+            // }
+            // else if (pillarsSpawned == 1)
+            // {
+            //     pillars.Add((GameObject)Instantiate(hardPillarPrefab, new Vector2(spawnXPosition, 6f), Quaternion.identity));
+            // }
 
             DeterminePillarSpawn();
 
