@@ -7,7 +7,7 @@ public class Coin : MonoBehaviour
 {
     [SerializeField] private int pointsWorth;
     [SerializeField] private AudioClip collectCoinSound;
-    public float moveSpeed = 5f;
+    public float moveSpeed = 20f;
     private Transform player;
 
     void Start()

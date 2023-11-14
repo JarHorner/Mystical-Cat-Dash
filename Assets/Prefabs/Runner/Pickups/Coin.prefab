@@ -175,7 +175,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pointsWorth: 100
   collectCoinSound: {fileID: 8300000, guid: 4d1e715a815a2a04fa70858c359feb0e, type: 3}
-  moveSpeed: 5
+  moveSpeed: 20
 --- !u!54 &-4404947808466141140
 Rigidbody:
   m_ObjectHideFlags: 0

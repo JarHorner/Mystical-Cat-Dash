@@ -56,7 +56,6 @@ public class TileManager : MonoBehaviour
     private void DetermineTileSpawn()
     {
         int portalSpawnPercentage = Random.Range(1, 101); // range of 1 - 100
-        Debug.Log("portal tile spawn num: " + portalSpawnPercentage);
 
         if (tilesSpawnedUntilPortal >= 10 && tilesSpawnedUntilPortal <= 20 && portalSpawnPercentage >= 90) // 10% chance
         {
@@ -88,7 +87,6 @@ public class TileManager : MonoBehaviour
     {
         // resets number so tons of portals do not open
         tilesSpawnedUntilPortal = 0;
-        Debug.Log("Portal Spawned");
         GameObject tile = Instantiate(swapGameTile, transform.forward * zSpawn, transform.rotation);
         activeTiles.Add(tile);
         zSpawn += tileLength;

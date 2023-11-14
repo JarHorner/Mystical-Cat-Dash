@@ -4,51 +4,27 @@ using UnityEngine;
 
 public class PowerupSpawner : MonoBehaviour
 {
-    [SerializeField] private GameObject[] powerups;
-    private float[] lanes = new float[] { -2f, 0f, 2f };
-    private int[] heights = new int[] { 1, 3, 5 };
-    [SerializeField] private Transform runnerPlayerTransform;
-    [SerializeField] private float zSpawnDistance = 140f;
-
+    [SerializeField] private List<GameObject> powerups;
+    [SerializeField] private GameObject powerupParent;
 
     void Start()
     {
-        runnerPlayerTransform = GameObject.FindWithTag("Player").transform;
-    }
-
-    void Update()
-    {
-
-    }
-
-    public void DeterminePowerupSpawn()
-    {
-        float powerupSpawnPercentage = Random.Range(1, 101); // range of 1 - 100
-
         SpawnPowerup();
-
-        // if (tilesSpawnedUntilPortal >= 16 && tilesSpawnedUntilPortal >= 30 && portalSpawnPercentage >= 90)
-        // {
-        //      SpawnPowerup();
-        // }
-        // else if (tilesSpawnedUntilPortal >= 31 && tilesSpawnedUntilPortal >= 45 && portalSpawnPercentage >= 85)
-        // {
-        //      SpawnPowerup();
-        // }
-        // else if (tilesSpawnedUntilPortal > 46 && portalSpawnPercentage >= 80)
-        // {
-        //      SpawnPowerup();
-        // }
     }
 
     private void SpawnPowerup()
     {
-        GameObject powerup = DeterminePowerup();
-        Vector3 location = DeterminePowerupLocation();
+        float powerupSpawnPercentage = Random.Range(0, 2); // range of 0 to 9 = 10% chance to spawn powerup
 
-        Instantiate(powerup, location, transform.rotation);
+        if (powerupSpawnPercentage == 0)
+        {
+            Debug.Log("Powerup spawned");
+            GameObject powerup = DeterminePowerup();
+            powerupParent.SetActive(true);
 
-
+            GameObject spawnedPowerup = Instantiate(powerup, new Vector3(powerupParent.transform.position.x, 1f, powerupParent.transform.position.z), Quaternion.identity);
+            spawnedPowerup.transform.parent = powerupParent.transform;
+        }
     }
 
     private GameObject DeterminePowerup()
@@ -58,16 +34,4 @@ public class PowerupSpawner : MonoBehaviour
         return powerups[chosenPowerup];
     }
 
-    private Vector3 DeterminePowerupLocation()
-    {
-        int randomIndexForLane = Random.Range(0, 3); // range of 0 - 2 for lanes array
-        float randomLane = lanes[randomIndexForLane];
-
-        int randomIndexForHeight = Random.Range(0, 2); // range of 0 - 2 for Height array
-        int randomHeight = heights[randomIndexForHeight];
-
-        Vector3 powerupLocation = new Vector3(randomLane, randomHeight, runnerPlayerTransform.position.z + zSpawnDistance);
-
-        return powerupLocation;
-    }
 }

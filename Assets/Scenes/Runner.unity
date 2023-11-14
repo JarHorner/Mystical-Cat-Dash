@@ -387,12 +387,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3320795679431575941, guid: 332af6dfa4e7b084ca77ef57d0113f26, type: 3}
       propertyPath: tilePrefabs.Array.size
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3320795679431575941, guid: 332af6dfa4e7b084ca77ef57d0113f26, type: 3}
       propertyPath: tilePrefabs.Array.data[0]
       value: 
-      objectReference: {fileID: 2964598716801432744, guid: fc1391f823537f040811452d12ad6f46, type: 3}
+      objectReference: {fileID: 6018399080922412537, guid: a7f71d1f735548a4db11a86dd9db7350, type: 3}
     - target: {fileID: 3320795679431575941, guid: 332af6dfa4e7b084ca77ef57d0113f26, type: 3}
       propertyPath: tilePrefabs.Array.data[1]
       value: 
@@ -459,7 +459,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6360679624717465266, guid: 332af6dfa4e7b084ca77ef57d0113f26, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6490752519256809444, guid: 332af6dfa4e7b084ca77ef57d0113f26, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2535,7 +2535,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6360679624717465266, guid: 332af6dfa4e7b084ca77ef57d0113f26, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6490752519256809444, guid: 332af6dfa4e7b084ca77ef57d0113f26, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3056,57 +3056,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2114944864}
   m_CullTransparentMesh: 1
---- !u!1 &2138167869
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2138167871}
-  - component: {fileID: 2138167870}
-  m_Layer: 0
-  m_Name: PowerupSpawner
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &2138167870
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2138167869}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8cfd04eb9c83a8e47bc7cd249a95ebec, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  powerups:
-  - {fileID: 4042660625502987984, guid: 13337154a8ad1724e99ee52e5b2d6333, type: 3}
-  - {fileID: 8515289557347081945, guid: 73cce168cb1d0ec4c84deb838c11f916, type: 3}
-  - {fileID: 782431648164839485, guid: b345ace19c455c74c94620f2e2e01e49, type: 3}
-  - {fileID: 6746150071461298513, guid: 6c71f9c657d53d648bc2ecc96e46a463, type: 3}
-  runnerPlayerTransform: {fileID: 0}
-  zSpawnDistance: 140
---- !u!4 &2138167871
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2138167869}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1685425854572048
 GameObject:
   m_ObjectHideFlags: 0
@@ -3574,7 +3523,6 @@ SceneRoots:
   - {fileID: 4032000179286448920}
   - {fileID: 909386607280129858}
   - {fileID: 1342278972}
-  - {fileID: 2138167871}
   - {fileID: 5250059293146932126}
   - {fileID: 1845713138}
   - {fileID: 298272028}

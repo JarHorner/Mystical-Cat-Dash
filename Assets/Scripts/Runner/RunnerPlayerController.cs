@@ -222,10 +222,6 @@ public class RunnerPlayerController : MonoBehaviour
             Coin coin = other.gameObject.GetComponent<Coin>();
             coin.CoinScored();
         }
-        else if (other.tag == "PowerupSpawn")
-        {
-            powerupSpawner.DeterminePowerupSpawn();
-        }
         else if (other.tag == "Multiplier")
         {
             Multiplier multiplier = other.gameObject.GetComponent<Multiplier>();

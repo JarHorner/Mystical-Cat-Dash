@@ -13,7 +13,7 @@ public class CoinSpawner : MonoBehaviour
 
     private void SpawnCoins()
     {
-        float coinsSpawnPercentage = Random.Range(0, 2); // range of 0 or 1 = 50% chance to spawn coins
+        int coinsSpawnPercentage = Random.Range(0, 2); // range of 0 or 1 = 50% chance to spawn coins
 
         if (coinsSpawnPercentage == 0)
         {
@@ -21,7 +21,7 @@ public class CoinSpawner : MonoBehaviour
             coinLanes[randomIndexForLane].SetActive(true);
 
             // determines if a different lane of coins spawns
-            float secondCoinsSpawnPercentage = Random.Range(0, 4); // range of 0 - 3 = 25% chance to spawn second row of coins
+            int secondCoinsSpawnPercentage = Random.Range(0, 4); // range of 0 - 3 = 25% chance to spawn second row of coins
             if (secondCoinsSpawnPercentage == 0)
             {
                 coinLanes.RemoveAt(randomIndexForLane);
