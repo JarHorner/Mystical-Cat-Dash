@@ -45,22 +45,29 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   runnerPlayer: {fileID: 0}
+  playerMesh: {fileID: 0}
+  powerupAlmostDoneTimer: 2
+  powerupAlmostDone: 0
   multiplyBuff: {fileID: 8515289557347081945, guid: 73cce168cb1d0ec4c84deb838c11f916, type: 3}
   multiplierLength: 20
   multiplyValue: 2
   currentMultiplierTime: 0
   multiplyPickedUp: 0
+  destroyMultiplierVFX: 0
   magnetBuff: {fileID: 4042660625502987984, guid: 13337154a8ad1724e99ee52e5b2d6333, type: 3}
   magnetLength: 20
   magnetSize: 10
   currentMagnetTime: 0
   magnetPickedUp: 0
+  destroyMagnetVFX: 0
   shieldBuff: {fileID: 782431648164839485, guid: b345ace19c455c74c94620f2e2e01e49, type: 3}
   shieldLength: 30
   currentShieldTime: 0
   shieldPickedUp: 0
+  destroyShieldVFX: 0
   speedBuff: {fileID: 6746150071461298513, guid: 6c71f9c657d53d648bc2ecc96e46a463, type: 3}
   speedLength: 5
-  speedValue: 2
+  speedValue: 1.5
   currentSpeedTime: 0
   speedPickedUp: 0
+  destroySpeedVFX: 0

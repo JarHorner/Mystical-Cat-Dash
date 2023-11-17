@@ -276,10 +276,18 @@ public class RunnerPlayerController : MonoBehaviour
         else if (other.tag == "Speed")
         {
             Speed speed = other.gameObject.GetComponent<Speed>();
-            invulIEnumerator = Invulnerable(Powerups.Instance.speedLength);
 
-            if (!Powerups.Instance.speedPickedUp)
+            if (Powerups.Instance.speedPickedUp)
             {
+                StopCoroutine(invulIEnumerator);
+
+                invulIEnumerator = Invulnerable(Powerups.Instance.speedLength);
+                StartCoroutine(invulIEnumerator);
+                speed.ExtendBuff();
+            }
+            else
+            {
+                Debug.Log("Start Speed");
                 invulIEnumerator = Invulnerable(Powerups.Instance.speedLength);
                 StartCoroutine(invulIEnumerator);
                 // gives the buff VFX to the player
@@ -287,14 +295,6 @@ public class RunnerPlayerController : MonoBehaviour
                 speed.gameObject.transform.GetChild(0).parent = this.gameObject.transform;
 
                 speed.SpeedBuff();
-            }
-            else
-            {
-                StopCoroutine(invulIEnumerator);
-
-                invulIEnumerator = Invulnerable(Powerups.Instance.speedLength);
-                StartCoroutine(invulIEnumerator);
-                speed.ExtendBuff();
             }
         }
     }

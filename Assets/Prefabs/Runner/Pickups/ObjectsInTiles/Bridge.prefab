@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 4546852837195034261}
   m_Layer: 0
   m_Name: Bridge
-  m_TagString: Untagged
+  m_TagString: Object
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -118,7 +118,7 @@ GameObject:
   - component: {fileID: 1228024589366499357}
   - component: {fileID: 2117662086651725981}
   - component: {fileID: 1298822231767981640}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Rails
   m_TagString: Object
   m_Icon: {fileID: 0}

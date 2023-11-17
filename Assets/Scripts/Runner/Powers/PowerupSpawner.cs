@@ -5,7 +5,7 @@ using UnityEngine;
 public class PowerupSpawner : MonoBehaviour
 {
     [SerializeField] private List<GameObject> powerups;
-    [SerializeField] private GameObject powerupParent;
+    [SerializeField] private List<GameObject> powerupParent;
 
     void Start()
     {
@@ -14,16 +14,17 @@ public class PowerupSpawner : MonoBehaviour
 
     private void SpawnPowerup()
     {
-        float powerupSpawnPercentage = Random.Range(0, 2); // range of 0 to 9 = 10% chance to spawn powerup
+        int powerupSpawnPercentage = Random.Range(0, 1); // range of 0 to 16 = 6.25% chance to spawn powerup
 
         if (powerupSpawnPercentage == 0)
         {
+            int powerupSpawnLocation = Random.Range(0, 3); // range of 0-2 to get proper location from list
             Debug.Log("Powerup spawned");
             GameObject powerup = DeterminePowerup();
-            powerupParent.SetActive(true);
+            powerupParent[powerupSpawnLocation].SetActive(true);
 
-            GameObject spawnedPowerup = Instantiate(powerup, new Vector3(powerupParent.transform.position.x, 1f, powerupParent.transform.position.z), Quaternion.identity);
-            spawnedPowerup.transform.parent = powerupParent.transform;
+            GameObject spawnedPowerup = Instantiate(powerup, new Vector3(powerupParent[powerupSpawnLocation].transform.position.x, powerupParent[powerupSpawnLocation].transform.position.y, powerupParent[powerupSpawnLocation].transform.position.z), Quaternion.identity);
+            spawnedPowerup.transform.parent = powerupParent[powerupSpawnLocation].transform;
         }
     }
 

@@ -49,4 +49,4 @@ MonoBehaviour:
   - {fileID: 8515289557347081945, guid: 73cce168cb1d0ec4c84deb838c11f916, type: 3}
   - {fileID: 782431648164839485, guid: b345ace19c455c74c94620f2e2e01e49, type: 3}
   - {fileID: 6746150071461298513, guid: 6c71f9c657d53d648bc2ecc96e46a463, type: 3}
-  powerupParent: {fileID: 0}
+  powerupParent: []

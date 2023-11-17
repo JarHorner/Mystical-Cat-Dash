@@ -39,7 +39,7 @@ public class Powerups : MonoBehaviour
     // Speed powerup variables
     [SerializeField] private GameObject speedBuff;
     public float speedLength;
-    public int speedValue = 2;
+    public float speedValue = 1.5f;
     public float currentSpeedTime;
     public bool speedPickedUp = false;
     public bool destroySpeedVFX = false;
