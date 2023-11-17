@@ -29,7 +29,7 @@ public class MainMenu : MonoBehaviour
 
     public void StartGame()
     {
-        SoundManager.Instance.Play(buttonPress, 0.4f);
+        SoundManager.Instance.Play(buttonPress, 0.25f);
 
         if (GameManager.Instance)
         {
@@ -51,7 +51,7 @@ public class MainMenu : MonoBehaviour
 
     public void ToggleCreditsMenu()
     {
-        SoundManager.Instance.Play(buttonPress, 0.4f);
+        SoundManager.Instance.Play(buttonPress, 0.25f);
 
         if (creditMenuOpen)
         {
@@ -67,7 +67,7 @@ public class MainMenu : MonoBehaviour
 
     public void ToggleSettingsMenu()
     {
-        SoundManager.Instance.Play(buttonPress, 0.4f);
+        SoundManager.Instance.Play(buttonPress, 0.25f);
 
         if (settingsMenuOpen)
         {
@@ -150,7 +150,7 @@ public class MainMenu : MonoBehaviour
     // opens the link warning panel
     public void ToggleLinkWarning(string credit = "")
     {
-        SoundManager.Instance.Play(buttonPress, 0.4f);
+        SoundManager.Instance.Play(buttonPress, 0.25f);
 
         if (linkWarningMenuOpen)
         {
