@@ -184,7 +184,7 @@ public class RunnerPlayerController : MonoBehaviour
     {
         if (hit.transform.tag == "Object")
         {
-            SoundManager.Instance.Play(hitSound);
+            SoundManager.Instance.Play(hitSound, 0.5f);
             // if player has shield powerup, he does not die and enters invulnerable state
             if (Powerups.Instance.shieldPickedUp)
             {
@@ -311,7 +311,7 @@ public class RunnerPlayerController : MonoBehaviour
     {
         if (desiredLane > 0 && currentState != PlayerState.idle)
         {
-            SoundManager.Instance.Play(swapLaneSound);
+            SoundManager.Instance.Play(swapLaneSound, 0.25f);
             desiredLane--;
         }
     }
@@ -321,7 +321,7 @@ public class RunnerPlayerController : MonoBehaviour
     {
         if (desiredLane < 2 && currentState != PlayerState.idle)
         {
-            SoundManager.Instance.Play(swapLaneSound);
+            SoundManager.Instance.Play(swapLaneSound, 0.25f);
             desiredLane++;
         }
     }
@@ -331,7 +331,7 @@ public class RunnerPlayerController : MonoBehaviour
     {
         if (controller.isGrounded)
         {
-            SoundManager.Instance.Play(jumpSound);
+            SoundManager.Instance.Play(jumpSound, 0.4f);
             StartCoroutine(RunnerJump());
             direction.y = jumpForce;
         }
@@ -360,7 +360,7 @@ public class RunnerPlayerController : MonoBehaviour
     {
         if (controller.isGrounded)
         {
-            SoundManager.Instance.Play(swapLaneSound);
+            SoundManager.Instance.Play(swapLaneSound, 0.25f);
             StartCoroutine(RunnerSlide());
         }
     }

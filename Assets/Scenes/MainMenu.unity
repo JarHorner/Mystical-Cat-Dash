@@ -789,7 +789,7 @@ PrefabInstance:
     - target: {fileID: 3265131749927553153, guid: ffc4b2e4246b0f244890b139a4a49eb9, type: 3}
       propertyPath: backgroundMusic
       value: 
-      objectReference: {fileID: 8300000, guid: c24d48ea8dcfffb4a8aca9cfb14f2ca6, type: 3}
+      objectReference: {fileID: 8300000, guid: 17043b5438b91e141b4da5664715d708, type: 3}
     - target: {fileID: 5742276778116736302, guid: ffc4b2e4246b0f244890b139a4a49eb9, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -2877,6 +2877,7 @@ MonoBehaviour:
   credits: {fileID: 1693955789}
   settings: {fileID: 1477063103}
   linkWarning: {fileID: 1983505304}
+  backgroundMusic: {fileID: 8300000, guid: 17043b5438b91e141b4da5664715d708, type: 3}
   fader: {fileID: 1413589832}
   buttonPress: {fileID: 8300000, guid: cf9505f1c1e4fb946b4641b3133f81ad, type: 3}
 --- !u!114 &780610483

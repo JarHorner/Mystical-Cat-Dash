@@ -10,7 +10,7 @@ public class Multiplier : MonoBehaviour
     // starts the timer of the multiplier powerup
     public void MultiplyBuff()
     {
-        SoundManager.Instance.Play(collectPowerupSound);
+        SoundManager.Instance.Play(collectPowerupSound, 0.4f);
 
         // shows the buff symbol on the screen
         GameUI.Instance.powerupImages[0].enabled = true;

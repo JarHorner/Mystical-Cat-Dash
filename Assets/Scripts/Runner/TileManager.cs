@@ -41,14 +41,8 @@ public class TileManager : MonoBehaviour
     {
         if (playerTransform.position.z - 35 > zSpawn - (numOfTiles * tileLength))
         {
-            if (tilesSpawnedUntilPortal == swapGameTileSpawnNum) // this will be removed
-            {
-                SpawnPortalGameTile();
-            }
-            else
-            {
-                DetermineTileSpawn();
-            }
+            DetermineTileSpawn();
+
             DeleteTile();
         }
     }
@@ -57,15 +51,15 @@ public class TileManager : MonoBehaviour
     {
         int portalSpawnPercentage = Random.Range(1, 101); // range of 1 - 100
 
-        if (tilesSpawnedUntilPortal >= 10 && tilesSpawnedUntilPortal <= 20 && portalSpawnPercentage >= 90) // 10% chance
+        if (tilesSpawnedUntilPortal >= 10 && tilesSpawnedUntilPortal <= 20 && portalSpawnPercentage >= 85) // 15% chance
         {
             SpawnPortalGameTile();
         }
-        else if (tilesSpawnedUntilPortal >= 21 && tilesSpawnedUntilPortal <= 31 && portalSpawnPercentage >= 80) // 20% chance
+        else if (tilesSpawnedUntilPortal >= 21 && tilesSpawnedUntilPortal <= 31 && portalSpawnPercentage >= 70) // 30% chance
         {
             SpawnPortalGameTile();
         }
-        else if (tilesSpawnedUntilPortal >= 32 && portalSpawnPercentage >= 70) // 30% chance
+        else if (tilesSpawnedUntilPortal >= 32 && portalSpawnPercentage >= 60) // 40% chance
         {
             SpawnPortalGameTile();
         }

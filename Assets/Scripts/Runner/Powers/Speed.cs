@@ -11,9 +11,9 @@ public class Speed : MonoBehaviour
     // starts the timer of the speed powerup
     public void SpeedBuff()
     {
-        SoundManager.Instance.Play(collectPowerupSound);
+        SoundManager.Instance.Play(collectPowerupSound, 0.4f);
 
-        SoundManager.Instance.Play(speedUpSound);
+        SoundManager.Instance.Play(speedUpSound, 0.5f);
 
         // shows the buff symbol on the screen
         GameUI.Instance.powerupImages[3].enabled = true;

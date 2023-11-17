@@ -21734,4 +21734,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerTransform: {fileID: 0}
   animator: {fileID: 8867825729516755482}
-  distanceToOpen: 30
+  distanceToOpen: 35

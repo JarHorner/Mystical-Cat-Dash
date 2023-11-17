@@ -9,6 +9,7 @@ public class MainMenu : MonoBehaviour
     [SerializeField] private Image credits;
     [SerializeField] private Image settings;
     [SerializeField] private Image linkWarning;
+    [SerializeField] private AudioClip backgroundMusic;
     private bool creditMenuOpen = false;
     private bool settingsMenuOpen = false;
     private bool linkWarningMenuOpen = false;
@@ -22,13 +23,13 @@ public class MainMenu : MonoBehaviour
         {
             Tween.Instance.backToMainMenu = false;
             Tween.Instance.TweenEnd();
+            SoundManager.Instance.changeBackground(backgroundMusic);
         }
-
     }
 
     public void StartGame()
     {
-        SoundManager.Instance.Play(buttonPress);
+        SoundManager.Instance.Play(buttonPress, 0.4f);
 
         if (GameManager.Instance)
         {
@@ -50,7 +51,7 @@ public class MainMenu : MonoBehaviour
 
     public void ToggleCreditsMenu()
     {
-        SoundManager.Instance.Play(buttonPress);
+        SoundManager.Instance.Play(buttonPress, 0.4f);
 
         if (creditMenuOpen)
         {
@@ -66,7 +67,7 @@ public class MainMenu : MonoBehaviour
 
     public void ToggleSettingsMenu()
     {
-        SoundManager.Instance.Play(buttonPress);
+        SoundManager.Instance.Play(buttonPress, 0.4f);
 
         if (settingsMenuOpen)
         {
@@ -149,7 +150,7 @@ public class MainMenu : MonoBehaviour
     // opens the link warning panel
     public void ToggleLinkWarning(string credit = "")
     {
-        SoundManager.Instance.Play(buttonPress);
+        SoundManager.Instance.Play(buttonPress, 0.4f);
 
         if (linkWarningMenuOpen)
         {

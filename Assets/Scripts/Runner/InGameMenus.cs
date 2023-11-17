@@ -27,7 +27,7 @@ public class InGameMenus : MonoBehaviour
     // allows the player to restart the game by resetting all the values of the GameManager.
     public void ReplayGame()
     {
-        SoundManager.Instance.Play(buttonPress);
+        SoundManager.Instance.Play(buttonPress, 0.4f);
 
         Tween.Instance.TweenReplayGame();
     }
@@ -38,7 +38,7 @@ public class InGameMenus : MonoBehaviour
         if (pauseGame)
             PauseGame();
 
-        SoundManager.Instance.Play(buttonPress);
+        SoundManager.Instance.Play(buttonPress, 0.4f);
 
         Tween.Instance.backToMainMenu = true;
         Tween.Instance.TweenMainMenu();
@@ -57,7 +57,7 @@ public class InGameMenus : MonoBehaviour
             Time.timeScale = 0;
             GameUI.Instance.pausePanel.SetActive(true);
         }
-        SoundManager.Instance.Play(buttonPress);
+        SoundManager.Instance.Play(buttonPress, 0.4f);
 
         pauseGame = !pauseGame;
     }

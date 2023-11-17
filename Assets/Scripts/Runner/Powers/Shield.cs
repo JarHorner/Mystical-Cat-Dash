@@ -10,7 +10,7 @@ public class Shield : MonoBehaviour
     // starts the timer of the shield powerup
     public void ShieldBuff()
     {
-        SoundManager.Instance.Play(collectPowerupSound);
+        SoundManager.Instance.Play(collectPowerupSound, 0.4f);
 
         // shows the buff symbol on the screen
         GameUI.Instance.powerupImages[2].enabled = true;

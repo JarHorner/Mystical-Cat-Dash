@@ -36,7 +36,7 @@ public class Coin : MonoBehaviour
     // adds score to calculated score
     public void CoinScored()
     {
-        SoundManager.Instance.Play(collectCoinSound);
+        SoundManager.Instance.Play(collectCoinSound, 0.25f);
         GameManager.Instance.Scored(pointsWorth);
 
         Destroy(this.gameObject);

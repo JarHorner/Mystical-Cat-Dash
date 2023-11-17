@@ -33,7 +33,7 @@ public class SoundManager : MonoBehaviour
 
     //creates a new GameObject, gives it a AudioSource component and adds the parameter as the clip then plays it.
     //Used for sound effects
-    public void Play(AudioClip clip)
+    public void Play(AudioClip clip, float volume)
     {
         GameObject newSound = new GameObject();
         newSound.transform.position = this.transform.position;
@@ -45,7 +45,7 @@ public class SoundManager : MonoBehaviour
         source.outputAudioMixerGroup = soundEffectAudioMixer;
         source.clip = clip;
         source.priority = 0;
-        source.volume = 0.5f;
+        source.volume = volume;
         source.Play();
         Destroy(newSound, clip.length);
     }

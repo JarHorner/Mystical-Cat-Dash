@@ -42,7 +42,7 @@ public class GameManager : MonoBehaviour
         gameUI = GameUI.Instance;
         isGameStarted = false;
 
-        // SoundManager.Instance.changeBackground(gameMusic);
+        SoundManager.Instance.changeBackground(gameMusic);
     }
 
     void Update()
@@ -79,7 +79,7 @@ public class GameManager : MonoBehaviour
                 // when game over menu is active, game over sound plays, time scale is 0 and values are reset.
                 if (!gameOverMenuOpen)
                 {
-                    SoundManager.Instance.Play(gameOverSound);
+                    SoundManager.Instance.Play(gameOverSound, 0.5f);
                     AudioSource bgMusic = GameObject.Find("BG Music").GetComponent<AudioSource>();
                     bgMusic.volume = 0.5f;
 
@@ -120,7 +120,7 @@ public class GameManager : MonoBehaviour
     // depending on what scene you are in, swaps to the other with transitions
     public void SwitchDimensions()
     {
-        SoundManager.Instance.Play(enterPortalSound);
+        SoundManager.Instance.Play(enterPortalSound, 0.5f);
 
         Tween.Instance.TweenBetweenScenes();
     }
