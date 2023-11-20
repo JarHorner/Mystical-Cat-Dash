@@ -80,8 +80,7 @@ public class GameManager : MonoBehaviour
                 if (!gameOverMenuOpen)
                 {
                     SoundManager.Instance.Play(gameOverSound, 0.5f);
-                    AudioSource bgMusic = GameObject.Find("BG Music").GetComponent<AudioSource>();
-                    bgMusic.volume = 0.5f;
+                    SoundManager.Instance.StopBackground();
 
                     //Time.timeScale = 0;
 

@@ -352,6 +352,7 @@ public class RunnerPlayerController : MonoBehaviour
             animator.SetTrigger("Land");
             animator.SetBool("Run", true);
         }
+        yield return null;
     }
 
 

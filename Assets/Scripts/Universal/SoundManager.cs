@@ -68,6 +68,12 @@ public class SoundManager : MonoBehaviour
         source.Play();
     }
 
+        public void StopBackground()
+    {
+        AudioSource source = bgPlayer.GetComponent<AudioSource>();
+        source.Stop();
+    }
+
     public void changeBackground(AudioClip newClip)
     {
         bgPlayer.GetComponent<AudioSource>().clip = newClip;
