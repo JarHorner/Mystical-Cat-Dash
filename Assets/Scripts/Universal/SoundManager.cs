@@ -64,6 +64,7 @@ public class SoundManager : MonoBehaviour
         source.outputAudioMixerGroup = backgroundAudioMixer;
         source.clip = clip;
         source.priority = 0;
+        source.volume = 0.5f;
         source.loop = true;
         source.Play();
     }

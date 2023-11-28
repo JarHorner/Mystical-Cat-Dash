@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using TMPro;
 
 public class MainMenu : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class MainMenu : MonoBehaviour
     [SerializeField] private Image settings;
     [SerializeField] private Image linkWarning;
     [SerializeField] private AudioClip backgroundMusic;
+    [SerializeField] private TMP_Text highscore;
     private bool creditMenuOpen = false;
     private bool settingsMenuOpen = false;
     private bool linkWarningMenuOpen = false;
@@ -17,11 +19,17 @@ public class MainMenu : MonoBehaviour
     [SerializeField] private RectTransform fader;
     [SerializeField] private AudioClip buttonPress;
 
+    void Start()
+    {
+        highscore.text = PlayerPrefs.GetInt("Highscore").ToString();
+    }
+
     void Update()
     {
         if (Tween.Instance.backToMainMenu)
         {
             Tween.Instance.backToMainMenu = false;
+            highscore.text = PlayerPrefs.GetInt("Highscore").ToString();
             Tween.Instance.TweenEnd();
             SoundManager.Instance.changeBackground(backgroundMusic);
         }

@@ -14,7 +14,7 @@ public class PowerupSpawner : MonoBehaviour
 
     private void SpawnPowerup()
     {
-        int powerupSpawnPercentage = Random.Range(0, 1); // range of 0 to 16 = 6.25% chance to spawn powerup
+        int powerupSpawnPercentage = Random.Range(0, 8); // range of 0 to 7 = 12% chance to spawn powerup
 
         if (powerupSpawnPercentage == 0)
         {

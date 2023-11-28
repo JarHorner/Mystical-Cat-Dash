@@ -311,7 +311,7 @@ public class RunnerPlayerController : MonoBehaviour
     {
         if (desiredLane > 0 && currentState != PlayerState.idle)
         {
-            SoundManager.Instance.Play(swapLaneSound, 0.25f);
+            SoundManager.Instance.Play(swapLaneSound, 0.6f);
             desiredLane--;
         }
     }
@@ -321,7 +321,7 @@ public class RunnerPlayerController : MonoBehaviour
     {
         if (desiredLane < 2 && currentState != PlayerState.idle)
         {
-            SoundManager.Instance.Play(swapLaneSound, 0.25f);
+            SoundManager.Instance.Play(swapLaneSound, 0.6f);
             desiredLane++;
         }
     }
@@ -331,7 +331,7 @@ public class RunnerPlayerController : MonoBehaviour
     {
         if (controller.isGrounded)
         {
-            SoundManager.Instance.Play(jumpSound, 0.4f);
+            SoundManager.Instance.Play(jumpSound, 0.6f);
             StartCoroutine(RunnerJump());
             direction.y = jumpForce;
         }
@@ -361,7 +361,7 @@ public class RunnerPlayerController : MonoBehaviour
     {
         if (controller.isGrounded)
         {
-            SoundManager.Instance.Play(swapLaneSound, 0.25f);
+            SoundManager.Instance.Play(swapLaneSound, 0.6f);
             StartCoroutine(RunnerSlide());
         }
     }

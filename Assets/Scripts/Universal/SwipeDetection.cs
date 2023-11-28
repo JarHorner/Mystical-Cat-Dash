@@ -54,7 +54,6 @@ public class SwipeDetection : MonoBehaviour
         if (Vector3.Distance(startPosition, endPosition) >= minimumDistance &&
         (endTime - startTime) <= maximumTime)
         {
-            Debug.Log("Swipe Detected");
             Vector3 direction = endPosition - startPosition;
             Vector2 direction2D = new Vector2(direction.x, direction.y).normalized;
             SwipeDirection(direction2D);
@@ -66,27 +65,19 @@ public class SwipeDetection : MonoBehaviour
     {
         if (Vector2.Dot(Vector2.up, direction) > directionThreshhold)
         {
-            Debug.Log("UP");
             runnerPlayer.SwipeJump();
         }
         else if (Vector2.Dot(Vector2.down, direction) > directionThreshhold)
         {
-            Debug.Log("DOWN");
             runnerPlayer.SwipeSlide();
         }
         else if (Vector2.Dot(Vector2.left, direction) > directionThreshhold)
         {
-            Debug.Log("LEFT");
             runnerPlayer.SwipeShiftLeft();
         }
         else if (Vector2.Dot(Vector2.right, direction) > directionThreshhold)
         {
-            Debug.Log("RIGHT");
             runnerPlayer.SwipeShiftRight();
-        }
-        else
-        {
-            Debug.Log("NOTHING");
         }
     }
 }

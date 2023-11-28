@@ -97,7 +97,7 @@ public class FlappyPlayerController : MonoBehaviour
         }
         else if (!GameManager.Instance.gameOver && context.performed && Time.timeScale == 1)
         {
-            SoundManager.Instance.Play(flapSound, 0.8f);
+            SoundManager.Instance.Play(flapSound, 1f);
             anim.SetTrigger("Flap");
 
             direction = Vector3.up * flapStrength;

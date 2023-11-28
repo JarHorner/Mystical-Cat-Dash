@@ -82,14 +82,13 @@ public class GameManager : MonoBehaviour
                     SoundManager.Instance.Play(gameOverSound, 0.5f);
                     SoundManager.Instance.StopBackground();
 
-                    //Time.timeScale = 0;
-
-
                     gameUI.gameOverScore.GetComponent<TMP_Text>().text = calculatedScore.ToString();
                     gameUI.gameOverPanel.SetActive(true);
                     countdownToPointGain = 0f;
 
                     gameOverMenuOpen = true;
+
+                    CheckNewHighscore();
                 }
             }
         }
@@ -103,6 +102,14 @@ public class GameManager : MonoBehaviour
             Scored(pointsPerSecond);
             countdownToPointGain = 0;
         }
+    }
+
+    private void CheckNewHighscore()
+    {
+        int currentHighscore = PlayerPrefs.GetInt("Highscore");
+        
+        if (calculatedScore > currentHighscore)
+            PlayerPrefs.SetInt("Highscore", calculatedScore);
     }
 
     // adds score to calculated score based on if the player has a multiplier power or not
