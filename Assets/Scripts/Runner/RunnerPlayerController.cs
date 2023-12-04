@@ -373,7 +373,6 @@ public class RunnerPlayerController : MonoBehaviour
         animator.SetTrigger("SleepStart");
 
         // these are needed as I cannot edit the animations themselves, this would be in the animations if I could.
-        this.gameObject.transform.position =
         controller.center = new Vector3(0.002f, 0.015f, 0.04f);
         controller.radius = 0.01f;
         controller.height = 0f;
