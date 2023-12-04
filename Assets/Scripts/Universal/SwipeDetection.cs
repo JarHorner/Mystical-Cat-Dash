@@ -51,8 +51,17 @@ public class SwipeDetection : MonoBehaviour
     // helps detect if a swipe has occcured and not a random touch on the screen.
     private void DetectSwipe()
     {
+
+        // checks to see if pause button was clicked before jumping. really round-about way to solving a bug.
+        if (startPosition.x >= 3.5f && startPosition.y >= 10.1f)
+        {
+            if (startPosition.x <= 5.1f && startPosition.y <= 11.8f)
+            {
+                return;
+            }
+        }
         if (Vector3.Distance(startPosition, endPosition) >= minimumDistance &&
-        (endTime - startTime) <= maximumTime)
+        (endTime - startTime) <= maximumTime && Time.timeScale == 1)
         {
             Vector3 direction = endPosition - startPosition;
             Vector2 direction2D = new Vector2(direction.x, direction.y).normalized;

@@ -19,7 +19,6 @@ public class PowerupSpawner : MonoBehaviour
         if (powerupSpawnPercentage == 0)
         {
             int powerupSpawnLocation = Random.Range(0, 3); // range of 0-2 to get proper location from list
-            Debug.Log("Powerup spawned");
             GameObject powerup = DeterminePowerup();
             powerupParent[powerupSpawnLocation].SetActive(true);
 
