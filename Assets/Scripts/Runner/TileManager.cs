@@ -51,15 +51,15 @@ public class TileManager : MonoBehaviour
     {
         int portalSpawnPercentage = Random.Range(1, 101); // range of 1 - 100
 
-        if (tilesSpawnedUntilPortal >= 10 && tilesSpawnedUntilPortal <= 20 && portalSpawnPercentage >= 85) // 15% chance
+        if (tilesSpawnedUntilPortal >= 10 && tilesSpawnedUntilPortal <= 20 && portalSpawnPercentage >= 80) // 20% chance
         {
             SpawnPortalGameTile();
         }
-        else if (tilesSpawnedUntilPortal >= 21 && tilesSpawnedUntilPortal <= 31 && portalSpawnPercentage >= 70) // 30% chance
+        else if (tilesSpawnedUntilPortal >= 21 && tilesSpawnedUntilPortal <= 31 && portalSpawnPercentage >= 65) // 35% chance
         {
             SpawnPortalGameTile();
         }
-        else if (tilesSpawnedUntilPortal >= 32 && portalSpawnPercentage >= 60) // 40% chance
+        else if (tilesSpawnedUntilPortal >= 32 && portalSpawnPercentage >= 55) // 45% chance
         {
             SpawnPortalGameTile();
         }
