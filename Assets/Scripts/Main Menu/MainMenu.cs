@@ -21,7 +21,6 @@ public class MainMenu : MonoBehaviour
 
     void Start()
     {
-        Application.targetFrameRate = 60;
         highscore.text = PlayerPrefs.GetInt("Highscore").ToString();
     }
 

@@ -3268,7 +3268,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8869869082020133624, guid: d2a9d6fc6c08a6847b57ce9b8a035f54, type: 3}
       propertyPath: shieldLength
-      value: 10
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 8869869082020133624, guid: d2a9d6fc6c08a6847b57ce9b8a035f54, type: 3}
+      propertyPath: multiplierLength
+      value: 30
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

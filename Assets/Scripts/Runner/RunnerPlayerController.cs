@@ -11,6 +11,7 @@ public enum PlayerState
     jump,
     dead,
 }
+
 public class RunnerPlayerController : MonoBehaviour
 {
     public PlayerState currentState;
@@ -18,8 +19,6 @@ public class RunnerPlayerController : MonoBehaviour
     private InputAction primaryContact, primaryPosition;
     public Animator animator;
     public float playIdleAnimTimer = 6f;
-    private Vector2 initialPos;
-    private Vector2 currentPos => primaryPosition.ReadValue<Vector2>();
 
     [SerializeField] private CharacterController controller;
     [SerializeField] private PowerupSpawner powerupSpawner;
@@ -194,10 +193,10 @@ public class RunnerPlayerController : MonoBehaviour
             }
             else
             {
+                currentState = PlayerState.dead;
                 GameManager.Instance.gameOver = true;
 
                 animator.SetBool("Run", false);
-                currentState = PlayerState.dead;
                 animator.SetTrigger("Die");
 
 
@@ -287,7 +286,6 @@ public class RunnerPlayerController : MonoBehaviour
             }
             else
             {
-                Debug.Log("Start Speed");
                 invulIEnumerator = Invulnerable(Powerups.Instance.speedLength);
                 StartCoroutine(invulIEnumerator);
                 // gives the buff VFX to the player
@@ -309,7 +307,7 @@ public class RunnerPlayerController : MonoBehaviour
     // shifts the players lane to the left
     public void SwipeShiftLeft()
     {
-        if (desiredLane > 0 && currentState != PlayerState.idle)
+        if (desiredLane > 0 && currentState != PlayerState.idle && currentState != PlayerState.dead)
         {
             SoundManager.Instance.Play(swapLaneSound, 0.6f);
             desiredLane--;
@@ -319,7 +317,7 @@ public class RunnerPlayerController : MonoBehaviour
     // shifts the players lane to the right
     public void SwipeShiftRight()
     {
-        if (desiredLane < 2 && currentState != PlayerState.idle)
+        if (desiredLane < 2 && currentState != PlayerState.idle && currentState != PlayerState.dead)
         {
             SoundManager.Instance.Play(swapLaneSound, 0.6f);
             desiredLane++;
@@ -329,7 +327,7 @@ public class RunnerPlayerController : MonoBehaviour
     // jumps the player up
     public void SwipeJump()
     {
-        if (controller.isGrounded)
+        if (controller.isGrounded && currentState != PlayerState.idle && currentState != PlayerState.dead)
         {
             SoundManager.Instance.Play(jumpSound, 0.6f);
             StartCoroutine(RunnerJump());
@@ -359,7 +357,7 @@ public class RunnerPlayerController : MonoBehaviour
     // slides the player along the ground
     public void SwipeSlide()
     {
-        if (controller.isGrounded)
+        if (controller.isGrounded && currentState != PlayerState.idle && currentState != PlayerState.dead)
         {
             SoundManager.Instance.Play(swapLaneSound, 0.6f);
             StartCoroutine(RunnerSlide());

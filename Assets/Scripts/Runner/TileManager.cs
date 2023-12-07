@@ -7,7 +7,6 @@ public class TileManager : MonoBehaviour
     public GameObject[] tilePrefabs;
     public GameObject swapGameTile;
     public GameObject startTile;
-    public int swapGameTileSpawnNum;
     public float zSpawn = 0;
     public float tileLength = 30;
     public int numOfTiles = 5;
@@ -51,7 +50,7 @@ public class TileManager : MonoBehaviour
     {
         int portalSpawnPercentage = Random.Range(1, 101); // range of 1 - 100
 
-        if (tilesSpawnedUntilPortal >= 10 && tilesSpawnedUntilPortal <= 20 && portalSpawnPercentage >= 80) // 20% chance
+        if (tilesSpawnedUntilPortal >= 10 && tilesSpawnedUntilPortal <= 20 && portalSpawnPercentage >= 75) // 25% chance
         {
             SpawnPortalGameTile();
         }
@@ -59,7 +58,7 @@ public class TileManager : MonoBehaviour
         {
             SpawnPortalGameTile();
         }
-        else if (tilesSpawnedUntilPortal >= 32 && portalSpawnPercentage >= 55) // 45% chance
+        else if (tilesSpawnedUntilPortal >= 32 && portalSpawnPercentage >= 40) // 40% chance
         {
             SpawnPortalGameTile();
         }

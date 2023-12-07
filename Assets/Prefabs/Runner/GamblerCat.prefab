@@ -1317,7 +1317,7 @@ MonoBehaviour:
   swapLaneSound: {fileID: 8300000, guid: 6e8f1015c7b6f834683ef9919e0dc9ab, type: 3}
   jumpSound: {fileID: 8300000, guid: 3e04f0232798a774a8bcf578408e4f4c, type: 3}
   desiredLane: 1
-  laneSwapSpeed: 30
+  laneSwapSpeed: 40
   laneDistance: 2
   jumpForce: 10
   slideTime: 0.8
