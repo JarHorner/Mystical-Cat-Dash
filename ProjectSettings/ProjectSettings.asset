@@ -156,6 +156,7 @@ PlayerSettings:
   applicationIdentifier:
     Android: com.GameDev.MysticCatDash
     Standalone: com.Game-Dev.Mystic-Cat-Dash
+    iPhone: com.Game-Dev.Mystic-Cat-Dash
   buildNumber:
     Standalone: 0
     VisionOS: 0
